@@ -100,7 +100,7 @@ extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
-        if pokemons.count-1 == indexPath.row {
+        if pokemons.count-10 == indexPath.row {
             requestNextPage()
         }
         let pokemon = pokemons[indexPath.row]
