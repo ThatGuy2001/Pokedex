@@ -10,4 +10,5 @@ import Foundation
 struct K {
     static var PokemonCell = "PokemonCell"
     static let firstPage = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+    // testing git
 }
