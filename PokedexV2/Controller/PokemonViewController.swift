@@ -29,6 +29,7 @@ class PokemonViewController : UIViewController {
     
     func preparePokemonView(){
         if let pokemon {
+            pokemon.spriteIndex = 0
             name.text = pokemon.name
             id.text = String(format: "#%03d", pokemon.id ?? 0)
             if let type1 = pokemon.type1 {
@@ -39,7 +40,20 @@ class PokemonViewController : UIViewController {
             } else {
                 type2.isHidden = true
             }
-            sprite.image = pokemon.front
+            sprite.image = pokemon.sprites[0]
         }
     }
+    
+    
+    @IBAction func tapPokemon(_ sender: UITapGestureRecognizer) {
+        if let pokemon {
+            if pokemon.spriteIndex >= pokemon.sprites.count-1 {
+                pokemon.spriteIndex = 0
+            } else {
+                pokemon.spriteIndex += 1
+            }
+            sprite.image = pokemon.sprites[pokemon.spriteIndex]
+        }
+    }
+    
 }

@@ -40,7 +40,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
     func updateAllPokemons() {
         print("Updating All Pokemons")
         for pokemon in pokemons {
@@ -128,7 +127,7 @@ extension ViewController : UITableViewDataSource {
             cell.id.text = String(pokemon.id!)
             cell.name.text = pokemon.name
             
-            cell.sprite.image = pokemon.front
+            cell.sprite.image = pokemon.sprites[0]
             
             if let type = pokemon.type1{
                 cell.type1.image = UIImage(named: type)

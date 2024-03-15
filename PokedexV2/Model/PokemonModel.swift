@@ -22,15 +22,13 @@ class PokemonModel {
     var url : String
     var updateCalled : Bool
     var updateEnded : Bool
-    var shiny : Bool
     
     var id : Int?
     var type1 : String?
     var type2 : String?
     
-    var front : UIImage?
-    var frontShiny : UIImage?
-    
+    var sprites : [UIImage] = []
+    var spriteIndex = 0
     
     init(name: String, url: String) {
         requestManger = RequestManager()
@@ -38,7 +36,6 @@ class PokemonModel {
         self.url = url
         updateCalled = false
         updateEnded = false
-        shiny = false
         
         requestManger.delegate = self
     }
@@ -81,11 +78,11 @@ extension PokemonModel : RequestManagerDelegate {
         } else if let sprite = data as? SpriteModel {
             switch sprite.type {
             case .front:
-                front = sprite.sprite
+                sprites.insert(sprite.sprite, at: 0)
                 updateEnded = true
                 delegade?.didEndUpdate()
             case .frontShiny:
-                frontShiny = sprite.sprite
+                sprites.append(sprite.sprite)
             }
         }
     }

@@ -82,6 +82,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xs-Rm-vYE">
                                                 <rect key="frame" x="0.0" y="0.0" width="241" height="160.33333333333334"/>
+                                                <gestureRecognizers/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMv-OO-aBa">
                                                 <rect key="frame" x="191.66666666666669" y="2" width="48.333333333333343" height="24"/>
@@ -91,6 +92,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="bMv-OO-aBa" firstAttribute="top" secondItem="KWI-Sj-tQt" secondAttribute="top" constant="2" id="9c8-AJ-k9I"/>
                                             <constraint firstAttribute="trailing" secondItem="bMv-OO-aBa" secondAttribute="trailing" constant="1" id="CKb-B9-5ts"/>
@@ -99,6 +101,9 @@
                                             <constraint firstAttribute="bottom" secondItem="7xs-Rm-vYE" secondAttribute="bottom" id="T30-kl-3rR"/>
                                             <constraint firstAttribute="trailing" secondItem="7xs-Rm-vYE" secondAttribute="trailing" id="TCC-FR-xy6"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="eNk-Lv-TTk" appends="YES" id="hnY-tz-PdW"/>
+                                        </connections>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRO-SH-Xo8">
                                         <rect key="frame" x="97.666666666666686" y="8" width="198" height="36"/>
@@ -144,6 +149,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqu-SI-KPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eNk-Lv-TTk">
+                    <connections>
+                        <action selector="tapPokemon:" destination="bNL-nR-7xw" id="QmB-5p-ImZ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1983.9694656488548" y="-2.1126760563380285"/>
         </scene>
