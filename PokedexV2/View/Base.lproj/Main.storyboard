@@ -33,22 +33,23 @@
                     <navigationItem key="navigationItem" id="cl7-z3-MQS"/>
                     <connections>
                         <outlet property="tableView" destination="sVB-Vr-Ry4" id="H73-8h-2VA"/>
+                        <segue destination="bNL-nR-7xw" kind="show" identifier="ToPokemonView" id="04c-0r-pdR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>
-        <!--View Controller-->
+        <!--PokemonViewController-->
         <scene sceneID="3JI-B5-evE">
             <objects>
-                <viewController id="bNL-nR-7xw" sceneMemberID="viewController">
+                <viewController title="PokemonViewController" id="bNL-nR-7xw" customClass="PokemonViewController" customModule="PokedexV2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3W9-eU-eDw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zW-f2-2AQ">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErU-lu-A6i">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="1500"/>
@@ -144,6 +145,7 @@
                             <constraint firstItem="0zW-f2-2AQ" firstAttribute="bottom" secondItem="7xU-pU-bLd" secondAttribute="bottom" id="o5m-rH-XAd"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="I3S-XT-MbP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqu-SI-KPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

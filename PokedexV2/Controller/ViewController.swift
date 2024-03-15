@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: K.PokemonCell, bundle: nil), forCellReuseIdentifier: K.PokemonCell)
         
         requestManager.delegate = self
@@ -81,12 +82,16 @@ extension ViewController : RequestManagerDelegate {
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
         let pokemon = pokemons[indexPath.row]
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
             cell.isHidden = true
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(pokemons[indexPath.row].name)
+        performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
     }
 }
 
