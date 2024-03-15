@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var list : PokemonListData?
     var pokemons : [PokemonModel] = []
+    var selectedPokemon = 0
     
     var requestManager = RequestManager()
     
@@ -76,6 +77,11 @@ extension ViewController : RequestManagerDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PokemonViewController
+        destinationVC.pokemon = pokemons[selectedPokemon]
+    }
 }
 
 // MARK: -
@@ -91,6 +97,7 @@ extension ViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(pokemons[indexPath.row].name)
+        selectedPokemon = indexPath.row
         performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
     }
 }
