@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +35,6 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                                 <constraints>
                                                     <constraint firstItem="ULp-kg-caN" firstAttribute="leading" secondItem="U1e-ns-Tan" secondAttribute="leading" constant="5" id="Fb4-oM-GTS"/>
                                                     <constraint firstItem="ULp-kg-caN" firstAttribute="top" secondItem="U1e-ns-Tan" secondAttribute="top" id="Hva-tJ-TKT"/>
@@ -61,7 +59,6 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                                 <constraints>
                                                     <constraint firstItem="gQB-VO-fZr" firstAttribute="leading" secondItem="qIy-EU-qwb" secondAttribute="leading" constant="4" id="ESr-GQ-F1N"/>
                                                     <constraint firstItem="n0R-pV-yo8" firstAttribute="leading" secondItem="gQB-VO-fZr" secondAttribute="trailing" constant="8" symbolic="YES" id="Y2S-ds-BLE"/>
@@ -74,7 +71,6 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
                                 <constraints>
                                     <constraint firstItem="Xhv-9O-V0Z" firstAttribute="top" secondItem="vW7-NO-fs7" secondAttribute="top" constant="10" id="7g7-Aj-Vlx"/>
                                     <constraint firstAttribute="trailing" secondItem="Xhv-9O-V0Z" secondAttribute="trailing" constant="8" id="bf7-KA-KeQ"/>
@@ -95,7 +91,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jQX-P2-HST" secondAttribute="height" multiplier="74:61" id="K8f-wM-wwJ"/>
                                     <constraint firstAttribute="trailing" secondItem="P3Y-ux-xZm" secondAttribute="trailing" constant="10" id="PvX-vu-h9l"/>
@@ -130,18 +125,4 @@
             <point key="canvasLocation" x="187.78625954198472" y="50"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

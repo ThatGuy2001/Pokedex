@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var list : PokemonListData?
     var pokemons : [PokemonModel] = []
+    var selectedPokemon = 0
     
     var requestManager = RequestManager()
     
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UINib(nibName: K.PokemonCell, bundle: nil), forCellReuseIdentifier: K.PokemonCell)
         
         requestManager.delegate = self
@@ -75,18 +77,28 @@ extension ViewController : RequestManagerDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PokemonViewController
+        destinationVC.pokemon = pokemons[selectedPokemon]
+    }
 }
 
 // MARK: -
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
         let pokemon = pokemons[indexPath.row]
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
             cell.isHidden = true
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(pokemons[indexPath.row].name)
+        selectedPokemon = indexPath.row
+        performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
     }
 }
 
@@ -100,7 +112,7 @@ extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
-        if pokemons.count-1 == indexPath.row {
+        if pokemons.count-10 == indexPath.row {
             requestNextPage()
         }
         let pokemon = pokemons[indexPath.row]
