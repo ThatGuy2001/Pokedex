@@ -17,17 +17,34 @@ class PokemonViewController : UIViewController {
     
     @IBOutlet weak var sprite: UIImageView!
     
+    @IBOutlet weak var hp: UIProgressView!
+    @IBOutlet weak var attack: UIProgressView!
+    @IBOutlet weak var defense: UIProgressView!
+    @IBOutlet weak var spAttack: UIProgressView!
+    @IBOutlet weak var spDef: UIProgressView!
+    @IBOutlet weak var speed: UIProgressView!
+    
+    @IBOutlet weak var hpLabel: UILabel!
+    @IBOutlet weak var attackLabel: UILabel!
+    @IBOutlet weak var defenseLabel: UILabel!
+    @IBOutlet weak var spAttackLabel: UILabel!
+    @IBOutlet weak var spDefLabel: UILabel!
+    @IBOutlet weak var SpeedLabel: UILabel!
+    
+    
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var weight: UILabel!
     
     var pokemon : PokemonModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-      preparePokemonView()
+        preparePokemonView()
     }
     
-    func preparePokemonView(){
+    func preparePokemonView() {
+        
         if let pokemon {
             pokemon.spriteIndex = 0
             name.text = pokemon.name.capitalized
@@ -41,9 +58,26 @@ class PokemonViewController : UIViewController {
                 type2.isHidden = true
             }
             sprite.image = pokemon.sprites[0]
+            
+            
+            prepareStats()
+            
+            
+            height.text = pokemon.getHeight()
+            weight.text = pokemon.getWeight()
+            
         }
     }
     
+    func prepareStats(){
+        let statsBars = [hp,attack,defense,spAttack,spDef,speed]
+        let statsLabels = [hpLabel,attackLabel,defenseLabel,spAttackLabel,spDefLabel,SpeedLabel]
+        guard let stats = pokemon?.getStats() else { return }
+        for i in 0..<6 {
+            statsBars[i]?.progress = Float(stats[i]) / 300
+            statsLabels[i]?.text = String(format: "%3d", stats[i])
+        }
+    }
     
     @IBAction func tapPokemon(_ sender: UITapGestureRecognizer) {
         if let pokemon {
@@ -57,4 +91,7 @@ class PokemonViewController : UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
 }

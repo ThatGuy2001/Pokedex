@@ -9,6 +9,7 @@ import UIKit
 
 protocol PokemonModelDelegate {
     func didEndUpdate()
+    func didUpdateStats()
     func didNotUpdate()
 }
 
@@ -30,6 +31,8 @@ class PokemonModel {
     var sprites : [UIImage] = []
     var spriteIndex = 0
     
+    var stats : PokemonFullData?
+    
     init(name: String, url: String) {
         requestManger = RequestManager()
         self.name = name
@@ -44,8 +47,7 @@ class PokemonModel {
     func updatePokemon() {
         if !updateCalled {
             updateCalled = true
-            let request : RequestType = .pokemon(url)
-            requestManger.fetchData(for: request)
+            requestManger.fetchData(for: RequestType.pokemon(url))
         }
     }
     
@@ -57,17 +59,32 @@ class PokemonModel {
             requestSprite(url: frontShiny, type: .maleShiny)
         }
         if let femaleShiny = sprites.front_shiny_female {
-                requestSprite(url: femaleShiny, type: .FemaleShiny)
+            requestSprite(url: femaleShiny, type: .FemaleShiny)
         }
         if let femaleDefaul = sprites.front_female {
             requestSprite(url: femaleDefaul, type: .FemaleShiny)
         }
-        
+    }
+    
+    func fetchPokemonStats() {
+        requestManger.fetchData(for: RequestType.pokemonFullData(url))
     }
     
     func requestSprite(url : String, type : SpriteType){
-        let request : RequestType = .sprite(url, type)
-        requestManger.fetchData(for: request)
+        requestManger.fetchData(for: RequestType.sprite(url, type))
+    }
+    
+    func getStats() -> [Int]? {
+        guard let stats = self.stats?.stats else { return nil }
+        return stats.map { $0.base_stat }
+    }
+    
+    func getHeight() -> String  {
+        String(format: "Height: %dft", stats?.height ?? 0)
+    }
+    
+    func getWeight() -> String {
+        String(format: "Weight: %dlb", stats?.weight ?? 0)
     }
 }
 
@@ -91,6 +108,9 @@ extension PokemonModel : RequestManagerDelegate {
             default:
                 sprites.append(sprite.sprite)
             }
+        } else if let stats = data as? PokemonFullData {
+            self.stats = stats
+            delegade?.didUpdateStats()
         }
     }
     
