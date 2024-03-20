@@ -47,9 +47,9 @@ struct Sprites : Codable {
     let front_shiny_female : String?
 }
 
-//MARK: - PokemonsDetails
+//MARK: - PokemonsStats
 
-struct PokemonFullData : Codable {
+struct PokemonStats : Codable {
     let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
     let weight : Int
     let height : Int
@@ -58,4 +58,3 @@ struct PokemonFullData : Codable {
 struct Stat : Codable {
     let base_stat : Int
 }
-

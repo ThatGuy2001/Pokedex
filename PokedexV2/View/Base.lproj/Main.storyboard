@@ -87,7 +87,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="filled" title="Moves"/>
                                                 <connections>
-                                                    <segue destination="FFo-p0-EfO" kind="show" id="iCp-iX-Ub8"/>
+                                                    <action selector="MovesPressed:" destination="bNL-nR-7xw" eventType="touchUpInside" id="y2y-b0-jmJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -423,6 +423,7 @@
                         <outlet property="type1" destination="v6y-W7-5eQ" id="kFx-Nk-2fY"/>
                         <outlet property="type2" destination="6E4-0a-FiI" id="xpE-8Z-f3C"/>
                         <outlet property="weight" destination="tHf-GN-6Rv" id="xae-29-34V"/>
+                        <segue destination="FFo-p0-EfO" kind="show" identifier="GoToMoves" id="Awj-gh-C0F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqu-SI-KPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -434,10 +435,10 @@
             </objects>
             <point key="canvasLocation" x="1983.9694656488548" y="-2.1126760563380285"/>
         </scene>
-        <!--View Controller-->
+        <!--Moves-->
         <scene sceneID="Qsv-No-iaJ">
             <objects>
-                <viewController id="FFo-p0-EfO" sceneMemberID="viewController">
+                <viewController id="FFo-p0-EfO" customClass="Moves" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UPi-Wv-auB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

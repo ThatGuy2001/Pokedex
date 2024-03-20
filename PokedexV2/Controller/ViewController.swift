@@ -80,6 +80,14 @@ extension ViewController : RequestManagerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonViewController
         destinationVC.pokemon = pokemons[selectedPokemon]
+        destinationVC.pokemon?.delegade = destinationVC
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        for pokemon in self.pokemons {
+            pokemon.delegade = self
+        }
     }
 }
 

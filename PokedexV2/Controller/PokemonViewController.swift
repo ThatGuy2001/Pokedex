@@ -59,9 +59,7 @@ class PokemonViewController : UIViewController {
             }
             sprite.image = pokemon.sprites[0]
             
-            
             prepareStats()
-            
             
             height.text = pokemon.getHeight()
             weight.text = pokemon.getWeight()
@@ -91,7 +89,24 @@ class PokemonViewController : UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    @IBAction func MovesPressed(_ sender: Any) {
+        
     }
+    
+}
+
+extension PokemonViewController : PokemonModelDelegate {
+    func didEndUpdate() {
+        
+    }
+    
+    func didUpdateStats() {
+        
+    }
+    
+    func didNotUpdate() {
+        
+    }
+    
+    
 }

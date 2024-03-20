@@ -12,6 +12,7 @@ import UIKit
 enum RequestType {
     case pokemonList (String)
     case pokemon (String)
+    case pokemonMoves (String)
     case pokemonFullData (String)
     case sprite (String, SpriteType)
 }
@@ -75,7 +76,7 @@ struct RequestManager {
                 }
                 return nil
             case .pokemonFullData:
-                return try decoder.decode(PokemonFullData.self , from: data)
+                return try decoder.decode(PokemonStats.self , from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)
