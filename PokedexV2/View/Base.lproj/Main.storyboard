@@ -16,18 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-Vr-Ry4">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q3A-Mq-19K">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="10" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-Vr-Ry4">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3Op-Ju-i9E"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Y1a-jN-qmf"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="duB-oe-K66"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pKF-zU-oSJ"/>
+                            <constraint firstItem="Q3A-Mq-19K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1up-7f-S3a"/>
+                            <constraint firstItem="Q3A-Mq-19K" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="B3d-y2-G7C"/>
+                            <constraint firstAttribute="bottom" secondItem="Q3A-Mq-19K" secondAttribute="bottom" id="Yyz-xC-ZLo"/>
+                            <constraint firstItem="Q3A-Mq-19K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mrk-oT-Nkp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cl7-z3-MQS"/>

@@ -10,7 +10,6 @@ import UIKit
 protocol PokemonModelDelegate {
     func didEndUpdate()
     func didUpdateStats()
-    func didUpdateMoves()
     func didNotUpdate()
 }
 
@@ -33,8 +32,6 @@ class PokemonModel {
     var spriteIndex = 0
     
     var stats : PokemonStats?
-    
-    var moves :  PokemonMoves?
     
     init(name: String, url: String) {
         requestManger = RequestManager()
@@ -69,10 +66,6 @@ class PokemonModel {
         }
     }
     
-    func fetchPokemonMoves() {
-        requestManger.fetchData(for: RequestType.pokemonMoves(url))
-    }
-    
     func fetchPokemonStats() {
         requestManger.fetchData(for: RequestType.pokemonFullData(url))
     }
@@ -92,6 +85,12 @@ class PokemonModel {
     
     func getWeight() -> String {
         String(format: "Weight: %dlb", stats?.weight ?? 0)
+    }
+    
+    func getColor() -> UIColor? {
+        guard let type = type1 else { return UIColor(named: "normal")
+        }
+        return UIColor(named: type)
     }
 }
 
@@ -118,9 +117,6 @@ extension PokemonModel : RequestManagerDelegate {
         } else if let stats = data as? PokemonStats {
             self.stats = stats
             delegade?.didUpdateStats()
-        } else if let moves = data as? PokemonMoves {
-            self.moves = moves
-            delegade?.didUpdateMoves()
         }
     }
     

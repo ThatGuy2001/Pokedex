@@ -59,22 +59,3 @@ struct Stat : Codable {
     let base_stat : Int
 }
 
-//MARK: - PokemonMoves
-
-struct PokemonMoves : Codable {
-    let moves : [moves]
-}
-
-struct moves : Codable {
-    let move : move
-    let version_group_details : [versionGroupDetail]
-}
-
-struct move : Codable {
-    let name : String
-    let url : String
-}
-
-struct versionGroupDetail : Codable {
-    let level_learned_at : Int
-}

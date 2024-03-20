@@ -144,6 +144,9 @@ extension ViewController : UITableViewDataSource {
             } else {
                 cell.type2.image = nil
             }
+            
+            cell.background.backgroundColor = pokemon.getColor()
+            cell.background.layer.cornerRadius = 10
         }
         return cell
         
