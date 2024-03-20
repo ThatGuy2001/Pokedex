@@ -81,21 +81,7 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feE-8f-MAp">
                                         <rect key="frame" x="0.0" y="343.33333333333337" width="393" height="85.666666666666686"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghn-be-mQV">
-                                                <rect key="frame" x="159.66666666666666" y="25.666666666666632" width="74" height="34.333333333333343"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Moves"/>
-                                                <connections>
-                                                    <action selector="MovesPressed:" destination="bNL-nR-7xw" eventType="touchUpInside" id="y2y-b0-jmJ"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="ghn-be-mQV" firstAttribute="centerY" secondItem="feE-8f-MAp" secondAttribute="centerY" id="56O-jX-3IS"/>
-                                            <constraint firstItem="ghn-be-mQV" firstAttribute="centerX" secondItem="feE-8f-MAp" secondAttribute="centerX" id="lQS-IW-SXj"/>
-                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ga4-fs-5cN">
                                         <rect key="frame" x="0.0" y="85.666666666666686" width="393" height="257.66666666666669"/>
@@ -422,7 +408,6 @@
                         <outlet property="type1" destination="v6y-W7-5eQ" id="kFx-Nk-2fY"/>
                         <outlet property="type2" destination="6E4-0a-FiI" id="xpE-8Z-f3C"/>
                         <outlet property="weight" destination="tHf-GN-6Rv" id="xae-29-34V"/>
-                        <segue destination="FFo-p0-EfO" kind="show" identifier="GoToMoves" id="Awj-gh-C0F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqu-SI-KPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -433,34 +418,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1983.9694656488548" y="-2.1126760563380285"/>
-        </scene>
-        <!--Moves View Controller-->
-        <scene sceneID="Qsv-No-iaJ">
-            <objects>
-                <viewController id="FFo-p0-EfO" customClass="MovesViewController" customModule="PokedexV2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UPi-Wv-auB">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BmK-eZ-3xN">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="3yb-va-LOn"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="3yb-va-LOn" firstAttribute="trailing" secondItem="BmK-eZ-3xN" secondAttribute="trailing" id="Fl1-fS-gYh"/>
-                            <constraint firstItem="BmK-eZ-3xN" firstAttribute="leading" secondItem="3yb-va-LOn" secondAttribute="leading" id="XtU-m6-UU8"/>
-                            <constraint firstItem="BmK-eZ-3xN" firstAttribute="top" secondItem="3yb-va-LOn" secondAttribute="top" id="ofS-1V-f1Y"/>
-                            <constraint firstItem="3yb-va-LOn" firstAttribute="bottom" secondItem="BmK-eZ-3xN" secondAttribute="bottom" id="wwr-OC-HxA"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="X2e-mC-4rs"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="reK-2N-nQL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3102" y="-275"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rUL-Ll-Qiz">

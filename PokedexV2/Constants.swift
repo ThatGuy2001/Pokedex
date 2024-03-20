@@ -9,6 +9,7 @@ import Foundation
 
 struct K {
     static let PokemonCell = "PokemonCell"
+    static let MoveCell = "MoveCell"
     static let PokemonViewSegue = "ToPokemonView"
     static let PokemonMovesSeque = "GoToMoves"
     static let firstPage = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"

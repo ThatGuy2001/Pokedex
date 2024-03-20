@@ -23,7 +23,6 @@
 		1C47671D2BA0858D007B9395 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C47671C2BA0858D007B9395 /* Data.swift */; };
 		1C47671F2BA086B3007B9395 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C47671E2BA086B3007B9395 /* PokemonModel.swift */; };
 		1C4767212BA0AFE6007B9395 /* SpriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4767202BA0AFE6007B9395 /* SpriteModel.swift */; };
-		1C686B882BAB2A3300F25296 /* MovesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C686B872BAB2A3300F25296 /* MovesViewController.swift */; };
 		1C686B8A2BAB2C2600F25296 /* MoveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C686B892BAB2C2600F25296 /* MoveModel.swift */; };
 		1CD07A752BA455120071062D /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD07A742BA455120071062D /* PokemonViewController.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		1C47671C2BA0858D007B9395 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1C47671E2BA086B3007B9395 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		1C4767202BA0AFE6007B9395 /* SpriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteModel.swift; sourceTree = "<group>"; };
-		1C686B872BAB2A3300F25296 /* MovesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovesViewController.swift; sourceTree = "<group>"; };
 		1C686B892BAB2C2600F25296 /* MoveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveModel.swift; sourceTree = "<group>"; };
 		1CD07A742BA455120071062D /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,7 +163,6 @@
 			children = (
 				1C4766E12B9FA367007B9395 /* ViewController.swift */,
 				1CD07A742BA455120071062D /* PokemonViewController.swift */,
-				1C686B872BAB2A3300F25296 /* MovesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -314,7 +311,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C47671D2BA0858D007B9395 /* Data.swift in Sources */,
-				1C686B882BAB2A3300F25296 /* MovesViewController.swift in Sources */,
 				1C4767192BA07D06007B9395 /* Constants.swift in Sources */,
 				1C4766E22B9FA367007B9395 /* ViewController.swift in Sources */,
 				1C4767212BA0AFE6007B9395 /* SpriteModel.swift in Sources */,
