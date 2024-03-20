@@ -90,12 +90,28 @@ class PokemonViewController : UIViewController {
     }
     
     @IBAction func MovesPressed(_ sender: Any) {
-        
+        pokemon?.fetchPokemonMoves()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! MovesViewController
+        
+        let moves = pokemon?.moves?.moves
+        
+        for move in moves! {
+            destinationVC.moveList.append(MoveModel(name: move.move.name, url: move.move.url, levelLerned: move.version_group_details[0].level_learned_at))
+        }
+        
+    }
 }
 
 extension PokemonViewController : PokemonModelDelegate {
+    func didUpdateMoves() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: K.PokemonMovesSeque, sender: self)
+        }
+    }
+    
     func didEndUpdate() {
         
     }

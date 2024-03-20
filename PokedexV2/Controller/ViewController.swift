@@ -153,6 +153,10 @@ extension ViewController : UITableViewDataSource {
 //MARK: - PokemonModelDelegate
 
 extension ViewController : PokemonModelDelegate {
+    func didUpdateMoves() {
+        
+    }
+    
     func didUpdateStats() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: K.PokemonViewSegue, sender: self)

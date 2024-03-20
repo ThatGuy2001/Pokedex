@@ -59,6 +59,8 @@ struct RequestManager {
             return url
         case .pokemonFullData(let url):
             return url
+        case .pokemonMoves(let url):
+            return url
         }
     }
     
@@ -77,6 +79,8 @@ struct RequestManager {
                 return nil
             case .pokemonFullData:
                 return try decoder.decode(PokemonStats.self , from: data)
+            case .pokemonMoves:
+                return try decoder.decode(PokemonMoves.self, from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)

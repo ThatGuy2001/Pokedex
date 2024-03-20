@@ -10,6 +10,7 @@ import UIKit
 protocol PokemonModelDelegate {
     func didEndUpdate()
     func didUpdateStats()
+    func didUpdateMoves()
     func didNotUpdate()
 }
 
@@ -32,6 +33,8 @@ class PokemonModel {
     var spriteIndex = 0
     
     var stats : PokemonStats?
+    
+    var moves :  PokemonMoves?
     
     init(name: String, url: String) {
         requestManger = RequestManager()
@@ -66,7 +69,7 @@ class PokemonModel {
         }
     }
     
-    func fetchPokemonMoces() {
+    func fetchPokemonMoves() {
         requestManger.fetchData(for: RequestType.pokemonMoves(url))
     }
     
@@ -115,7 +118,10 @@ extension PokemonModel : RequestManagerDelegate {
         } else if let stats = data as? PokemonStats {
             self.stats = stats
             delegade?.didUpdateStats()
-        } else if let stats as? 
+        } else if let moves = data as? PokemonMoves {
+            self.moves = moves
+            delegade?.didUpdateMoves()
+        }
     }
     
     func didFailWithError(error: Error) {
