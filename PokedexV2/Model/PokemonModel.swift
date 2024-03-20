@@ -23,7 +23,7 @@ class PokemonModel {
     var updateCalled : Bool
     var updateEnded : Bool
     
-    var id : Int?
+    var id : Int
     var type1 : String?
     var type2 : String?
     
@@ -34,6 +34,7 @@ class PokemonModel {
         requestManger = RequestManager()
         self.name = name
         self.url = url
+        id = 0
         updateCalled = false
         updateEnded = false
         
@@ -50,12 +51,18 @@ class PokemonModel {
     
     func updateSprites(sprites: Sprites) {
         if let front = sprites.front_default {
-            requestSprite(url: front, type: .front)
+            requestSprite(url: front, type: .male)
+        }
+        if let frontShiny = sprites.front_shiny {
+            requestSprite(url: frontShiny, type: .maleShiny)
+        }
+        if let femaleShiny = sprites.front_shiny_female {
+                requestSprite(url: femaleShiny, type: .FemaleShiny)
+        }
+        if let femaleDefaul = sprites.front_female {
+            requestSprite(url: femaleDefaul, type: .FemaleShiny)
         }
         
-        if let frontShiny = sprites.front_shiny {
-            requestSprite(url: frontShiny, type: .frontShiny)
-        }
     }
     
     func requestSprite(url : String, type : SpriteType){
@@ -77,11 +84,11 @@ extension PokemonModel : RequestManagerDelegate {
             updateSprites(sprites: pokemon.sprites)
         } else if let sprite = data as? SpriteModel {
             switch sprite.type {
-            case .front:
+            case .male:
                 sprites.insert(sprite.sprite, at: 0)
                 updateEnded = true
                 delegade?.didEndUpdate()
-            case .frontShiny:
+            default:
                 sprites.append(sprite.sprite)
             }
         }

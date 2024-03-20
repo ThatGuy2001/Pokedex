@@ -124,8 +124,8 @@ extension ViewController : UITableViewDataSource {
         
         if pokemon.updateEnded {
             cell.isHidden = false
-            cell.id.text = String(pokemon.id!)
-            cell.name.text = pokemon.name
+            cell.id.text = String(format: "#%03d", pokemon.id)
+            cell.name.text = pokemon.name.capitalized
             
             cell.sprite.image = pokemon.sprites[0]
             

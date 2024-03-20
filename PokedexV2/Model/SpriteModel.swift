@@ -8,8 +8,10 @@
 import UIKit
 
 enum SpriteType {
-    case front
-    case frontShiny
+    case male
+    case maleShiny
+    case female
+    case FemaleShiny
 }
 
 class SpriteModel {

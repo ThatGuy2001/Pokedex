@@ -30,8 +30,8 @@ class PokemonViewController : UIViewController {
     func preparePokemonView(){
         if let pokemon {
             pokemon.spriteIndex = 0
-            name.text = pokemon.name
-            id.text = String(format: "#%03d", pokemon.id ?? 0)
+            name.text = pokemon.name.capitalized
+            id.text = String(format: "#%03d", pokemon.id)
             if let type1 = pokemon.type1 {
                 self.type1.image = UIImage(named: type1)
             }
@@ -52,6 +52,7 @@ class PokemonViewController : UIViewController {
             } else {
                 pokemon.spriteIndex += 1
             }
+            print(pokemon.spriteIndex)
             sprite.image = pokemon.sprites[pokemon.spriteIndex]
         }
     }

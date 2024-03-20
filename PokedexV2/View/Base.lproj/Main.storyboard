@@ -56,16 +56,16 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="286"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXX-tk-ejR">
-                                        <rect key="frame" x="0.0" y="217.33333333333331" width="393" height="68.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="243" width="393" height="43"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KKN-3L-feo">
-                                                <rect key="frame" x="10" y="0.0" width="373" height="68.666666666666671"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KKN-3L-feo">
+                                                <rect key="frame" x="78.666666666666671" y="0.0" width="235.66666666666663" height="43"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v6y-W7-5eQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="184" height="68.666666666666671"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v6y-W7-5eQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="115.33333333333333" height="43"/>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6E4-0a-FiI">
-                                                        <rect key="frame" x="189" y="0.0" width="184" height="68.666666666666671"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6E4-0a-FiI">
+                                                        <rect key="frame" x="120.33333333333334" y="0.0" width="115.33333333333334" height="43"/>
                                                     </imageView>
                                                 </subviews>
                                             </stackView>
@@ -77,51 +77,52 @@
                                             <constraint firstItem="KKN-3L-feo" firstAttribute="top" secondItem="TXX-tk-ejR" secondAttribute="top" id="M7d-bi-LuD"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWI-Sj-tQt">
-                                        <rect key="frame" x="76" y="48.000000000000014" width="241" height="160.33333333333337"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xs-Rm-vYE">
-                                                <rect key="frame" x="0.0" y="0.0" width="241" height="160.33333333333334"/>
-                                                <gestureRecognizers/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMv-OO-aBa">
-                                                <rect key="frame" x="191.66666666666669" y="2" width="48.333333333333343" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstItem="bMv-OO-aBa" firstAttribute="top" secondItem="KWI-Sj-tQt" secondAttribute="top" constant="2" id="9c8-AJ-k9I"/>
-                                            <constraint firstAttribute="trailing" secondItem="bMv-OO-aBa" secondAttribute="trailing" constant="1" id="CKb-B9-5ts"/>
-                                            <constraint firstItem="7xs-Rm-vYE" firstAttribute="leading" secondItem="KWI-Sj-tQt" secondAttribute="leading" id="FX7-JL-yCf"/>
-                                            <constraint firstItem="7xs-Rm-vYE" firstAttribute="top" secondItem="KWI-Sj-tQt" secondAttribute="top" id="MQH-Go-6qr"/>
-                                            <constraint firstAttribute="bottom" secondItem="7xs-Rm-vYE" secondAttribute="bottom" id="T30-kl-3rR"/>
-                                            <constraint firstAttribute="trailing" secondItem="7xs-Rm-vYE" secondAttribute="trailing" id="TCC-FR-xy6"/>
-                                        </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="eNk-Lv-TTk" appends="YES" id="hnY-tz-PdW"/>
-                                        </connections>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRO-SH-Xo8">
                                         <rect key="frame" x="97.666666666666686" y="8" width="198" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJY-Tz-aB9">
+                                        <rect key="frame" x="76" y="43.999999999999986" width="241" height="190.66666666666663"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kqJ-py-KFb">
+                                                <rect key="frame" x="8" y="8" width="225" height="174.66666666666666"/>
+                                                <gestureRecognizers/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="De2-Oa-RLy">
+                                                <rect key="frame" x="100" y="166.33333333333331" width="41.333333333333343" height="20.333333333333343"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemCyanColor"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="kqJ-py-KFb" firstAttribute="top" secondItem="qJY-Tz-aB9" secondAttribute="top" constant="8" id="8dS-ho-LYg"/>
+                                            <constraint firstItem="kqJ-py-KFb" firstAttribute="leading" secondItem="qJY-Tz-aB9" secondAttribute="leading" constant="8" id="Jzr-OT-c1b"/>
+                                            <constraint firstItem="De2-Oa-RLy" firstAttribute="centerX" secondItem="qJY-Tz-aB9" secondAttribute="centerX" id="Qap-yN-l2k"/>
+                                            <constraint firstAttribute="trailing" secondItem="kqJ-py-KFb" secondAttribute="trailing" constant="8" id="RVD-cw-8lX"/>
+                                            <constraint firstAttribute="bottom" secondItem="De2-Oa-RLy" secondAttribute="bottom" constant="4" id="nZU-aq-4mB"/>
+                                            <constraint firstAttribute="bottom" secondItem="kqJ-py-KFb" secondAttribute="bottom" constant="8" id="y8j-NJ-FeE"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="v24-9s-paM" appends="YES" id="5sD-8C-Psa"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="TXX-tk-ejR" firstAttribute="height" secondItem="6xK-KQ-wca" secondAttribute="height" multiplier="0.24" id="71o-Lc-IKG"/>
+                                    <constraint firstItem="KKN-3L-feo" firstAttribute="width" secondItem="6xK-KQ-wca" secondAttribute="width" multiplier="0.6" id="2MF-Ri-ma2"/>
+                                    <constraint firstItem="TXX-tk-ejR" firstAttribute="height" secondItem="6xK-KQ-wca" secondAttribute="height" multiplier="0.15" id="71o-Lc-IKG"/>
+                                    <constraint firstItem="qJY-Tz-aB9" firstAttribute="top" secondItem="XRO-SH-Xo8" secondAttribute="bottom" id="Cb3-Dv-AAo"/>
+                                    <constraint firstItem="KKN-3L-feo" firstAttribute="top" secondItem="qJY-Tz-aB9" secondAttribute="bottom" constant="8.3333333333333144" id="Chp-fN-d8e"/>
                                     <constraint firstItem="XRO-SH-Xo8" firstAttribute="centerX" secondItem="6xK-KQ-wca" secondAttribute="centerX" id="EHD-S4-gm0"/>
-                                    <constraint firstItem="KWI-Sj-tQt" firstAttribute="top" secondItem="XRO-SH-Xo8" secondAttribute="bottom" constant="4" id="Eoi-8N-t0T"/>
-                                    <constraint firstItem="KWI-Sj-tQt" firstAttribute="centerX" secondItem="XRO-SH-Xo8" secondAttribute="centerX" id="GTh-lm-Hjn"/>
                                     <constraint firstAttribute="trailing" secondItem="TXX-tk-ejR" secondAttribute="trailing" id="HRE-ym-hqg"/>
-                                    <constraint firstItem="TXX-tk-ejR" firstAttribute="top" secondItem="KWI-Sj-tQt" secondAttribute="bottom" constant="9" id="Y6L-i9-RuK"/>
+                                    <constraint firstItem="qJY-Tz-aB9" firstAttribute="leading" secondItem="6xK-KQ-wca" secondAttribute="leading" constant="76" id="Kj5-fI-beJ"/>
                                     <constraint firstItem="XRO-SH-Xo8" firstAttribute="top" secondItem="6xK-KQ-wca" secondAttribute="top" constant="8" id="akv-St-8dR"/>
                                     <constraint firstItem="TXX-tk-ejR" firstAttribute="leading" secondItem="6xK-KQ-wca" secondAttribute="leading" id="eeG-ub-uXw"/>
-                                    <constraint firstItem="KWI-Sj-tQt" firstAttribute="leading" secondItem="6xK-KQ-wca" secondAttribute="leading" constant="76" id="i8b-fm-D5U"/>
+                                    <constraint firstItem="qJY-Tz-aB9" firstAttribute="centerX" secondItem="6xK-KQ-wca" secondAttribute="centerX" id="jN5-s5-4Hf"/>
                                     <constraint firstAttribute="bottom" secondItem="TXX-tk-ejR" secondAttribute="bottom" id="v0o-hD-IFf"/>
                                 </constraints>
                             </view>
@@ -141,17 +142,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="I3S-XT-MbP"/>
                     <connections>
-                        <outlet property="id" destination="bMv-OO-aBa" id="xGz-nR-eJb"/>
+                        <outlet property="id" destination="De2-Oa-RLy" id="PZo-gh-tag"/>
                         <outlet property="name" destination="XRO-SH-Xo8" id="2Vy-MT-b1f"/>
-                        <outlet property="sprite" destination="7xs-Rm-vYE" id="iiz-1a-dYu"/>
+                        <outlet property="sprite" destination="kqJ-py-KFb" id="7rH-kM-S1Z"/>
                         <outlet property="type1" destination="v6y-W7-5eQ" id="kFx-Nk-2fY"/>
                         <outlet property="type2" destination="6E4-0a-FiI" id="xpE-8Z-f3C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xqu-SI-KPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="eNk-Lv-TTk">
+                <tapGestureRecognizer id="v24-9s-paM">
                     <connections>
-                        <action selector="tapPokemon:" destination="bNL-nR-7xw" id="QmB-5p-ImZ"/>
+                        <action selector="tapPokemon:" destination="bNL-nR-7xw" id="K8l-QC-IOF"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -179,6 +180,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemCyanColor">
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
