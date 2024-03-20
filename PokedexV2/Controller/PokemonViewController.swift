@@ -35,6 +35,9 @@ class PokemonViewController : UIViewController {
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
     
+    
+    @IBOutlet weak var pokemonView: UIView!
+    
     var pokemon : PokemonModel?
     
     override func viewDidLoad() {
@@ -64,6 +67,8 @@ class PokemonViewController : UIViewController {
             height.text = pokemon.getHeight()
             weight.text = pokemon.getWeight()
             
+            pokemonView.backgroundColor = pokemon.getColor()
+            pokemonView.layer.cornerRadius = 30
         }
     }
     
