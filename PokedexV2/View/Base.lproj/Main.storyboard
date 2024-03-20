@@ -116,12 +116,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PnZ-Uv-f6A">
-                                                                        <rect key="frame" x="87" y="8.3333333333333144" width="266" height="4"/>
+                                                                        <rect key="frame" x="87" y="8.3333333333333144" width="210" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdb-Mx-8Be">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="wV7-EY-14C" secondAttribute="trailing" constant="20" id="LoJ-8z-lS9"/>
                                                             <constraint firstItem="wV7-EY-14C" firstAttribute="leading" secondItem="eub-BB-eUX" secondAttribute="leading" constant="20" id="aXm-dn-DrF"/>
@@ -141,12 +146,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-Tw-eEr">
-                                                                        <rect key="frame" x="87" y="8" width="266" height="4"/>
+                                                                        <rect key="frame" x="87" y="8" width="210" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAZ-a4-nAm">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstItem="cvW-LO-rBC" firstAttribute="leading" secondItem="S4e-Rk-loR" secondAttribute="leading" constant="20" id="UQ8-AA-8b1"/>
                                                             <constraint firstAttribute="trailing" secondItem="cvW-LO-rBC" secondAttribute="trailing" constant="20" id="naW-3V-CRg"/>
@@ -166,12 +176,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eu9-0r-XDr">
-                                                                        <rect key="frame" x="88.333333333333343" y="8" width="264.66666666666663" height="4"/>
+                                                                        <rect key="frame" x="88.333333333333329" y="8" width="208.66666666666669" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-Zv-nrT">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="M9C-OR-rNG" secondAttribute="trailing" constant="20" id="EPz-v7-XHo"/>
                                                             <constraint firstItem="M9C-OR-rNG" firstAttribute="centerY" secondItem="QZa-1F-Gsp" secondAttribute="centerY" id="mW7-v7-UQV"/>
@@ -191,12 +206,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0m2-AQ-hrz">
-                                                                        <rect key="frame" x="88" y="8.3333333333333712" width="265" height="4"/>
+                                                                        <rect key="frame" x="88" y="8.3333333333333712" width="209" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-g1-0F0">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="AVb-gH-wC4" secondAttribute="trailing" constant="20" id="cLa-u9-EKB"/>
                                                             <constraint firstItem="AVb-gH-wC4" firstAttribute="leading" secondItem="52n-Z0-V9X" secondAttribute="leading" constant="20" id="rRs-fB-3wm"/>
@@ -216,12 +236,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YxA-WY-3oS">
-                                                                        <rect key="frame" x="85.666666666666657" y="8.3333333333333712" width="267.33333333333337" height="4"/>
+                                                                        <rect key="frame" x="85.666666666666671" y="8.3333333333333712" width="211.33333333333331" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZm-mw-5g6">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstItem="tey-e7-E2l" firstAttribute="centerY" secondItem="feU-PQ-Adg" secondAttribute="centerY" id="9rU-4G-QJm"/>
                                                             <constraint firstItem="tey-e7-E2l" firstAttribute="leading" secondItem="feU-PQ-Adg" secondAttribute="leading" constant="20" id="qvJ-E3-G7x"/>
@@ -241,12 +266,17 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SDz-m4-okI">
-                                                                        <rect key="frame" x="87" y="8" width="266" height="4"/>
+                                                                        <rect key="frame" x="87" y="8" width="210" height="4"/>
                                                                     </progressView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFb-Cu-ga7">
+                                                                        <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="p5u-Wa-EzA" secondAttribute="trailing" constant="20" id="7nT-Ue-cgP"/>
                                                             <constraint firstItem="p5u-Wa-EzA" firstAttribute="leading" secondItem="H71-PX-p7i" secondAttribute="leading" constant="20" id="Kvk-kW-Yr9"/>
@@ -374,14 +404,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="I3S-XT-MbP"/>
                     <connections>
+                        <outlet property="SpeedLabel" destination="BFb-Cu-ga7" id="pGU-gt-yGL"/>
                         <outlet property="attack" destination="BSg-Tw-eEr" id="pwy-gN-kP2"/>
+                        <outlet property="attackLabel" destination="CAZ-a4-nAm" id="2QJ-Vs-7Q0"/>
                         <outlet property="defense" destination="eu9-0r-XDr" id="uar-7e-pRo"/>
+                        <outlet property="defenseLabel" destination="0Cu-Zv-nrT" id="M3Z-Lo-uiw"/>
                         <outlet property="height" destination="b9N-d9-DWZ" id="amN-fE-vYq"/>
-                        <outlet property="hp" destination="PnZ-Uv-f6A" id="GVQ-a0-kc0"/>
+                        <outlet property="hp" destination="PnZ-Uv-f6A" id="PdG-5x-oiy"/>
+                        <outlet property="hpLabel" destination="Qdb-Mx-8Be" id="oh8-ig-hkI"/>
                         <outlet property="id" destination="De2-Oa-RLy" id="PZo-gh-tag"/>
                         <outlet property="name" destination="XRO-SH-Xo8" id="2Vy-MT-b1f"/>
                         <outlet property="spAttack" destination="0m2-AQ-hrz" id="0He-Hd-2J7"/>
+                        <outlet property="spAttackLabel" destination="0F8-g1-0F0" id="TaF-zZ-LC9"/>
                         <outlet property="spDef" destination="YxA-WY-3oS" id="aXC-LP-jjA"/>
+                        <outlet property="spDefLabel" destination="RZm-mw-5g6" id="w2x-mF-eqY"/>
                         <outlet property="speed" destination="SDz-m4-okI" id="zcD-dl-pWS"/>
                         <outlet property="sprite" destination="kqJ-py-KFb" id="7rH-kM-S1Z"/>
                         <outlet property="type1" destination="v6y-W7-5eQ" id="kFx-Nk-2fY"/>
@@ -424,7 +460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reK-2N-nQL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3257" y="-201"/>
+            <point key="canvasLocation" x="3102" y="-275"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rUL-Ll-Qiz">

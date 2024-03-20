@@ -24,6 +24,14 @@ class PokemonViewController : UIViewController {
     @IBOutlet weak var spDef: UIProgressView!
     @IBOutlet weak var speed: UIProgressView!
     
+    @IBOutlet weak var hpLabel: UILabel!
+    @IBOutlet weak var attackLabel: UILabel!
+    @IBOutlet weak var defenseLabel: UILabel!
+    @IBOutlet weak var spAttackLabel: UILabel!
+    @IBOutlet weak var spDefLabel: UILabel!
+    @IBOutlet weak var SpeedLabel: UILabel!
+    
+    
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
     
@@ -36,7 +44,7 @@ class PokemonViewController : UIViewController {
     }
     
     func preparePokemonView() {
-        let statsBars = [hp,attack,defense,spAttack,spDef,speed]
+        
         if let pokemon {
             pokemon.spriteIndex = 0
             name.text = pokemon.name.capitalized
@@ -51,12 +59,9 @@ class PokemonViewController : UIViewController {
             }
             sprite.image = pokemon.sprites[0]
             
-            if let stats = pokemon.stats?.stats {
-                print(stats)
-                for i in 0..<6 {
-                    statsBars[i]?.progress = Float(stats[i].base_stat) / 300
-                }
-            }
+            
+            prepareStats()
+            
             
             height.text = pokemon.getHeight()
             weight.text = pokemon.getWeight()
@@ -64,6 +69,15 @@ class PokemonViewController : UIViewController {
         }
     }
     
+    func prepareStats(){
+        let statsBars = [hp,attack,defense,spAttack,spDef,speed]
+        let statsLabels = [hpLabel,attackLabel,defenseLabel,spAttackLabel,spDefLabel,SpeedLabel]
+        guard let stats = pokemon?.getStats() else { return }
+        for i in 0..<6 {
+            statsBars[i]?.progress = Float(stats[i]) / 300
+            statsLabels[i]?.text = String(format: "%3d", stats[i])
+        }
+    }
     
     @IBAction func tapPokemon(_ sender: UITapGestureRecognizer) {
         if let pokemon {
@@ -77,4 +91,7 @@ class PokemonViewController : UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
 }
