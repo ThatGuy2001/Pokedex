@@ -9,6 +9,7 @@ import UIKit
 
 protocol PokemonModelDelegate {
     func didEndUpdate()
+    func didUpdateStats()
     func didNotUpdate()
 }
 
@@ -29,6 +30,8 @@ class PokemonModel {
     
     var sprites : [UIImage] = []
     var spriteIndex = 0
+    
+    var stats : PokemonStats?
     
     init(name: String, url: String) {
         requestManger = RequestManager()
@@ -62,7 +65,11 @@ class PokemonModel {
         if let femaleDefaul = sprites.front_female {
             requestSprite(url: femaleDefaul, type: .FemaleShiny)
         }
-        
+    }
+    
+    func fetchPokemonStats() {
+        let request : RequestType = .pokemonStats(url)
+        requestManger.fetchData(for: request)
     }
     
     func requestSprite(url : String, type : SpriteType){
@@ -91,6 +98,9 @@ extension PokemonModel : RequestManagerDelegate {
             default:
                 sprites.append(sprite.sprite)
             }
+        } else if let stats = data as? PokemonStats {
+            self.stats = stats
+            delegade?.didUpdateStats()
         }
     }
     

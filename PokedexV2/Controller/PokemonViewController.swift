@@ -23,8 +23,7 @@ class PokemonViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-      preparePokemonView()
+        preparePokemonView()
     }
     
     func preparePokemonView(){

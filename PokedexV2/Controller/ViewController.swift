@@ -83,7 +83,7 @@ extension ViewController : RequestManagerDelegate {
     }
 }
 
-// MARK: -
+// MARK: - UITableViewDelegate
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -95,9 +95,8 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(pokemons[indexPath.row].name)
         selectedPokemon = indexPath.row
-        performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
+        pokemons[indexPath.row].fetchPokemonStats()
     }
 }
 
@@ -146,6 +145,12 @@ extension ViewController : UITableViewDataSource {
 //MARK: - PokemonModelDelegate
 
 extension ViewController : PokemonModelDelegate {
+    func didUpdateStats() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
+        }
+    }
+    
     func didEndUpdate() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
