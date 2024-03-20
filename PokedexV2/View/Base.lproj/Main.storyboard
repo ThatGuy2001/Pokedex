@@ -107,7 +107,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PnZ-Uv-f6A">
-                                                                        <rect key="frame" x="87" y="8.3333333333333144" width="210" height="4"/>
+                                                                        <rect key="frame" x="87" y="6.3333333333333144" width="210" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="Okz-XE-pZ7"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdb-Mx-8Be">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
@@ -137,7 +140,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-Tw-eEr">
-                                                                        <rect key="frame" x="87" y="8" width="210" height="4"/>
+                                                                        <rect key="frame" x="87" y="6" width="210" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="c0H-To-G4C"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAZ-a4-nAm">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
@@ -167,7 +173,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eu9-0r-XDr">
-                                                                        <rect key="frame" x="88.333333333333329" y="8" width="208.66666666666669" height="4"/>
+                                                                        <rect key="frame" x="88.333333333333329" y="6" width="208.66666666666669" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="yfV-g2-UER"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cu-Zv-nrT">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
@@ -197,7 +206,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0m2-AQ-hrz">
-                                                                        <rect key="frame" x="88" y="8.3333333333333712" width="209" height="4"/>
+                                                                        <rect key="frame" x="88" y="6.3333333333333712" width="209" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="OxK-JK-Taa"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0F8-g1-0F0">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
@@ -227,7 +239,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YxA-WY-3oS">
-                                                                        <rect key="frame" x="85.666666666666671" y="8.3333333333333712" width="211.33333333333331" height="4"/>
+                                                                        <rect key="frame" x="85.666666666666671" y="6.3333333333333712" width="211.33333333333331" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="GbN-L8-Axg"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZm-mw-5g6">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>
@@ -257,7 +272,10 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SDz-m4-okI">
-                                                                        <rect key="frame" x="87" y="8" width="210" height="4"/>
+                                                                        <rect key="frame" x="87" y="6" width="210" height="8"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="8" id="EtO-eF-IkJ"/>
+                                                                        </constraints>
                                                                     </progressView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFb-Cu-ga7">
                                                                         <rect key="frame" x="322" y="0.0" width="31" height="20.333333333333332"/>

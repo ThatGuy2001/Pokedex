@@ -31,10 +31,8 @@ class PokemonViewController : UIViewController {
     @IBOutlet weak var spDefLabel: UILabel!
     @IBOutlet weak var SpeedLabel: UILabel!
     
-    
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
-    
     
     @IBOutlet weak var pokemonView: UIView!
     
@@ -47,29 +45,29 @@ class PokemonViewController : UIViewController {
     }
     
     func preparePokemonView() {
+        guard let pokemon  else { return }
         
-        if let pokemon {
-            pokemon.spriteIndex = 0
-            name.text = pokemon.name.capitalized
-            id.text = String(format: "#%03d", pokemon.id)
-            if let type1 = pokemon.type1 {
-                self.type1.image = UIImage(named: type1)
-            }
-            if let type2 = pokemon.type2 {
-                self.type2.image = UIImage(named: type2)
-            } else {
-                type2.isHidden = true
-            }
-            sprite.image = pokemon.sprites[0]
-            
-            prepareStats()
-            
-            height.text = pokemon.getHeight()
-            weight.text = pokemon.getWeight()
-            
-            pokemonView.backgroundColor = pokemon.getColor()
-            pokemonView.layer.cornerRadius = 30
+        pokemon.spriteIndex = 0
+        name.text = pokemon.name.capitalized
+        id.text = String(format: "#%03d", pokemon.id)
+        if let type1 = pokemon.type1 {
+            self.type1.image = UIImage(named: type1)
         }
+        if let type2 = pokemon.type2 {
+            self.type2.image = UIImage(named: type2)
+        } else {
+            type2.isHidden = true
+        }
+        sprite.image = pokemon.sprites[0]
+        
+        prepareStats()
+        
+        height.text = pokemon.getHeight()
+        weight.text = pokemon.getWeight()
+        
+        pokemonView.backgroundColor = pokemon.getColor()
+        pokemonView.layer.cornerRadius = 30
+        
     }
     
     func prepareStats(){
@@ -83,7 +81,7 @@ class PokemonViewController : UIViewController {
     }
     
     @IBAction func tapPokemon(_ sender: UITapGestureRecognizer) {
-        if let pokemon {
+        guard let pokemon else { return }
             if pokemon.spriteIndex >= pokemon.sprites.count-1 {
                 pokemon.spriteIndex = 0
             } else {
@@ -91,7 +89,7 @@ class PokemonViewController : UIViewController {
             }
             print(pokemon.spriteIndex)
             sprite.image = pokemon.sprites[pokemon.spriteIndex]
-        }
+        
     }
     
 }

@@ -58,12 +58,6 @@ class PokemonModel {
         if let frontShiny = sprites.front_shiny {
             requestSprite(url: frontShiny, type: .maleShiny)
         }
-        if let femaleShiny = sprites.front_shiny_female {
-            requestSprite(url: femaleShiny, type: .FemaleShiny)
-        }
-        if let femaleDefaul = sprites.front_female {
-            requestSprite(url: femaleDefaul, type: .FemaleShiny)
-        }
     }
     
     func fetchPokemonStats() {
