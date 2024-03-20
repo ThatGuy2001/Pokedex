@@ -31,7 +31,7 @@ class PokemonModel {
     var sprites : [UIImage] = []
     var spriteIndex = 0
     
-    var stats : PokemonStats?
+    var stats : PokemonFullData?
     
     init(name: String, url: String) {
         requestManger = RequestManager()
@@ -68,13 +68,21 @@ class PokemonModel {
     }
     
     func fetchPokemonStats() {
-        let request : RequestType = .pokemonStats(url)
+        let request : RequestType = .pokemonFullData(url)
         requestManger.fetchData(for: request)
     }
     
     func requestSprite(url : String, type : SpriteType){
         let request : RequestType = .sprite(url, type)
         requestManger.fetchData(for: request)
+    }
+    
+    func getHeight() -> String  {
+        return String(format: "Height: %dft", stats?.height ?? 0)
+    }
+    
+    func getWeight() -> String {
+        return String(format: "Weight: %dlb", stats?.weight ?? 0)
     }
 }
 
@@ -98,7 +106,7 @@ extension PokemonModel : RequestManagerDelegate {
             default:
                 sprites.append(sprite.sprite)
             }
-        } else if let stats = data as? PokemonStats {
+        } else if let stats = data as? PokemonFullData {
             self.stats = stats
             delegade?.didUpdateStats()
         }

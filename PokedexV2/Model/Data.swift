@@ -49,7 +49,7 @@ struct Sprites : Codable {
 
 //MARK: - PokemonsDetails
 
-struct PokemonStats : Codable {
+struct PokemonFullData : Codable {
     let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
     let weight : Int
     let height : Int
