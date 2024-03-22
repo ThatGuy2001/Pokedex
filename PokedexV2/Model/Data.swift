@@ -42,11 +42,12 @@ struct _Type : Codable {
 
 struct Sprites : Codable {
     let front_default : String?
-    let front_shiny : String?}
+    let front_shiny : String?
+}
 
-//MARK: - PokemonsStats
+//MARK: - PokemonsStatsData
 
-struct PokemonStats : Codable {
+struct PokemonStatsData : Codable {
     let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
     let weight : Int
     let height : Int

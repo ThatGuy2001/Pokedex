@@ -32,24 +32,11 @@ class ViewController: UIViewController {
     }
     
     func requestNextPage() {
-        if let nextPage = list?.next {
-            let request = RequestType.pokemonList(nextPage)
-            requestManager.fetchData(for: request)
-        } else {
-            return
-        }
+        guard let nextPage = list?.next else { return }
+        print(nextPage)
+        list?.next = nil
+        requestManager.fetchData(for: RequestType.pokemonList(nextPage))
     }
-    
-    func updateAllPokemons() {
-        print("Updating All Pokemons")
-        for pokemon in pokemons {
-            if !pokemon.updateEnded{
-                pokemon.updatePokemon()
-            }
-        }
-        print("Update Complete")
-    }
-    
 }
 
 //MARK: - RequestManagerDelegate
@@ -71,7 +58,7 @@ extension ViewController : RequestManagerDelegate {
             self.tableView.reloadData()
         }
     }
-
+    
     
     func didFailWithError(error: Error) {
         print(error)
@@ -80,15 +67,8 @@ extension ViewController : RequestManagerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonViewController
         destinationVC.pokemon = pokemons[selectedPokemon]
-        destinationVC.pokemon?.delegade = destinationVC
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        for pokemon in self.pokemons {
-            pokemon.delegade = self
-        }
-    }
 }
 
 // MARK: - UITableViewDelegate
@@ -116,11 +96,7 @@ extension ViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
-        if pokemons.count-10 == indexPath.row {
-            requestNextPage()
-        }
         let pokemon = pokemons[indexPath.row]
         
         if !pokemon.updateCalled{
@@ -133,10 +109,11 @@ extension ViewController : UITableViewDataSource {
             cell.isHidden = false
             cell.id.text = String(format: "#%03d", pokemon.id)
             cell.name.text = pokemon.name.capitalized
-            
             cell.sprite.image = pokemon.sprites[0]
+            cell.background.backgroundColor = pokemon.getColor()
+            cell.background.layer.cornerRadius = 10
             
-            if let type = pokemon.type1{
+            if let type = pokemon.type1 {
                 cell.type1.image = UIImage(named: type)
             }
             if let type2 = pokemon.type2{
@@ -144,12 +121,13 @@ extension ViewController : UITableViewDataSource {
             } else {
                 cell.type2.image = nil
             }
-            
-            cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 10
         }
-        return cell
         
+        if pokemons.count-10 == indexPath.row {
+            requestNextPage()
+        }
+        
+        return cell
     }
 }
 
@@ -157,7 +135,7 @@ extension ViewController : UITableViewDataSource {
 
 extension ViewController : PokemonModelDelegate {
     func didUpdateMoves() {
-        
+        print("Should not have been called")
     }
     
     func didUpdateStats() {

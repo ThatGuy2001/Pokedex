@@ -40,12 +40,11 @@ class PokemonViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         preparePokemonView()
     }
     
     func preparePokemonView() {
-        guard let pokemon  else { return }
+        guard let pokemon else { return }
         
         pokemon.spriteIndex = 0
         name.text = pokemon.name.capitalized
@@ -61,13 +60,7 @@ class PokemonViewController : UIViewController {
         sprite.image = pokemon.sprites[0]
         
         prepareStats()
-        
-        height.text = pokemon.getHeight()
-        weight.text = pokemon.getWeight()
-        
-        pokemonView.backgroundColor = pokemon.getColor()
-        pokemonView.layer.cornerRadius = 30
-        
+        prepareBackground()
     }
     
     func prepareStats(){
@@ -78,36 +71,25 @@ class PokemonViewController : UIViewController {
             statsBars[i]?.progress = Float(stats[i]) / 300
             statsLabels[i]?.text = String(format: "%3d", stats[i])
         }
+        height.text = pokemon?.getHeight()
+        weight.text = pokemon?.getWeight()
+    }
+    
+    func prepareBackground() {
+        pokemonView.backgroundColor = pokemon?.getColor()
+        pokemonView.layer.cornerRadius = 30
     }
     
     @IBAction func tapPokemon(_ sender: UITapGestureRecognizer) {
         guard let pokemon else { return }
-            if pokemon.spriteIndex >= pokemon.sprites.count-1 {
-                pokemon.spriteIndex = 0
-            } else {
-                pokemon.spriteIndex += 1
-            }
-            print(pokemon.spriteIndex)
-            sprite.image = pokemon.sprites[pokemon.spriteIndex]
-        
+        if pokemon.spriteIndex >= pokemon.sprites.count-1 {
+            pokemon.spriteIndex = 0
+        } else {
+            pokemon.spriteIndex += 1
+        }
+        print(pokemon.spriteIndex)
+        sprite.image = pokemon.sprites[pokemon.spriteIndex]
     }
-    
-}
-
-extension PokemonViewController : PokemonModelDelegate {    
-    func didEndUpdate() {
-        
-    }
-    
-    func didUpdateStats() {
-        
-    }
-    
-    func didNotUpdate() {
-        
-    }
-    
-    
 }
 
 // developing...
