@@ -12,7 +12,7 @@ import UIKit
 enum RequestType {
     case pokemonList (String)
     case pokemon (String)
-    case pokemonFullData (String)
+    case pokemonStats (String)
     case sprite (String, SpriteType)
 }
 
@@ -31,7 +31,7 @@ struct RequestManager {
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
-        if let url = URL(string: urlString){
+        guard let url = URL(string: urlString) else { return  }
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { data, reponse, error in
                 if error != nil {
@@ -45,7 +45,7 @@ struct RequestManager {
                 }
             }
             task.resume()
-        }
+        
     }
     
     func getRequestURL(for request : RequestType ) -> String {
@@ -56,7 +56,7 @@ struct RequestManager {
             return url
         case .sprite(let url,_):
             return url
-        case .pokemonFullData(let url):
+        case .pokemonStats(let url):
             return url
         }
     }
@@ -70,11 +70,9 @@ struct RequestManager {
             case .pokemon:
                 return try decoder.decode(PokemonData.self, from: data)
             case .sprite(_, let spriteType):
-                if let image = UIImage(data: data) {
-                    return SpriteModel(sprite: image, type: spriteType)
-                }
-                return nil
-            case .pokemonFullData:
+                guard let image = UIImage(data: data) else { return nil }
+                return SpriteModel(sprite: image, type: spriteType)
+            case .pokemonStats:
                 return try decoder.decode(PokemonStats.self , from: data)
             }
         } catch {

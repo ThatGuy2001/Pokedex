@@ -93,19 +93,3 @@ class PokemonViewController : UIViewController {
     }
     
 }
-
-extension PokemonViewController : PokemonModelDelegate {    
-    func didEndUpdate() {
-        
-    }
-    
-    func didUpdateStats() {
-        
-    }
-    
-    func didNotUpdate() {
-        
-    }
-    
-    
-}
