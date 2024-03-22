@@ -31,21 +31,19 @@ struct RequestManager {
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
-        guard let url = URL(string: urlString) else { return  }
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { data, reponse, error in
-                if error != nil {
-                    delegate?.didFailWithError(error: error!)
-                    return
-                }
-                if let data {
-                    if let decodedData = parseJSON(data: data, request: request){
-                        delegate?.didUpdate(data: decodedData)
-                    }
-                }
+        guard let url = URL(string: urlString) else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { data, reponse, error in
+            if error != nil {
+                delegate?.didFailWithError(error: error!)
+                return
             }
-            task.resume()
-        
+            guard let data else { return }
+            if let decodedData = parseJSON(data: data, request: request){
+                delegate?.didUpdate(data: decodedData)
+            }
+        }
+        task.resume()
     }
     
     func getRequestURL(for request : RequestType ) -> String {
@@ -73,7 +71,7 @@ struct RequestManager {
                 guard let image = UIImage(data: data) else { return nil }
                 return SpriteModel(sprite: image, type: spriteType)
             case .pokemonStats:
-                return try decoder.decode(PokemonStats.self , from: data)
+                return try decoder.decode(PokemonStatsData.self , from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)

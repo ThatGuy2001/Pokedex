@@ -31,16 +31,16 @@ class PokemonModel {
     var sprites : [UIImage] = []
     var spriteIndex = 0
     
-    var stats : PokemonStats?
+    var stats : PokemonStatsData?
     
     init(name: String, url: String) {
-        requestManger = RequestManager()
         self.name = name
         self.url = url
         id = 0
         updateCalled = false
         updateEnded = false
         
+        requestManger = RequestManager()
         requestManger.delegate = self
     }
     
@@ -64,7 +64,7 @@ class PokemonModel {
         requestManger.fetchData(for: RequestType.pokemonStats(url))
     }
     
-    func requestSprite(url : String, type : SpriteType){
+    func requestSprite(url : String, type : SpriteType) {
         requestManger.fetchData(for: RequestType.sprite(url, type))
     }
     
@@ -82,8 +82,7 @@ class PokemonModel {
     }
     
     func getColor() -> UIColor? {
-        guard let type = type1 else { return UIColor(named: "normal")
-        }
+        guard let type = type1 else { return UIColor(named: "normal") }
         return UIColor(named: type)
     }
 }
@@ -108,7 +107,7 @@ extension PokemonModel : RequestManagerDelegate {
             default:
                 sprites.append(sprite.sprite)
             }
-        } else if let stats = data as? PokemonStats {
+        } else if let stats = data as? PokemonStatsData {
             self.stats = stats
             delegade?.didUpdateStats()
         }
