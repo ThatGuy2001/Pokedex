@@ -68,3 +68,14 @@ struct TypeData : Codable {
 struct TPokemon : Codable {
     let pokemon : Pokemon
 }
+
+//MARK: - PokedexData
+
+struct PokedexData : Codable {
+    let name : String
+    let pokemon_entries : [PokemonEntries]
+}
+
+struct PokemonEntries : Codable {
+    let pokemon_species : Pokemon
+}
