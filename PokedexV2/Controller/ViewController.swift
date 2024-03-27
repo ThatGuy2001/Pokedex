@@ -87,8 +87,10 @@ extension ViewController : RequestManagerDelegate {
                 let name = pokemon.pokemon.name
                 let newPokemon = PokemonModel(name: name, url: url)
                 newPokemon.delegade = self
-                newPokemon.updatePokemon()
                 somePokemons.append(newPokemon)
+            }
+            for i in 0..<10 {
+                somePokemons[i].updatePokemon()
             }
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
@@ -227,7 +229,6 @@ extension ViewController: UITextFieldDelegate {
         resetSearchButton.isHidden = false
         if K.types.contains(search){
             requestManager.fetchData(for: .type(search))
-            tableView.reloadData()
         } else {
             search = K.pokemonUrl + search
             requestManager.fetchData(for: .pokemon(search))
