@@ -81,6 +81,13 @@ extension ViewController : RequestManagerDelegate {
             }
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
+        } else if let pokemon = data as? PokemonData {
+            let newPokemon = PokemonModel(name: pokemon.name, url: K.pokemonUrl + pokemon.name)
+            newPokemon.delegade = self
+            newPokemon.updatePokemon()
+            somePokemons.append(newPokemon)
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -203,12 +210,15 @@ extension ViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard var search = searchTextField.text else { return }
         search = search.lowercased()
+        somePokemons = []
+        shownPokemons = []
         if K.types.contains(search){
-            somePokemons = []
-            shownPokemons = []
             print(1)
             requestManager.fetchData(for: .type(search))
             tableView.reloadData()
+        } else {
+            search = K.pokemonUrl + search
+            requestManager.fetchData(for: .pokemon(search))
         }
         searchTextField.text = ""
     }
