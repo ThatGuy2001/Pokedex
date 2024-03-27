@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var resetSearchButton: UIButton!
     
+    @IBOutlet weak var menuLeadingConstrait: NSLayoutConstraint!
+    
+    @IBOutlet weak var translucentView: UIVisualEffectView!
     
     var list : PokemonListData?
     var selectedPokemon = 0
@@ -40,6 +43,9 @@ class ViewController: UIViewController {
         
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.firstPage))
+        
+        menuLeadingConstrait.constant = -200
+        translucentView.layer.cornerRadius = 20
     }
     
     func requestNextPage() {
@@ -59,6 +65,23 @@ class ViewController: UIViewController {
         resetSearchButton.isHidden = true
         tableView.reloadData()
     }
+    
+    
+    @IBAction func menuPressed(_ sender: Any) {
+        
+        if menuLeadingConstrait.constant == -20 {
+            UIView.animate(withDuration: 0.2) {
+                self.menuLeadingConstrait.constant = -200
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            UIView.animate(withDuration: 0.2) {
+                self.menuLeadingConstrait.constant = -20
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     
 }
 
@@ -130,10 +153,15 @@ extension ViewController : RequestManagerDelegate {
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let pokemon = shownPokemons[indexPath.row]
-        if !pokemon.updateCalled{
-            pokemon.updatePokemon()
-            cell.isHidden = true
+        let index = indexPath.row
+        for i in index..<index+3 {
+            if i < shownPokemons.count {
+                let pokemon = shownPokemons[i]
+                if !pokemon.updateCalled{
+                    pokemon.updatePokemon()
+                    cell.isHidden = true
+                }
+            }
         }
     }
     
