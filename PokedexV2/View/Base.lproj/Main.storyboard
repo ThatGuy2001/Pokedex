@@ -31,6 +31,9 @@
                                                 <rect key="frame" x="327.33333333333331" y="0.0" width="49.666666666666686" height="37"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                                <connections>
+                                                    <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e76-UW-uZ9"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

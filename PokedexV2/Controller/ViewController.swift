@@ -40,6 +40,11 @@ class ViewController: UIViewController {
         list?.next = nil
         requestManager.fetchData(for: RequestType.pokemonList(nextPage))
     }
+    
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        searchTextField.endEditing(true)
+    }
+    
 }
 
 //MARK: - RequestManagerDelegate
@@ -160,9 +165,6 @@ extension ViewController : PokemonModelDelegate {
 
 //MARK: -UITextFieldDelegate
 extension ViewController: UITextFieldDelegate {
-    @IBAction func searchPressed(_ sender: UIButton) {
-        searchTextField.endEditing(true)
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
