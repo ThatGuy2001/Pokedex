@@ -22,10 +22,18 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZJ-h1-iTm">
                                         <rect key="frame" x="8" y="4" width="377" height="37"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ip-1d-wE5">
+                                                <rect key="frame" x="0.0" y="0.0" width="51" height="37"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.left" catalog="system"/>
+                                                <connections>
+                                                    <action selector="resetSearchPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Hh-cA-IQM"/>
+                                                </connections>
+                                            </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YBb-dV-s8f">
-                                                <rect key="frame" x="0.0" y="0.0" width="327.33333333333331" height="37"/>
+                                                <rect key="frame" x="51" y="0.0" width="276.33333333333331" height="37"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ1-NY-bSb">
                                                 <rect key="frame" x="327.33333333333331" y="0.0" width="49.666666666666686" height="37"/>
@@ -66,6 +74,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="l8u-Ft-HJB"/>
                     <connections>
+                        <outlet property="resetSearchButton" destination="3Ip-1d-wE5" id="Uea-kd-sI6"/>
                         <outlet property="searchTextField" destination="YBb-dV-s8f" id="nRF-Nq-E1M"/>
                         <outlet property="tableView" destination="sVB-Vr-Ry4" id="H73-8h-2VA"/>
                         <segue destination="bNL-nR-7xw" kind="show" identifier="ToPokemonView" id="04c-0r-pdR"/>
@@ -496,6 +505,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.left" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

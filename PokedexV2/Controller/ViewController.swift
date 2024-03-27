@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTextField: UITextField!
     
+    @IBOutlet weak var resetSearchButton: UIButton!
+    
+    
     var list : PokemonListData?
     var selectedPokemon = 0
     
@@ -30,6 +33,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         shownPokemons = allPokemons
+        resetSearchButton.isHidden = true
         
         searchTextField.delegate = self
         
@@ -50,6 +54,13 @@ class ViewController: UIViewController {
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         searchTextField.endEditing(true)
+    }
+    
+    @IBAction func resetSearchPressed(_ sender: Any) {
+        allPokemonsInDisplay = true
+        shownPokemons = allPokemons
+        resetSearchButton.isHidden = true
+        tableView.reloadData()
     }
     
 }
@@ -212,8 +223,9 @@ extension ViewController: UITextFieldDelegate {
         search = search.lowercased()
         somePokemons = []
         shownPokemons = []
+        allPokemonsInDisplay = false
+        resetSearchButton.isHidden = false
         if K.types.contains(search){
-            print(1)
             requestManager.fetchData(for: .type(search))
             tableView.reloadData()
         } else {
