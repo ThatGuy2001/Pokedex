@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
     
     var list : PokemonListData?
     var pokemons : [PokemonModel] = []
@@ -22,6 +23,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchTextField.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -152,5 +155,32 @@ extension ViewController : PokemonModelDelegate {
     
     func didNotUpdate() {
         print("Erro")
+    }
+}
+
+//MARK: -UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
+    @IBAction func searchPressed(_ sender: UIButton) {
+        searchTextField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Search"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let search = searchTextField.text else { return }
+        print(search)
+        searchTextField.text = ""
     }
 }
