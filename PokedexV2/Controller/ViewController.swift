@@ -74,7 +74,7 @@ extension ViewController : RequestManagerDelegate {
             for pokemon in pokemonList.results {
                 let url = pokemon.url
                 let name = pokemon.name
-                let newPokemon = PokemonModel(name: name, url: url)
+                let newPokemon = PokemonModel(name: name)
                 newPokemon.delegade = self
                 newPokemon.updatePokemon()
                 allPokemons.append(newPokemon)
@@ -83,9 +83,8 @@ extension ViewController : RequestManagerDelegate {
             allPokemonsInDisplay = true
         } else if let type = data as? TypeData {
             for pokemon in type.pokemon {
-                let url = pokemon.pokemon.url
                 let name = pokemon.pokemon.name
-                let newPokemon = PokemonModel(name: name, url: url)
+                let newPokemon = PokemonModel(name: name)
                 newPokemon.delegade = self
                 somePokemons.append(newPokemon)
             }
@@ -95,7 +94,7 @@ extension ViewController : RequestManagerDelegate {
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
         } else if let pokemon = data as? PokemonData {
-            let newPokemon = PokemonModel(name: pokemon.name, url: K.pokemonUrl + pokemon.name)
+            let newPokemon = PokemonModel(name: pokemon.name)
             newPokemon.delegade = self
             newPokemon.updatePokemon()
             somePokemons.append(newPokemon)
@@ -230,7 +229,6 @@ extension ViewController: UITextFieldDelegate {
         if K.types.contains(search){
             requestManager.fetchData(for: .type(search))
         } else {
-            search = K.pokemonUrl + search
             requestManager.fetchData(for: .pokemon(search))
         }
         searchTextField.text = ""

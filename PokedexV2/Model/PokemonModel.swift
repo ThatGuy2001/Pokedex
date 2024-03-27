@@ -20,7 +20,6 @@ class PokemonModel {
     var requestManger : RequestManager
     
     var name : String
-    var url : String
     var updateCalled : Bool
     var updateEnded : Bool
     
@@ -33,13 +32,11 @@ class PokemonModel {
     
     var stats : PokemonStatsData?
     
-    init(name: String, url: String) {
+    init(name: String) {
         self.name = name
-        self.url = url
         id = 0
         updateCalled = false
         updateEnded = false
-        
         requestManger = RequestManager()
         requestManger.delegate = self
     }
@@ -47,7 +44,7 @@ class PokemonModel {
     func updatePokemon() {
         if !updateCalled {
             updateCalled = true
-            requestManger.fetchData(for: RequestType.pokemon(url))
+            requestManger.fetchData(for: RequestType.pokemon(name))
         }
     }
     
@@ -61,7 +58,7 @@ class PokemonModel {
     }
     
     func fetchPokemonStats() {
-        requestManger.fetchData(for: RequestType.stats(url))
+        requestManger.fetchData(for: RequestType.stats(name))
     }
     
     func requestSprite(url : String, type : SpriteType) {

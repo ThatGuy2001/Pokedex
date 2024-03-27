@@ -29,7 +29,6 @@ protocol RequestManagerDelegate {
 struct RequestManager {
     
     var delegate : RequestManagerDelegate?
-    let typeUrl = "https://pokeapi.co/api/v2/type/"
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
@@ -52,15 +51,14 @@ struct RequestManager {
         switch request {
         case .pokemonList(let url):
             return url
-        case .pokemon(let url):
-            return url
+        case .pokemon(let name):
+            return K.pokemonUrl + name
         case .sprite(let url,_):
             return url
-        case .stats(let url):
-            return url
+        case .stats(let name):
+            return K.pokemonUrl + name
         case .type(let type):
-            print(typeUrl + type )
-            return typeUrl + type
+            return K.typeUrl + type
         }
     }
     
