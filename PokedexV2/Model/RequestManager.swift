@@ -15,6 +15,7 @@ enum RequestType {
     case pokemon (String)
     case stats (String)
     case sprite (String, SpriteType)
+    case pokedex (String)
 }
 
 //MARK: - RequestManagerDelegate
@@ -59,6 +60,8 @@ struct RequestManager {
             return K.pokemonUrl + name
         case .type(let type):
             return K.typeUrl + type
+        case .pokedex(let id):
+            return K.pokedexUrl + "/\(id)"
         }
     }
     
@@ -75,8 +78,10 @@ struct RequestManager {
                 return SpriteModel(sprite: image, type: spriteType)
             case .stats:
                 return try decoder.decode(PokemonStatsData.self , from: data)
-            case .type(_):
+            case .type:
                 return try decoder.decode(TypeData.self , from: data)
+            case .pokedex:
+                return try decoder.decode(PokedexData.self, from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)

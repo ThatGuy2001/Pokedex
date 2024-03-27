@@ -24,9 +24,6 @@ class ViewController: UIViewController {
     
     var requestManager = RequestManager()
     
-    let queue = DispatchQueue(label: "pokemonUpdater")
-    var timer = Timer()
-    
     var allPokemonsInDisplay = true
     
     override func viewDidLoad() {
@@ -72,7 +69,6 @@ extension ViewController : RequestManagerDelegate {
         if let pokemonList = data as? PokemonListData{
             list = pokemonList
             for pokemon in pokemonList.results {
-                let url = pokemon.url
                 let name = pokemon.name
                 let newPokemon = PokemonModel(name: name)
                 newPokemon.delegade = self
@@ -98,6 +94,18 @@ extension ViewController : RequestManagerDelegate {
             newPokemon.delegade = self
             newPokemon.updatePokemon()
             somePokemons.append(newPokemon)
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
+        } else if let pokedex = data as? PokedexData {
+            for pokemon in pokedex.pokemon_entries {
+                let name = pokemon.pokemon_species.name
+                let newPokemon = PokemonModel(name: name)
+                newPokemon.delegade = self
+                somePokemons.append(newPokemon)
+            }
+            for i in 0..<10 {
+                somePokemons[i].updatePokemon()
+            }
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
         }
