@@ -10,18 +10,32 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
+    
+    @IBOutlet weak var resetSearchButton: UIButton!
+    
     
     var list : PokemonListData?
-    var pokemons : [PokemonModel] = []
     var selectedPokemon = 0
+    
+    var allPokemons : [PokemonModel] = []
+    var somePokemons : [PokemonModel] = []
+    var shownPokemons : [PokemonModel] = []
     
     var requestManager = RequestManager()
     
     let queue = DispatchQueue(label: "pokemonUpdater")
     var timer = Timer()
     
+    var allPokemonsInDisplay = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        shownPokemons = allPokemons
+        resetSearchButton.isHidden = true
+        
+        searchTextField.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -32,22 +46,21 @@ class ViewController: UIViewController {
     }
     
     func requestNextPage() {
-        if let nextPage = list?.next {
-            let request = RequestType.pokemonList(nextPage)
-            requestManager.fetchData(for: request)
-        } else {
-            return
-        }
+        guard let nextPage = list?.next else { return }
+        print(nextPage)
+        list?.next = nil
+        requestManager.fetchData(for: RequestType.pokemonList(nextPage))
     }
     
-    func updateAllPokemons() {
-        print("Updating All Pokemons")
-        for pokemon in pokemons {
-            if !pokemon.updateEnded{
-                pokemon.updatePokemon()
-            }
-        }
-        print("Update Complete")
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        searchTextField.endEditing(true)
+    }
+    
+    @IBAction func resetSearchPressed(_ sender: Any) {
+        allPokemonsInDisplay = true
+        shownPokemons = allPokemons
+        resetSearchButton.isHidden = true
+        tableView.reloadData()
     }
     
 }
@@ -64,14 +77,34 @@ extension ViewController : RequestManagerDelegate {
                 let newPokemon = PokemonModel(name: name, url: url)
                 newPokemon.delegade = self
                 newPokemon.updatePokemon()
-                pokemons.append(newPokemon)
+                allPokemons.append(newPokemon)
             }
+            shownPokemons = allPokemons
+            allPokemonsInDisplay = true
+        } else if let type = data as? TypeData {
+            for pokemon in type.pokemon {
+                let url = pokemon.pokemon.url
+                let name = pokemon.pokemon.name
+                let newPokemon = PokemonModel(name: name, url: url)
+                newPokemon.delegade = self
+                newPokemon.updatePokemon()
+                somePokemons.append(newPokemon)
+            }
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
+        } else if let pokemon = data as? PokemonData {
+            let newPokemon = PokemonModel(name: pokemon.name, url: K.pokemonUrl + pokemon.name)
+            newPokemon.delegade = self
+            newPokemon.updatePokemon()
+            somePokemons.append(newPokemon)
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-
+    
     
     func didFailWithError(error: Error) {
         print(error)
@@ -79,23 +112,16 @@ extension ViewController : RequestManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonViewController
-        destinationVC.pokemon = pokemons[selectedPokemon]
-        destinationVC.pokemon?.delegade = destinationVC
+        destinationVC.pokemon = shownPokemons[selectedPokemon]
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        for pokemon in self.pokemons {
-            pokemon.delegade = self
-        }
-    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let pokemon = pokemons[indexPath.row]
+        let pokemon = shownPokemons[indexPath.row]
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
             cell.isHidden = true
@@ -104,7 +130,7 @@ extension ViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPokemon = indexPath.row
-        pokemons[indexPath.row].fetchPokemonStats()
+        shownPokemons[indexPath.row].fetchPokemonStats()
     }
 }
 
@@ -112,16 +138,12 @@ extension ViewController : UITableViewDelegate {
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemons.count
+        return shownPokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
-        if pokemons.count-10 == indexPath.row {
-            requestNextPage()
-        }
-        let pokemon = pokemons[indexPath.row]
+        let pokemon = shownPokemons[indexPath.row]
         
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
@@ -133,10 +155,11 @@ extension ViewController : UITableViewDataSource {
             cell.isHidden = false
             cell.id.text = String(format: "#%03d", pokemon.id)
             cell.name.text = pokemon.name.capitalized
-            
             cell.sprite.image = pokemon.sprites[0]
+            cell.background.backgroundColor = pokemon.getColor()
+            cell.background.layer.cornerRadius = 10
             
-            if let type = pokemon.type1{
+            if let type = pokemon.type1 {
                 cell.type1.image = UIImage(named: type)
             }
             if let type2 = pokemon.type2{
@@ -144,12 +167,13 @@ extension ViewController : UITableViewDataSource {
             } else {
                 cell.type2.image = nil
             }
-            
-            cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 10
         }
-        return cell
         
+        if allPokemons.count-10 == indexPath.row && allPokemonsInDisplay{
+            requestNextPage()
+        }
+        
+        return cell
     }
 }
 
@@ -157,7 +181,7 @@ extension ViewController : UITableViewDataSource {
 
 extension ViewController : PokemonModelDelegate {
     func didUpdateMoves() {
-        
+        print("Should not have been called")
     }
     
     func didUpdateStats() {
@@ -174,5 +198,40 @@ extension ViewController : PokemonModelDelegate {
     
     func didNotUpdate() {
         print("Erro")
+    }
+}
+
+//MARK: -UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Search"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard var search = searchTextField.text else { return }
+        search = search.lowercased()
+        somePokemons = []
+        shownPokemons = []
+        allPokemonsInDisplay = false
+        resetSearchButton.isHidden = false
+        if K.types.contains(search){
+            requestManager.fetchData(for: .type(search))
+            tableView.reloadData()
+        } else {
+            search = K.pokemonUrl + search
+            requestManager.fetchData(for: .pokemon(search))
+        }
+        searchTextField.text = ""
     }
 }

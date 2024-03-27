@@ -15,12 +15,10 @@ class PokemonCell: UITableViewCell {
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
     
-    
     @IBOutlet weak var background: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

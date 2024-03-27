@@ -13,5 +13,7 @@ struct K {
     static let PokemonViewSegue = "ToPokemonView"
     static let PokemonMovesSeque = "GoToMoves"
     static let firstPage = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+    static let pokemonUrl = "https://pokeapi.co/api/v2/pokemon/"
+    static let types = ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "physical", "fire", "water", "grass", "electric", "psychic", "ice", "dragon","dark", "fairy"]
     // testing git
 }

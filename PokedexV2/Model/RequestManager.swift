@@ -11,8 +11,9 @@ import UIKit
 
 enum RequestType {
     case pokemonList (String)
+    case type (String)
     case pokemon (String)
-    case pokemonFullData (String)
+    case stats (String)
     case sprite (String, SpriteType)
 }
 
@@ -28,24 +29,23 @@ protocol RequestManagerDelegate {
 struct RequestManager {
     
     var delegate : RequestManagerDelegate?
+    let typeUrl = "https://pokeapi.co/api/v2/type/"
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
-        if let url = URL(string: urlString){
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { data, reponse, error in
-                if error != nil {
-                    delegate?.didFailWithError(error: error!)
-                    return
-                }
-                if let data {
-                    if let decodedData = parseJSON(data: data, request: request){
-                        delegate?.didUpdate(data: decodedData)
-                    }
-                }
+        guard let url = URL(string: urlString) else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { data, reponse, error in
+            if error != nil {
+                delegate?.didFailWithError(error: error!)
+                return
             }
-            task.resume()
+            guard let data else { return }
+            if let decodedData = parseJSON(data: data, request: request){
+                delegate?.didUpdate(data: decodedData)
+            }
         }
+        task.resume()
     }
     
     func getRequestURL(for request : RequestType ) -> String {
@@ -56,8 +56,11 @@ struct RequestManager {
             return url
         case .sprite(let url,_):
             return url
-        case .pokemonFullData(let url):
+        case .stats(let url):
             return url
+        case .type(let type):
+            print(typeUrl + type )
+            return typeUrl + type
         }
     }
     
@@ -70,12 +73,12 @@ struct RequestManager {
             case .pokemon:
                 return try decoder.decode(PokemonData.self, from: data)
             case .sprite(_, let spriteType):
-                if let image = UIImage(data: data) {
-                    return SpriteModel(sprite: image, type: spriteType)
-                }
-                return nil
-            case .pokemonFullData:
-                return try decoder.decode(PokemonStats.self , from: data)
+                guard let image = UIImage(data: data) else { return nil }
+                return SpriteModel(sprite: image, type: spriteType)
+            case .stats:
+                return try decoder.decode(PokemonStatsData.self , from: data)
+            case .type(_):
+                return try decoder.decode(TypeData.self , from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)
