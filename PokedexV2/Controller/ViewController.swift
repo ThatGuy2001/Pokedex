@@ -13,16 +13,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     
     var list : PokemonListData?
-    var pokemons : [PokemonModel] = []
     var selectedPokemon = 0
+    
+    var allPokemons : [PokemonModel] = []
+    var somePokemons : [PokemonModel] = []
+    var shownPokemons : [PokemonModel] = []
     
     var requestManager = RequestManager()
     
     let queue = DispatchQueue(label: "pokemonUpdater")
     var timer = Timer()
     
+    var allPokemonsInDisplay = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        shownPokemons = allPokemons
         
         searchTextField.delegate = self
         
@@ -59,8 +66,21 @@ extension ViewController : RequestManagerDelegate {
                 let newPokemon = PokemonModel(name: name, url: url)
                 newPokemon.delegade = self
                 newPokemon.updatePokemon()
-                pokemons.append(newPokemon)
+                allPokemons.append(newPokemon)
             }
+            shownPokemons = allPokemons
+            allPokemonsInDisplay = true
+        } else if let type = data as? TypeData {
+            for pokemon in type.pokemon {
+                let url = pokemon.pokemon.url
+                let name = pokemon.pokemon.name
+                let newPokemon = PokemonModel(name: name, url: url)
+                newPokemon.delegade = self
+                newPokemon.updatePokemon()
+                somePokemons.append(newPokemon)
+            }
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -74,7 +94,7 @@ extension ViewController : RequestManagerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonViewController
-        destinationVC.pokemon = pokemons[selectedPokemon]
+        destinationVC.pokemon = shownPokemons[selectedPokemon]
     }
     
 }
@@ -83,7 +103,7 @@ extension ViewController : RequestManagerDelegate {
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let pokemon = pokemons[indexPath.row]
+        let pokemon = shownPokemons[indexPath.row]
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
             cell.isHidden = true
@@ -92,7 +112,7 @@ extension ViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPokemon = indexPath.row
-        pokemons[indexPath.row].fetchPokemonStats()
+        shownPokemons[indexPath.row].fetchPokemonStats()
     }
 }
 
@@ -100,12 +120,12 @@ extension ViewController : UITableViewDelegate {
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemons.count
+        return shownPokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
-        let pokemon = pokemons[indexPath.row]
+        let pokemon = shownPokemons[indexPath.row]
         
         if !pokemon.updateCalled{
             pokemon.updatePokemon()
@@ -131,7 +151,7 @@ extension ViewController : UITableViewDataSource {
             }
         }
         
-        if pokemons.count-10 == indexPath.row {
+        if allPokemons.count-10 == indexPath.row && allPokemonsInDisplay{
             requestNextPage()
         }
         
@@ -181,8 +201,15 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let search = searchTextField.text else { return }
-        print(search)
+        guard var search = searchTextField.text else { return }
+        search = search.lowercased()
+        if K.types.contains(search){
+            somePokemons = []
+            shownPokemons = []
+            print(1)
+            requestManager.fetchData(for: .type(search))
+            tableView.reloadData()
+        }
         searchTextField.text = ""
     }
 }

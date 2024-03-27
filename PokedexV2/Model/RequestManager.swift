@@ -29,7 +29,7 @@ protocol RequestManagerDelegate {
 struct RequestManager {
     
     var delegate : RequestManagerDelegate?
-    let typeUrl = "https://pokeapi.co/api/v2/type/fire"
+    let typeUrl = "https://pokeapi.co/api/v2/type/"
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
@@ -59,6 +59,7 @@ struct RequestManager {
         case .stats(let url):
             return url
         case .type(let type):
+            print(typeUrl + type )
             return typeUrl + type
         }
     }
