@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var translucentView: UIVisualEffectView!
     
     var list : PokemonListData?
+    var pokedexlist : PokedexList?
     var selectedPokemon = 0
     
     var allPokemons : [PokemonModel] = []
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
         
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.firstPage))
+        requestManager.fetchData(for: .pokedexList(K.pokedexListUrl))
         
         menuLeadingConstrait.constant = -200
         translucentView.layer.cornerRadius = 20
@@ -68,17 +70,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func menuPressed(_ sender: Any) {
-        
+        var x = -20
         if menuLeadingConstrait.constant == -20 {
-            UIView.animate(withDuration: 0.2) {
-                self.menuLeadingConstrait.constant = -200
-                self.view.layoutIfNeeded()
-            }
-        } else {
-            UIView.animate(withDuration: 0.2) {
-                self.menuLeadingConstrait.constant = -20
-                self.view.layoutIfNeeded()
-            }
+            x = -200
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.menuLeadingConstrait.constant = CGFloat(x)
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -131,6 +129,9 @@ extension ViewController : RequestManagerDelegate {
             }
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
+        } else if let pokedexlist = data as? PokedexList {
+            self.pokedexlist = pokedexlist
+            print(pokedexlist)
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()

@@ -61,12 +61,12 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asS-IO-5c0" userLabel="menu">
-                                <rect key="frame" x="0.0" y="148" width="175" height="704"/>
+                                <rect key="frame" x="0.0" y="103" width="200" height="749"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tln-el-P4I">
-                                        <rect key="frame" x="0.0" y="0.0" width="175" height="704"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="749"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NnI-Aj-lao">
-                                            <rect key="frame" x="0.0" y="0.0" width="175" height="704"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="749"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="regular"/>
@@ -74,7 +74,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="175" id="b3S-OJ-w2l"/>
+                                    <constraint firstAttribute="width" constant="200" id="b3S-OJ-w2l"/>
                                     <constraint firstItem="tln-el-P4I" firstAttribute="centerX" secondItem="asS-IO-5c0" secondAttribute="centerX" id="iJG-9m-El3"/>
                                     <constraint firstItem="tln-el-P4I" firstAttribute="height" secondItem="asS-IO-5c0" secondAttribute="height" id="pHW-zE-JWj"/>
                                     <constraint firstItem="tln-el-P4I" firstAttribute="width" secondItem="asS-IO-5c0" secondAttribute="width" id="rBh-BO-D0h"/>
@@ -94,7 +94,7 @@
                             <constraint firstAttribute="bottom" secondItem="asS-IO-5c0" secondAttribute="bottom" id="mg0-jq-d2g"/>
                             <constraint firstAttribute="bottom" secondItem="sVB-Vr-Ry4" secondAttribute="bottom" id="qZS-99-oRq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vm5-Oj-phJ" secondAttribute="trailing" id="ssp-XZ-mdN"/>
-                            <constraint firstItem="asS-IO-5c0" firstAttribute="top" secondItem="Vm5-Oj-phJ" secondAttribute="bottom" id="wbl-0G-brZ"/>
+                            <constraint firstItem="asS-IO-5c0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="wbl-0G-brZ"/>
                             <constraint firstItem="asS-IO-5c0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y0R-LP-WFi"/>
                         </constraints>
                     </view>

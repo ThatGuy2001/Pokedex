@@ -69,6 +69,17 @@ struct TPokemon : Codable {
     let pokemon : Pokemon
 }
 
+//MARK: - PokedexList
+
+struct PokedexList : Codable {
+    let next : String?
+    let results : [Pokedex]
+}
+
+struct Pokedex : Codable {
+    let name : String
+    let url : String
+}
 //MARK: - PokedexData
 
 struct PokedexData : Codable {
@@ -79,3 +90,4 @@ struct PokedexData : Codable {
 struct PokemonEntries : Codable {
     let pokemon_species : Pokemon
 }
+

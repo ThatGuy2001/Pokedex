@@ -16,6 +16,7 @@ struct K {
     static let pokemonUrl = "https://pokeapi.co/api/v2/pokemon/"
     static let typeUrl = "https://pokeapi.co/api/v2/type/"
     static let pokedexUrl = "https://pokeapi.co/api/v2/pokedex"
+    static let pokedexListUrl = "https://pokeapi.co/api/v2/pokedex?offset=0&limit=100"
     static let types = ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "physical", "fire", "water", "grass", "electric", "psychic", "ice", "dragon","dark", "fairy"]
     // testing git
 }
