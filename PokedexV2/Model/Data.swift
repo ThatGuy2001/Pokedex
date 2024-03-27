@@ -57,3 +57,9 @@ struct Stat : Codable {
     let base_stat : Int
 }
 
+//MARK: - Type
+
+struct TypeData : Codable {
+    var name : String
+    var pokemon : [Pokemon]
+}

@@ -11,8 +11,9 @@ import UIKit
 
 enum RequestType {
     case pokemonList (String)
+    case type (String)
     case pokemon (String)
-    case pokemonStats (String)
+    case stats (String)
     case sprite (String, SpriteType)
 }
 
@@ -28,6 +29,7 @@ protocol RequestManagerDelegate {
 struct RequestManager {
     
     var delegate : RequestManagerDelegate?
+    let typeUrl = "https://pokeapi.co/api/v2/type/fire"
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
@@ -54,8 +56,10 @@ struct RequestManager {
             return url
         case .sprite(let url,_):
             return url
-        case .pokemonStats(let url):
+        case .stats(let url):
             return url
+        case .type(let type):
+            return typeUrl + type
         }
     }
     
@@ -70,8 +74,10 @@ struct RequestManager {
             case .sprite(_, let spriteType):
                 guard let image = UIImage(data: data) else { return nil }
                 return SpriteModel(sprite: image, type: spriteType)
-            case .pokemonStats:
+            case .stats:
                 return try decoder.decode(PokemonStatsData.self , from: data)
+            case .type(_):
+                return try decoder.decode(TypeData.self , from: data)
             }
         } catch {
             delegate?.didFailWithError(error: error)

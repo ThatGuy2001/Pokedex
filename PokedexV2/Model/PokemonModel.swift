@@ -61,7 +61,7 @@ class PokemonModel {
     }
     
     func fetchPokemonStats() {
-        requestManger.fetchData(for: RequestType.pokemonStats(url))
+        requestManger.fetchData(for: RequestType.stats(url))
     }
     
     func requestSprite(url : String, type : SpriteType) {
