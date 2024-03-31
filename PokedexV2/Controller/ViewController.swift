@@ -11,24 +11,19 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchTextField: UITextField!
-    
     @IBOutlet weak var resetSearchButton: UIButton!
-    
     @IBOutlet weak var menuLeadingConstrait: NSLayoutConstraint!
-    
     @IBOutlet weak var translucentView: UIVisualEffectView!
     
-    var list : PokemonListData?
-    var pokedexlist : PokedexList?
     var selectedPokemon = 0
     
+    var pokemonList : PokemonListData?
     var allPokemons : [PokemonModel] = []
     var somePokemons : [PokemonModel] = []
     var shownPokemons : [PokemonModel] = []
+    var allPokemonsInDisplay = true
     
     var requestManager = RequestManager()
-    
-    var allPokemonsInDisplay = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +39,17 @@ class ViewController: UIViewController {
         
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.firstPage))
-        requestManager.fetchData(for: .pokedexList(K.pokedexListUrl))
         
         menuLeadingConstrait.constant = -200
         translucentView.layer.cornerRadius = 20
     }
     
     func requestNextPage() {
-        guard let nextPage = list?.next else { return }
-        print(nextPage)
-        list?.next = nil
+        guard let nextPage = pokemonList?.next else { return }
+        pokemonList?.next = nil
         requestManager.fetchData(for: RequestType.pokemonList(nextPage))
     }
+    
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         searchTextField.endEditing(true)
@@ -88,7 +82,7 @@ class ViewController: UIViewController {
 extension ViewController : RequestManagerDelegate {
     func didUpdate(data: Any) {
         if let pokemonList = data as? PokemonListData{
-            list = pokemonList
+            self.pokemonList = pokemonList
             for pokemon in pokemonList.results {
                 let name = pokemon.name
                 let newPokemon = PokemonModel(name: name)
@@ -129,10 +123,7 @@ extension ViewController : RequestManagerDelegate {
             }
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
-        } else if let pokedexlist = data as? PokedexList {
-            self.pokedexlist = pokedexlist
-            print(pokedexlist)
-        }
+        } 
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

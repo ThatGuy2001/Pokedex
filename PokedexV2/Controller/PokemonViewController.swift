@@ -87,7 +87,6 @@ class PokemonViewController : UIViewController {
         } else {
             pokemon.spriteIndex += 1
         }
-        print(pokemon.spriteIndex)
         sprite.image = pokemon.sprites[pokemon.spriteIndex]
     }
 }
