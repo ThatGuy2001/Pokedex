@@ -13,38 +13,44 @@ protocol PokemonModelDelegate {
     func didNotUpdate()
 }
 
+struct Sprites {
+    var male : UIImage?
+    var maleShiny : UIImage?
+}
+
+enum UpdateStatus {
+    case baseInfo
+    case updateCalled
+    case updateEnded
+}
+
 class PokemonModel {
-    
-    enum UpdateStatus {
-        case baseInfo
-        case updateCalled
-        case updateEnded
-    }
-    
     
     var delegade : PokemonModelDelegate?
     var requestManger : RequestManager
+    
     var updateStatus : UpdateStatus
     
     var name : String
-    
     var id : Int
+    var stats : [Int]
+    var sprites : Sprites
+    var weight : Int
+    var height : Int
+    
     var type1 : String?
     var type2 : String?
     
-    var sprites : [UIImage] = []
-    var spriteIndex = 0
-    
-    var stats : [Int]
-    var weight : Int?
-    var height : Int?
-    
     init(name: String) {
+        updateStatus = .baseInfo
         self.name = name
         id = 0
+        sprites = Sprites()
+        stats = []
+        weight = 0
+        height = 0
         requestManger = RequestManager()
         requestManger.delegate = self
-        updateStatus = .baseInfo
     }
     
     func updatePokemon() {
@@ -54,7 +60,7 @@ class PokemonModel {
         }
     }
     
-    func updateSprites(sprites: Sprites) {
+    func updateSprites(sprites : SpritesData) {
         if let front = sprites.front_default {
             requestSprite(url: front, type: .male)
         }
@@ -67,21 +73,31 @@ class PokemonModel {
         requestManger.fetchData(for: RequestType.sprite(url, type))
     }
     
-    func getStats() {
-        // max hp 216
-        // max atc 110
-        // max def 230
-        // max spAtc 194
-        // max spDef 230
-        // max speed 180
+    func getHp() -> Float { // max hp 216
+        return Float(stats[0]) / 216
+    }
+    func getAtc() -> Float { // max atc 110
+        return Float(stats[1]) / 110
+    }
+    func getDef() -> Float { // max def 230
+        return Float(stats[2]) / 230
+    }
+    func getSpAtc() -> Float { // max spAtc 194
+        return Float(stats[3]) / 194
+    }
+    func getSpDef() -> Float { // max spDef 230
+        return Float(stats[4]) / 230
+    }
+    func getSpeed() -> Float { // max speed 180
+        return Float(stats[5]) / 180
     }
     
     func getHeight() -> String  {
-        String(format: "Height: %dft", height ?? 0)
+        String(format: "Height: %dft", height)
     }
     
     func getWeight() -> String {
-        String(format: "Weight: %dlb", weight ?? 0)
+        String(format: "Weight: %dlb", weight)
     }
     
     func getColor() -> UIColor? {
@@ -101,19 +117,24 @@ extension PokemonModel : RequestManagerDelegate {
     func didUpdate(data: Any) {
         if let pokemon = data as? PokemonData {
             id = pokemon.id
+            height = pokemon.height
+            weight = pokemon.weight
+            stats = pokemon.stats.map { $0.base_stat }
+            
             type1 = pokemon.types[0].type.name
             if pokemon.types.count > 1 {
                 type2 = pokemon.types[1].type.name
             }
+            
             updateSprites(sprites: pokemon.sprites)
         } else if let sprite = data as? SpriteModel {
             switch sprite.type {
             case .male:
-                sprites.insert(sprite.sprite, at: 0)
+                sprites.male = sprite.sprite
                 updateStatus = .updateEnded
                 delegade?.didEndUpdate()
-            default:
-                sprites.append(sprite.sprite)
+            case .maleShiny:
+                sprites.maleShiny = sprite.sprite
             }
         }
     }

@@ -27,7 +27,7 @@ struct PokemonData : Codable {
     let id : Int
     let name : String
     let types : [Types]
-    let sprites : Sprites
+    let sprites : SpritesData
     // stats
     let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
     let weight : Int
@@ -44,7 +44,7 @@ struct _Type : Codable {
     let url : String
 }
 
-struct Sprites : Codable {
+struct SpritesData : Codable {
     let front_default : String?
     let front_shiny : String?
 }
