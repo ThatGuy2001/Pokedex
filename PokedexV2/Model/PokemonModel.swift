@@ -76,13 +76,13 @@ class PokemonModel {
     func getHp() -> Float { // max hp 216
         return Float(stats[0]) / 216
     }
-    func getAtc() -> Float { // max atc 110
+    func getAtk() -> Float { // max atc 110
         return Float(stats[1]) / 110
     }
     func getDef() -> Float { // max def 230
         return Float(stats[2]) / 230
     }
-    func getSpAtc() -> Float { // max spAtc 194
+    func getSpAtk() -> Float { // max spAtc 194
         return Float(stats[3]) / 194
     }
     func getSpDef() -> Float { // max spDef 230

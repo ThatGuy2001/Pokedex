@@ -31,12 +31,31 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
     
     // Pokemon Info View Outlets
-    
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var sprite: UIImageView!
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
+    
+    @IBOutlet weak var pokemonView: UIView!
+    @IBOutlet weak var statsView: UIView!
+    
+    // Stats Bars
+    @IBOutlet weak var hpBar: UIProgressView!
+    @IBOutlet weak var atkBar: UIProgressView!
+    @IBOutlet weak var defBar: UIProgressView!
+    @IBOutlet weak var spAtkBar: UIProgressView!
+    @IBOutlet weak var spDefBar: UIProgressView!
+    @IBOutlet weak var speedBar: UIProgressView!
+    
+    // Stats Labels
+    @IBOutlet weak var hp: UILabel!
+    @IBOutlet weak var atk: UILabel!
+    @IBOutlet weak var def: UILabel!
+    @IBOutlet weak var spAtk: UILabel!
+    @IBOutlet weak var spDef: UILabel!
+    @IBOutlet weak var speed: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +70,47 @@ class ViewController: UIViewController {
         
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.Url.firstPage))
+        
+        statsView.isHidden = true
+        pokemonView.isHidden = true
     }
     func requestNextPage() {
         guard let nextPage = pokemonList?.next else { return }
         pokemonList?.next = nil
         requestManager.fetchData(for: RequestType.pokemonList(nextPage))
+    }
+    
+    func setPokemonView(pokemon: PokemonModel){
+        id.text = String(format: "#%03d", pokemon.id)
+        name.text = pokemon.name
+        sprite.image = pokemon.sprites.male
+        pokemonView.backgroundColor = pokemon.getColor()
+        if let type1 = pokemon.type1 {
+            self.type1.image = UIImage(named: type1)
+        }
+        if let type2 = pokemon.type2 {
+            self.type2.isHidden = false
+            self.type2.image = UIImage(named: type2)
+        } else {
+            type2.isHidden = true
+        }
+    }
+    
+    func setStatusView(pokemon: PokemonModel){
+        
+        let statsLabels = [hp,atk,def,spAtk,spDef,speed]
+        
+        hpBar.progress = pokemon.getHp()
+        atkBar.progress = pokemon.getAtk()
+        defBar.progress = pokemon.getDef()
+        spAtkBar.progress = pokemon.getSpAtk()
+        spDefBar.progress = pokemon.getSpDef()
+        speedBar.progress = pokemon.getSpeed()
+        
+        for i in 0..<6 {
+            statsLabels[i]?.text = String(format: "%3d", pokemon.stats[i])
+        }
+        
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -141,23 +196,13 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        statsView.isHidden = false
+        pokemonView.isHidden = false
+        
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
-        
-        id.text = String(format: "#%03d", pokemon.id)
-        name.text = pokemon.name
-        sprite.image = pokemon.sprites.male
-        
-        if let type1 = pokemon.type1 {
-            self.type1.image = UIImage(named: type1)
-        }
-        if let type2 = pokemon.type2 {
-            self.type2.isHidden = false
-            self.type2.image = UIImage(named: type2)
-        } else {
-            type2.isHidden = true
-        }
-        
+        setPokemonView(pokemon: pokemon)
+        setStatusView(pokemon: pokemon)
     }
 }
 
