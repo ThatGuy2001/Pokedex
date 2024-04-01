@@ -10,11 +10,6 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var resetSearchButton: UIButton!
-    @IBOutlet weak var menuLeadingConstrait: NSLayoutConstraint!
-    @IBOutlet weak var translucentView: UIVisualEffectView!
-    
     var selectedPokemon = 0
     
     var pokemonList : PokemonListData?
@@ -25,13 +20,23 @@ class ViewController: UIViewController {
     
     var requestManager = RequestManager()
     
+    // layout constraits
+    
+    @IBOutlet weak var statsViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var statsViewWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var pokemonViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var pokemonViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         shownPokemons = allPokemons
-        resetSearchButton.isHidden = true
+//        resetSearchButton.isHidden = true
         
-        searchTextField.delegate = self
+//        searchTextField.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,8 +45,8 @@ class ViewController: UIViewController {
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.firstPage))
         
-        menuLeadingConstrait.constant = -200
-        translucentView.layer.cornerRadius = 20
+        
+
     }
     
     func requestNextPage() {
@@ -50,31 +55,27 @@ class ViewController: UIViewController {
         requestManager.fetchData(for: RequestType.pokemonList(nextPage))
     }
     
-    
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        searchTextField.endEditing(true)
-    }
-    
-    @IBAction func resetSearchPressed(_ sender: Any) {
-        allPokemonsInDisplay = true
-        shownPokemons = allPokemons
-        resetSearchButton.isHidden = true
-        tableView.reloadData()
-    }
-    
-    
-    @IBAction func menuPressed(_ sender: Any) {
-        var x = -20
-        if menuLeadingConstrait.constant == -20 {
-            x = -200
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.willTransition(to: newCollection, with: coordinator)
+                
+                if UIDevice.current.orientation.isLandscape {
+                    print("in landscape")
+                    pokemonViewWidth = pokemonViewWidth.setMultiplier(multiplier: 0.45)
+                    pokemonViewHeight = pokemonViewHeight.setMultiplier(multiplier: 1)
+                    statsViewWidth = statsViewWidth.setMultiplier(multiplier: 0.45)
+                    statsViewHeight = statsViewHeight.setMultiplier(multiplier: 1)
+                    tableViewWidth = tableViewWidth.setMultiplier(multiplier: 0.10)
+                    view.layoutIfNeeded()
+                } else {
+                    pokemonViewWidth = pokemonViewWidth.setMultiplier(multiplier: 0.8)
+                    pokemonViewHeight = pokemonViewHeight.setMultiplier(multiplier: 0.5)
+                    statsViewWidth = statsViewWidth.setMultiplier(multiplier: 0.8)
+                    statsViewHeight = statsViewHeight.setMultiplier(multiplier: 0.5)
+                    tableViewWidth = tableViewWidth.setMultiplier(multiplier: 0.2)
+                    view.layoutIfNeeded()
+                }
         }
-        UIView.animate(withDuration: 0.2) {
-            self.menuLeadingConstrait.constant = CGFloat(x)
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    
+        
 }
 
 //MARK: - RequestManagerDelegate
@@ -181,21 +182,9 @@ extension ViewController : UITableViewDataSource {
         }
         
         if pokemon.updateEnded {
-            cell.isHidden = false
-            cell.id.text = String(format: "#%03d", pokemon.id)
-            cell.name.text = pokemon.name.capitalized
             cell.sprite.image = pokemon.sprites[0]
             cell.background.backgroundColor = pokemon.getColor()
             cell.background.layer.cornerRadius = 10
-            
-            if let type = pokemon.type1 {
-                cell.type1.image = UIImage(named: type)
-            }
-            if let type2 = pokemon.type2{
-                cell.type2.image = UIImage(named: type2)
-            } else {
-                cell.type2.image = nil
-            }
         }
         
         if allPokemons.count-10 == indexPath.row && allPokemonsInDisplay{
@@ -214,9 +203,7 @@ extension ViewController : PokemonModelDelegate {
     }
     
     func didUpdateStats() {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: K.PokemonViewSegue, sender: self)
-        }
+        print("Should not have been called")
     }
     
     func didEndUpdate() {
@@ -230,35 +217,61 @@ extension ViewController : PokemonModelDelegate {
     }
 }
 
-//MARK: -UITextFieldDelegate
-extension ViewController: UITextFieldDelegate {
+////MARK: -UITextFieldDelegate
+//extension ViewController: UITextFieldDelegate {
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        searchTextField.endEditing(true)
+//        return true
+//    }
+//    
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        if textField.text != "" {
+//            return true
+//        } else {
+//            textField.placeholder = "Search"
+//            return false
+//        }
+//    }
+//    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        guard var search = searchTextField.text else { return }
+//        search = search.lowercased()
+//        somePokemons = []
+//        shownPokemons = []
+//        allPokemonsInDisplay = false
+//        resetSearchButton.isHidden = false
+//        if K.types.contains(search){
+//            requestManager.fetchData(for: .type(search))
+//        } else {
+//            requestManager.fetchData(for: .pokemon(search))
+//        }
+//        searchTextField.text = ""
+//    }
+//}
+
+
+extension NSLayoutConstraint {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTextField.endEditing(true)
-        return true
+    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+        
+        let newConstraint = NSLayoutConstraint(
+            item: firstItem,
+            attribute: firstAttribute,
+            relatedBy: relation,
+            toItem: secondItem,
+            attribute: secondAttribute,
+            multiplier: multiplier,
+            constant: constant)
+        
+        newConstraint.priority = priority
+        newConstraint.shouldBeArchived = self.shouldBeArchived
+        newConstraint.identifier = self.identifier
+        newConstraint.isActive = true
+        
+        NSLayoutConstraint.deactivate([self])
+        NSLayoutConstraint.activate([newConstraint])
+        return newConstraint
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != "" {
-            return true
-        } else {
-            textField.placeholder = "Search"
-            return false
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard var search = searchTextField.text else { return }
-        search = search.lowercased()
-        somePokemons = []
-        shownPokemons = []
-        allPokemonsInDisplay = false
-        resetSearchButton.isHidden = false
-        if K.types.contains(search){
-            requestManager.fetchData(for: .type(search))
-        } else {
-            requestManager.fetchData(for: .pokemon(search))
-        }
-        searchTextField.text = ""
-    }
 }
