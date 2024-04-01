@@ -15,8 +15,6 @@ enum RequestType {
     case pokemon (String)
     case stats (String)
     case sprite (String, SpriteType)
-    case pokedex (String)
-    case pokedexList (String)
 }
 
 //MARK: - RequestManagerDelegate
@@ -61,11 +59,6 @@ struct RequestManager {
             return K.pokemonUrl + name
         case .type(let type):
             return K.typeUrl + type
-        case .pokedex(let id):
-            return K.pokedexUrl + "/\(id)"
-        case .pokedexList(let url):
-            return url
-        }
     }
     
     func parseJSON(data : Data, request : RequestType) -> Any? {

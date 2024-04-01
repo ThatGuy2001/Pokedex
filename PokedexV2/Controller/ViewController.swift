@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var selectedPokemon = 0
+    var pokemonInDisplay : PokemonModel?
     
     var pokemonList : PokemonListData?
     var allPokemons : [PokemonModel] = []
@@ -48,7 +48,6 @@ class ViewController: UIViewController {
         
 
     }
-    
     func requestNextPage() {
         guard let nextPage = pokemonList?.next else { return }
         pokemonList?.next = nil
@@ -57,25 +56,21 @@ class ViewController: UIViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
             super.willTransition(to: newCollection, with: coordinator)
-                
                 if UIDevice.current.orientation.isLandscape {
-                    print("in landscape")
-                    pokemonViewWidth = pokemonViewWidth.setMultiplier(multiplier: 0.45)
-                    pokemonViewHeight = pokemonViewHeight.setMultiplier(multiplier: 1)
-                    statsViewWidth = statsViewWidth.setMultiplier(multiplier: 0.45)
-                    statsViewHeight = statsViewHeight.setMultiplier(multiplier: 1)
-                    tableViewWidth = tableViewWidth.setMultiplier(multiplier: 0.10)
-                    view.layoutIfNeeded()
+                    changeLayout(0.45, 1, 0.45, 1, 0.1)
                 } else {
-                    pokemonViewWidth = pokemonViewWidth.setMultiplier(multiplier: 0.8)
-                    pokemonViewHeight = pokemonViewHeight.setMultiplier(multiplier: 0.5)
-                    statsViewWidth = statsViewWidth.setMultiplier(multiplier: 0.8)
-                    statsViewHeight = statsViewHeight.setMultiplier(multiplier: 0.5)
-                    tableViewWidth = tableViewWidth.setMultiplier(multiplier: 0.2)
-                    view.layoutIfNeeded()
+                    changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
                 }
-        }
-        
+    }
+    
+    func changeLayout(_ w1: CGFloat, _ h1: CGFloat, _ w2: CGFloat, _ h2: CGFloat, _ w3: CGFloat ) {
+        pokemonViewWidth = pokemonViewWidth.setMultiplier(multiplier: w1)
+        pokemonViewHeight = pokemonViewHeight.setMultiplier(multiplier: h1)
+        statsViewWidth = statsViewWidth.setMultiplier(multiplier: w2)
+        statsViewHeight = statsViewHeight.setMultiplier(multiplier: h2)
+        tableViewWidth = tableViewWidth.setMultiplier(multiplier: w3)
+        view.layoutIfNeeded()
+    }
 }
 
 //MARK: - RequestManagerDelegate
@@ -135,11 +130,6 @@ extension ViewController : RequestManagerDelegate {
         print(error)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! PokemonViewController
-        destinationVC.pokemon = shownPokemons[selectedPokemon]
-    }
-    
 }
 
 // MARK: - UITableViewDelegate
@@ -159,8 +149,9 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPokemon = indexPath.row
-        shownPokemons[indexPath.row].fetchPokemonStats()
+        pokemonInDisplay = shownPokemons[indexPath.row]
+        guard let pokemon = pokemonInDisplay else { return }
+        pokemon.fetchPokemonStats()
     }
 }
 
@@ -184,7 +175,7 @@ extension ViewController : UITableViewDataSource {
         if pokemon.updateEnded {
             cell.sprite.image = pokemon.sprites[0]
             cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 10
+            cell.background.layer.cornerRadius = 1
         }
         
         if allPokemons.count-10 == indexPath.row && allPokemonsInDisplay{
@@ -198,12 +189,8 @@ extension ViewController : UITableViewDataSource {
 //MARK: - PokemonModelDelegate
 
 extension ViewController : PokemonModelDelegate {
-    func didUpdateMoves() {
-        print("Should not have been called")
-    }
-    
     func didUpdateStats() {
-        print("Should not have been called")
+        //show pokemon info
     }
     
     func didEndUpdate() {

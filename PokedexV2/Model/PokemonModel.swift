@@ -15,6 +15,12 @@ protocol PokemonModelDelegate {
 
 class PokemonModel {
     
+    enum UpdateStatus {
+        case baseInfo
+        case Sprites
+        case Stats
+    }
+    
     var delegade : PokemonModelDelegate?
     
     var requestManger : RequestManager
@@ -68,6 +74,12 @@ class PokemonModel {
     func getStats() -> [Int]? {
         guard let stats = self.stats?.stats else { return nil }
         return stats.map { $0.base_stat }
+        // max hp 216
+        // max atc 110
+        // max def 230
+        // max spAtc 194
+        // max spDef 230
+        // max speed 180
     }
     
     func getHeight() -> String  {
