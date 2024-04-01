@@ -144,7 +144,7 @@ extension ViewController : UITableViewDelegate {
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
         
-        id.text = String(format: "#%3d", pokemon.id)
+        id.text = String(format: "#%03d", pokemon.id)
         name.text = pokemon.name
         sprite.image = pokemon.sprites.male
         
@@ -152,6 +152,7 @@ extension ViewController : UITableViewDelegate {
             self.type1.image = UIImage(named: type1)
         }
         if let type2 = pokemon.type2 {
+            self.type2.isHidden = false
             self.type2.image = UIImage(named: type2)
         } else {
             type2.isHidden = true
