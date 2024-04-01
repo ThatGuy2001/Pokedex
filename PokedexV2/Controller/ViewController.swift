@@ -40,10 +40,10 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: K.PokemonCell, bundle: nil), forCellReuseIdentifier: K.PokemonCell)
+        tableView.register(UINib(nibName: K.Identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.Identifiers.PokemonCell)
         
         requestManager.delegate = self
-        requestManager.fetchData(for: .pokemonList(K.firstPage))
+        requestManager.fetchData(for: .pokemonList(K.Url.firstPage))
         
         
 
@@ -107,19 +107,7 @@ extension ViewController : RequestManagerDelegate {
             somePokemons.append(newPokemon)
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
-        } else if let pokedex = data as? PokedexData {
-            for pokemon in pokedex.pokemon_entries {
-                let name = pokemon.pokemon_species.name
-                let newPokemon = PokemonModel(name: name)
-                newPokemon.delegade = self
-                somePokemons.append(newPokemon)
-            }
-            for i in 0..<10 {
-                somePokemons[i].updatePokemon()
-            }
-            shownPokemons = somePokemons
-            allPokemonsInDisplay = false
-        } 
+        }
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -163,7 +151,7 @@ extension ViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.PokemonCell, for: indexPath) as! PokemonCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.Identifiers.PokemonCell, for: indexPath) as! PokemonCell
         let pokemon = shownPokemons[indexPath.row]
         
         if !pokemon.updateCalled{

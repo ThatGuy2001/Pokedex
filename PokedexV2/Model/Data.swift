@@ -28,6 +28,10 @@ struct PokemonData : Codable {
     let name : String
     let types : [Types]
     let sprites : Sprites
+    // stats
+    let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
+    let weight : Int
+    let height : Int
 }
 
 struct Types : Codable {
@@ -45,14 +49,6 @@ struct Sprites : Codable {
     let front_shiny : String?
 }
 
-//MARK: - PokemonsStatsData
-
-struct PokemonStatsData : Codable {
-    let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
-    let weight : Int
-    let height : Int
-}
-
 struct Stat : Codable {
     let base_stat : Int
 }
@@ -68,26 +64,3 @@ struct TypeData : Codable {
 struct TPokemon : Codable {
     let pokemon : Pokemon
 }
-
-//MARK: - PokedexList
-
-struct PokedexList : Codable {
-    let next : String?
-    let results : [Pokedex]
-}
-
-struct Pokedex : Codable {
-    let name : String
-    let url : String
-}
-//MARK: - PokedexData
-
-struct PokedexData : Codable {
-    let name : String
-    let pokemon_entries : [PokemonEntries]
-}
-
-struct PokemonEntries : Codable {
-    let pokemon_species : Pokemon
-}
-
