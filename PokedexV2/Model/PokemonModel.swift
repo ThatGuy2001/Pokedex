@@ -79,8 +79,13 @@ class PokemonModel {
     }
     
     func getColor() -> UIColor? {
-        guard let type = type1 else { return UIColor(named: "normal") }
-        return UIColor(named: type)
+        guard let type1 = self.type1 else { return UIColor(named: "normal") }
+        guard let type2 = self.type2 else {return UIColor(named: type1)}
+        
+        if type1 == "normal" {
+            return UIColor(named: type2)
+        }
+         return UIColor(named: type1)
     }
 }
 
