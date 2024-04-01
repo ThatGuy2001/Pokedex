@@ -17,17 +17,16 @@ class PokemonModel {
     
     enum UpdateStatus {
         case baseInfo
-        case Sprites
-        case Stats
+        case updateCalled
+        case updateEnded
     }
     
-    var delegade : PokemonModelDelegate?
     
+    var delegade : PokemonModelDelegate?
     var requestManger : RequestManager
+    var updateStatus : UpdateStatus
     
     var name : String
-    var updateCalled : Bool
-    var updateEnded : Bool
     
     var id : Int
     var type1 : String?
@@ -36,20 +35,21 @@ class PokemonModel {
     var sprites : [UIImage] = []
     var spriteIndex = 0
     
-    var stats : PokemonStatsData?
+    var stats : [Int]
+    var weight : Int?
+    var height : Int?
     
     init(name: String) {
         self.name = name
         id = 0
-        updateCalled = false
-        updateEnded = false
         requestManger = RequestManager()
         requestManger.delegate = self
+        updateStatus = .baseInfo
     }
     
     func updatePokemon() {
-        if !updateCalled {
-            updateCalled = true
+        if updateStatus == .baseInfo {
+            updateStatus = .updateCalled
             requestManger.fetchData(for: RequestType.pokemon(name))
         }
     }
@@ -63,17 +63,11 @@ class PokemonModel {
         }
     }
     
-    func fetchPokemonStats() {
-        requestManger.fetchData(for: RequestType.stats(name))
-    }
-    
     func requestSprite(url : String, type : SpriteType) {
         requestManger.fetchData(for: RequestType.sprite(url, type))
     }
     
-    func getStats() -> [Int]? {
-        guard let stats = self.stats?.stats else { return nil }
-        return stats.map { $0.base_stat }
+    func getStats() {
         // max hp 216
         // max atc 110
         // max def 230
@@ -83,11 +77,11 @@ class PokemonModel {
     }
     
     func getHeight() -> String  {
-        String(format: "Height: %dft", stats?.height ?? 0)
+        String(format: "Height: %dft", height ?? 0)
     }
     
     func getWeight() -> String {
-        String(format: "Weight: %dlb", stats?.weight ?? 0)
+        String(format: "Weight: %dlb", weight ?? 0)
     }
     
     func getColor() -> UIColor? {
@@ -116,14 +110,11 @@ extension PokemonModel : RequestManagerDelegate {
             switch sprite.type {
             case .male:
                 sprites.insert(sprite.sprite, at: 0)
-                updateEnded = true
+                updateStatus = .updateEnded
                 delegade?.didEndUpdate()
             default:
                 sprites.append(sprite.sprite)
             }
-        } else if let stats = data as? PokemonStatsData {
-            self.stats = stats
-            delegade?.didUpdateStats()
         }
     }
     
