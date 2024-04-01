@@ -30,12 +30,19 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
     
+    // Pokemon Info View Outlets
+    
+    @IBOutlet weak var id: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var sprite: UIImageView!
+    @IBOutlet weak var type1: UIImageView!
+    @IBOutlet weak var type2: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         shownPokemons = allPokemons
 //        resetSearchButton.isHidden = true
-        
 //        searchTextField.delegate = self
         
         tableView.dataSource = self
@@ -44,9 +51,6 @@ class ViewController: UIViewController {
         
         requestManager.delegate = self
         requestManager.fetchData(for: .pokemonList(K.Url.firstPage))
-        
-        
-
     }
     func requestNextPage() {
         guard let nextPage = pokemonList?.next else { return }
@@ -128,7 +132,7 @@ extension ViewController : UITableViewDelegate {
         for i in index..<index+3 {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
-                if !pokemon.updateCalled{
+                if pokemon.updateStatus == .baseInfo {
                     pokemon.updatePokemon()
                     cell.isHidden = true
                 }
@@ -139,7 +143,20 @@ extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
-        pokemon.fetchPokemonStats()
+        
+        id.text = String(format: "#%3d", pokemon.id)
+        name.text = pokemon.name
+        sprite.image = pokemon.sprites.male
+        
+        if let type1 = pokemon.type1 {
+            self.type1.image = UIImage(named: type1)
+        }
+        if let type2 = pokemon.type2 {
+            self.type2.image = UIImage(named: type2)
+        } else {
+            type2.isHidden = true
+        }
+        
     }
 }
 
@@ -154,14 +171,14 @@ extension ViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Identifiers.PokemonCell, for: indexPath) as! PokemonCell
         let pokemon = shownPokemons[indexPath.row]
         
-        if !pokemon.updateCalled{
+        if pokemon.updateStatus == .baseInfo {
             pokemon.updatePokemon()
             cell.isHidden = true
             return cell
         }
         
-        if pokemon.updateEnded {
-            cell.sprite.image = pokemon.sprites[0]
+        if pokemon.updateStatus == .updateEnded {
+            cell.sprite.image = pokemon.sprites.male
             cell.background.backgroundColor = pokemon.getColor()
             cell.background.layer.cornerRadius = 1
         }

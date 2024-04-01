@@ -10,10 +10,10 @@ import Foundation
 //MARK: - PokemonListData
 
 struct PokemonListData : Codable {
-    var count: Int = 0
-    var next: String? = nil
-    var previous: String? = nil
-    var results : [Pokemon] = []
+    var count: Int
+    var next: String?
+    var previous: String?
+    var results : [Pokemon] 
 }
 
 struct Pokemon : Codable {
