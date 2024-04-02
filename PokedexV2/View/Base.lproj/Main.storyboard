@@ -32,6 +32,7 @@
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kR0-K3-37W">
                                         <rect key="frame" x="57" y="78.666666666666657" width="200" height="199.99999999999997"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kR0-K3-37W" secondAttribute="height" multiplier="1:1" id="Z07-aZ-wVi"/>
                                         </constraints>
@@ -63,6 +64,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="imi-4t-TW5" secondAttribute="trailing" constant="20" symbolic="YES" id="5or-mM-GzE"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="Lm2-2Y-OLV" secondAttribute="bottom" constant="8.6666666666666572" id="BXg-06-caj"/>
@@ -75,6 +77,9 @@
                                     <constraint firstItem="imi-4t-TW5" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="8" id="iXg-l6-S8Q"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="w9Q-TE-3Lj"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="xeF-e2-ZIT" appends="YES" id="2Fj-Mv-N5X"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="los-42-RPq" userLabel="statsView">
                                 <rect key="frame" x="78.666666666666657" y="460.66666666666674" width="314.33333333333337" height="357.33333333333326"/>
@@ -351,6 +356,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xeF-e2-ZIT">
+                    <connections>
+                        <action selector="spriteTapped:" destination="BYZ-38-t0r" id="5eZ-KZ-oDd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>

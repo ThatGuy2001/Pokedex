@@ -34,9 +34,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var sprite: UIImageView!
+    var spriteType = SpriteType.male
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
-    
     @IBOutlet weak var pokemonView: UIView!
     @IBOutlet weak var statsView: UIView!
     
@@ -84,6 +84,7 @@ class ViewController: UIViewController {
         id.text = String(format: "#%03d", pokemon.id)
         name.text = pokemon.name
         sprite.image = pokemon.sprites.male
+        spriteType = .male
         pokemonView.backgroundColor = pokemon.getColor()
         if let type1 = pokemon.type1 {
             self.type1.image = UIImage(named: type1)
@@ -130,6 +131,19 @@ class ViewController: UIViewController {
         tableViewWidth = tableViewWidth.setMultiplier(multiplier: w3)
         view.layoutIfNeeded()
     }
+    
+    @IBAction func spriteTapped(_ sender: UITapGestureRecognizer) {
+        print(1)
+        guard let pokemonInDisplay else { return  }
+        if spriteType == .male {
+            sprite.image = pokemonInDisplay.sprites.maleShiny
+            spriteType = .maleShiny
+        } else {
+            sprite.image = pokemonInDisplay.sprites.male
+            spriteType = .male
+        }
+    }
+    
 }
 
 //MARK: - RequestManagerDelegate
