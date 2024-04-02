@@ -66,10 +66,10 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: K.Identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.Identifiers.PokemonCell)
+        tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
         
         requestManager.delegate = self
-        requestManager.fetchData(for: .pokemonList(K.Url.firstPage))
+        requestManager.fetchData(for: .pokemonList(K.url.firstPage))
         
         statsView.isHidden = true
         pokemonView.isHidden = true
@@ -133,7 +133,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func spriteTapped(_ sender: UITapGestureRecognizer) {
-        print(1)
         guard let pokemonInDisplay else { return  }
         if spriteType == .male {
             sprite.image = pokemonInDisplay.sprites.maleShiny
@@ -143,7 +142,6 @@ class ViewController: UIViewController {
             spriteType = .male
         }
     }
-    
 }
 
 //MARK: - RequestManagerDelegate
@@ -228,7 +226,7 @@ extension ViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.Identifiers.PokemonCell, for: indexPath) as! PokemonCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
         let pokemon = shownPokemons[indexPath.row]
         
         if pokemon.updateStatus == .baseInfo {

@@ -51,11 +51,11 @@ struct RequestManager {
         case .pokemonList(let url):
             return url
         case .pokemon(let name):
-            return K.Url.pokemonUrl + name
-        case .sprite(let url,_):
+            return K.url.pokemon + name
+        case .sprite(let url ,_):
             return url
         case .type(let type):
-            return K.Url.typeUrl + type
+            return K.url.type + type
         }
     }
         

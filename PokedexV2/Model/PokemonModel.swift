@@ -59,13 +59,10 @@ class PokemonModel {
         }
     }
     
-    func updateSprites(sprites : SpritesData) {
-        if let front = sprites.front_default {
-            requestSprite(url: front, type: .male)
-        }
-        if let frontShiny = sprites.front_shiny {
-            requestSprite(url: frontShiny, type: .maleShiny)
-        }
+    func updateSprites() {
+        let sId = String(id) + ".png"
+        requestSprite(url: K.url.defaultSprite + sId, type: .male)
+        requestSprite(url: K.url.shinySprite + sId, type: .maleShiny)
     }
     
     func requestSprite(url : String, type : SpriteType) {
@@ -125,7 +122,7 @@ extension PokemonModel : RequestManagerDelegate {
                 type2 = pokemon.types[1].type.name
             }
             
-            updateSprites(sprites: pokemon.sprites)
+            updateSprites()
         } else if let sprite = data as? SpriteModel {
             switch sprite.type {
             case .male:
