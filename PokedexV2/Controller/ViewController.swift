@@ -31,6 +31,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
     
     
+    @IBOutlet weak var searchButton: UIBarButtonItem!
+    
     // Pokemon Info View Outlets
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var name: UILabel!
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
     var spriteType = SpriteType.male
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
+    
     @IBOutlet weak var pokemonView: UIView!
     @IBOutlet weak var statsView: UIView!
     
@@ -141,6 +144,49 @@ class ViewController: UIViewController {
         } else {
             sprite.image = pokemonInDisplay.sprites.male
             spriteType = .male
+        }
+    }
+    
+
+    @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
+        
+        if allPokemonsInDisplay == false {
+            allPokemonsInDisplay = true
+            shownPokemons = allPokemons
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+        let alertBox = UIAlertController (title: "Search", message: "Search Pokemon by type or name", preferredStyle: .alert)
+        
+        alertBox.addTextField { field in
+            field.placeholder = "Search..."
+            field.returnKeyType = .continue
+        }
+        
+        alertBox.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertBox.addAction(UIAlertAction(title: "Search", style: .default, handler:{_ in
+            guard let fields = alertBox.textFields else { return }
+            let searchField = fields[0]
+            
+            guard let search = searchField.text else { return }
+            
+            print(search)
+            self.searchPokemons(search)
+        }))
+        
+        present(alertBox, animated: true)
+    }
+    
+    func searchPokemons(_ search : String) {
+        somePokemons = []
+        shownPokemons = []
+        allPokemonsInDisplay = false
+        if K.types.contains(search.lowercased()){
+            requestManager.fetchData(for: .type(search))
+        } else {
+            requestManager.fetchData(for: .pokemon(search))
         }
     }
 }

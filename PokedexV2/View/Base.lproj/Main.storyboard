@@ -25,12 +25,11 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="sVB-Vr-Ry4" secondAttribute="trailing" id="HTT-y1-aYx"/>
                                     <constraint firstAttribute="bottom" secondItem="sVB-Vr-Ry4" secondAttribute="bottom" id="X28-Dr-4q0"/>
                                     <constraint firstItem="sVB-Vr-Ry4" firstAttribute="leading" secondItem="7SX-mc-fq3" secondAttribute="leading" id="jdN-JK-b69"/>
-                                    <constraint firstItem="sVB-Vr-Ry4" firstAttribute="top" secondItem="7SX-mc-fq3" secondAttribute="top" id="jtP-Ea-k4L"/>
+                                    <constraint firstItem="sVB-Vr-Ry4" firstAttribute="top" secondItem="7SX-mc-fq3" secondAttribute="top" id="s5i-qF-v2d"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJp-nw-CLt" userLabel="PokemonView">
@@ -338,7 +337,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7SX-mc-fq3" secondAttribute="bottom" id="jBU-xR-C0g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Pokedex" id="l8u-Ft-HJB"/>
+                    <navigationItem key="navigationItem" title="Pokedex" id="l8u-Ft-HJB">
+                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="qyw-L3-rJc">
+                            <connections>
+                                <action selector="searchBarButton:" destination="BYZ-38-t0r" id="izT-9a-l0r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="atk" destination="AVu-bK-Xr8" id="sem-1Q-vt4"/>
                         <outlet property="atkBar" destination="Itc-s0-BCb" id="W3c-5K-yyJ"/>
@@ -351,6 +356,7 @@
                         <outlet property="pokemonView" destination="ZJp-nw-CLt" id="gKA-wa-umC"/>
                         <outlet property="pokemonViewHeight" destination="OGF-10-Bys" id="rph-4i-wq6"/>
                         <outlet property="pokemonViewWidth" destination="2uj-Oh-atQ" id="j4J-I4-VLT"/>
+                        <outlet property="searchButton" destination="qyw-L3-rJc" id="Qoh-tS-Ogr"/>
                         <outlet property="spAtk" destination="7m4-uL-l3v" id="vnO-ys-RK3"/>
                         <outlet property="spAtkBar" destination="1LC-K2-Wah" id="Suu-ex-DS6"/>
                         <outlet property="spDef" destination="CLC-Oi-fkR" id="IYs-nk-cVa"/>
@@ -396,6 +402,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="normal" width="58.666667938232422" height="25.666666030883789"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="fighting">
@@ -406,9 +413,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
