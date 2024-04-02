@@ -14,6 +14,7 @@ enum RequestType {
     case type (String)
     case pokemon (String)
     case sprite (String, SpriteType)
+    case species (String)
 }
 
 //MARK: - RequestManagerDelegate
@@ -56,6 +57,8 @@ struct RequestManager {
             return url
         case .type(let type):
             return K.url.type + type
+        case .species(let name):
+            return K.url.species + name
         }
     }
         
@@ -72,6 +75,8 @@ struct RequestManager {
                     return SpriteModel(sprite: image, type: spriteType)
                 case .type:
                     return try decoder.decode(TypeData.self , from: data)
+                case .species(_):
+                    return try decoder.decode(SpeciesData.self, from: data)
                 }
             } catch {
                 delegate?.didFailWithError(error: error)

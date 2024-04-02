@@ -170,7 +170,7 @@ class ViewController: UIViewController {
             guard let fields = alertBox.textFields else { return }
             let searchField = fields[0]
             
-            guard let search = searchField.text else { return }
+            guard let search = searchField.text, !search.isEmpty else { return }
             
             print(search)
             self.searchPokemons(search)
@@ -299,6 +299,10 @@ extension ViewController : UITableViewDataSource {
 //MARK: - PokemonModelDelegate
 
 extension ViewController : PokemonModelDelegate {
+    func didEndUpdateSpecies() {
+        // perform segue to next page
+    }
+    
     func didEndUpdate() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -309,40 +313,6 @@ extension ViewController : PokemonModelDelegate {
         print("Erro")
     }
 }
-
-////MARK: -UITextFieldDelegate
-//extension ViewController: UITextFieldDelegate {
-//    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        searchTextField.endEditing(true)
-//        return true
-//    }
-//    
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        if textField.text != "" {
-//            return true
-//        } else {
-//            textField.placeholder = "Search"
-//            return false
-//        }
-//    }
-//    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        guard var search = searchTextField.text else { return }
-//        search = search.lowercased()
-//        somePokemons = []
-//        shownPokemons = []
-//        allPokemonsInDisplay = false
-//        resetSearchButton.isHidden = false
-//        if K.types.contains(search){
-//            requestManager.fetchData(for: .type(search))
-//        } else {
-//            requestManager.fetchData(for: .pokemon(search))
-//        }
-//        searchTextField.text = ""
-//    }
-//}
-
 
 extension NSLayoutConstraint {
     

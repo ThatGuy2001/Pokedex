@@ -14,6 +14,7 @@ struct K {
         static let type = "https://pokeapi.co/api/v2/type/"
         static let defaultSprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" //{id}.png
         static let shinySprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" //{id}.png
+        static let species = "https://pokeapi.co/api/v2/pokemon-species/"
     }
     struct identifiers {
         static let PokemonCell = "PokemonCell"

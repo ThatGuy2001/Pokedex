@@ -45,7 +45,7 @@ struct Stat : Codable {
     let base_stat : Int
 }
 
-//MARK: - Type
+//MARK: - TypeData
 
 struct TypeData : Codable {
     let id : Int
@@ -55,4 +55,30 @@ struct TypeData : Codable {
 
 struct TPokemon : Codable {
     let pokemon : Pokemon
+}
+
+//MARK: - SpeciesData
+
+struct SpeciesData : Codable {
+    let capture_rate : Int
+    let generation : Generation
+    let growth_rate : GrowthRate
+    let habitat : Habitat
+    let flavor_text_entries : [FlavorTextEntrie]
+}
+
+struct Generation : Codable {
+    let name : String
+}
+
+struct GrowthRate : Codable {
+    let name : String
+}
+
+struct Habitat : Codable {
+    let name : String
+}
+
+struct FlavorTextEntrie : Codable  {
+    let flavor_text : String
 }

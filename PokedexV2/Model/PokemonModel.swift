@@ -8,6 +8,7 @@
 import UIKit
 
 protocol PokemonModelDelegate {
+    func didEndUpdateSpecies()
     func didEndUpdate()
     func didNotUpdate()
 }
@@ -23,12 +24,18 @@ enum UpdateStatus {
     case updateEnded
 }
 
+enum SpeciesUpdateStatus {
+    case notCaled
+    case called
+    case concluded
+}
 class PokemonModel {
     
     var delegade : PokemonModelDelegate?
     var requestManger : RequestManager
     
     var updateStatus : UpdateStatus
+    var speciesStatus : SpeciesUpdateStatus
     
     var name : String
     var id : Int
@@ -40,8 +47,11 @@ class PokemonModel {
     var type1 : String?
     var type2 : String?
     
+    var species : SpeciesData?
+    
     init(name: String) {
         updateStatus = .baseInfo
+        speciesStatus = .notCaled
         self.name = name
         id = 0
         sprites = Sprites()
@@ -55,7 +65,7 @@ class PokemonModel {
     func updatePokemon() {
         if updateStatus == .baseInfo {
             updateStatus = .updateCalled
-            requestManger.fetchData(for: RequestType.pokemon(name))
+            requestManger.fetchData(for: .pokemon(name))
         }
     }
     
@@ -66,7 +76,14 @@ class PokemonModel {
     }
     
     func requestSprite(url : String, type : SpriteType) {
-        requestManger.fetchData(for: RequestType.sprite(url, type))
+        requestManger.fetchData(for: .sprite(url, type))
+    }
+    
+    func getSpeciesInfo(){
+        if speciesStatus == .notCaled {
+            requestManger.fetchData(for: .species(name))
+            speciesStatus =  .called
+        }
     }
     
     func getHp() -> Float { // max hp 216
@@ -132,6 +149,10 @@ extension PokemonModel : RequestManagerDelegate {
             case .maleShiny:
                 sprites.maleShiny = sprite.sprite
             }
+        } else if let species = data as? SpeciesData {
+            self.species = species
+            speciesStatus = .concluded
+            delegade?.didEndUpdateSpecies()
         }
     }
     
