@@ -192,8 +192,22 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! PokemonInfoView
-        destinationVC.pokemon = pokemonInDisplay!
+        guard let pokemon = pokemonInDisplay else { return }
+        destinationVC.pokemon = pokemon
     }
+    
+    
+    @IBAction func moreInfoPressed(_ sender: UIButton) {
+        guard let pokemon = pokemonInDisplay else { return }
+        if pokemon.speciesStatus == .notCaled {
+            pokemon.getSpeciesInfo()
+        } else if pokemon.speciesStatus == .concluded {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
+                   }
+        }
+    }
+    
 }
 
 //MARK: - RequestManagerDelegate
@@ -305,7 +319,9 @@ extension ViewController : UITableViewDataSource {
 
 extension ViewController : PokemonModelDelegate {
     func didEndUpdateSpecies() {
-        // perform segue to next page
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
+               }
     }
     
     func didEndUpdate() {
