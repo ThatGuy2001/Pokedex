@@ -43,6 +43,8 @@ class PokemonModel {
     var sprites : Sprites
     var weight : Int
     var height : Int
+    var abilities : [String]
+    
     
     var type1 : String?
     var type2 : String?
@@ -58,6 +60,7 @@ class PokemonModel {
         stats = []
         weight = 0
         height = 0
+        abilities = []
         requestManger = RequestManager()
         requestManger.delegate = self
     }
@@ -133,6 +136,7 @@ extension PokemonModel : RequestManagerDelegate {
             height = pokemon.height
             weight = pokemon.weight
             stats = pokemon.stats.map { $0.base_stat }
+            abilities = pokemon.abilities.map{$0.ability.name}
             
             type1 = pokemon.types[0].type.name
             if pokemon.types.count > 1 {

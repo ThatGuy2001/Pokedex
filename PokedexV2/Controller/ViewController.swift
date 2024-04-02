@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var pokemonInDisplay : PokemonModel?
     
@@ -63,10 +63,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         shownPokemons = allPokemons
-//        resetSearchButton.isHidden = true
-//        searchTextField.delegate = self
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -78,6 +75,7 @@ class ViewController: UIViewController {
         statsView.isHidden = true
         pokemonView.isHidden = true
     }
+    
     func requestNextPage() {
         guard let nextPage = pokemonList?.next else { return }
         pokemonList?.next = nil
@@ -223,6 +221,7 @@ extension ViewController : RequestManagerDelegate {
                 newPokemon.updatePokemon()
                 allPokemons.append(newPokemon)
             }
+            
             shownPokemons = allPokemons
             allPokemonsInDisplay = true
         } else if let type = data as? TypeData {
@@ -262,7 +261,7 @@ extension ViewController : RequestManagerDelegate {
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
-        for i in index..<index+3 {
+        for i in index..<index+5 {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
                 if pokemon.updateStatus == .baseInfo {
