@@ -9,7 +9,6 @@ import UIKit
 
 protocol PokemonModelDelegate {
     func didEndUpdate()
-    func didUpdateStats()
     func didNotUpdate()
 }
 

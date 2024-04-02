@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     
     func setPokemonView(pokemon: PokemonModel){
         id.text = String(format: "#%03d", pokemon.id)
-        name.text = pokemon.name
+        name.text = pokemon.name.capitalized
         sprite.image = pokemon.sprites.male
         spriteType = .male
         pokemonView.backgroundColor = pokemon.getColor()
@@ -254,10 +254,6 @@ extension ViewController : UITableViewDataSource {
 //MARK: - PokemonModelDelegate
 
 extension ViewController : PokemonModelDelegate {
-    func didUpdateStats() {
-        //show pokemon info
-    }
-    
     func didEndUpdate() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
