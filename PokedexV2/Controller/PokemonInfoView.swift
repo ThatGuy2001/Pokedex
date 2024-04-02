@@ -9,6 +9,7 @@ import UIKit
 
 class PokemonInfoView: UIViewController {
 
+    var pokemon : PokemonModel?
     
     //layout Constraits
     
@@ -22,6 +23,9 @@ class PokemonInfoView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let pokemon = pokemon else { return  }
+        print(pokemon.name)
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
