@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
     
+    
     // Pokemon Info View Outlets
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var name: UILabel!

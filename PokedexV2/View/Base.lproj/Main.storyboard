@@ -17,10 +17,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="10" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-Vr-Ry4">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SX-mc-fq3">
                                 <rect key="frame" x="0.0" y="103" width="78.666666666666671" height="715"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="10" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-Vr-Ry4">
+                                        <rect key="frame" x="0.0" y="0.0" width="78.666666666666671" height="715"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sVB-Vr-Ry4" secondAttribute="trailing" id="HTT-y1-aYx"/>
+                                    <constraint firstAttribute="bottom" secondItem="sVB-Vr-Ry4" secondAttribute="bottom" id="X28-Dr-4q0"/>
+                                    <constraint firstItem="sVB-Vr-Ry4" firstAttribute="leading" secondItem="7SX-mc-fq3" secondAttribute="leading" id="jdN-JK-b69"/>
+                                    <constraint firstItem="sVB-Vr-Ry4" firstAttribute="top" secondItem="7SX-mc-fq3" secondAttribute="top" id="jtP-Ea-k4L"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJp-nw-CLt" userLabel="PokemonView">
                                 <rect key="frame" x="78.666666666666657" y="103.00000000000003" width="314.33333333333337" height="357.66666666666674"/>
                                 <subviews>
@@ -312,18 +324,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="ZJp-nw-CLt" firstAttribute="leading" secondItem="sVB-Vr-Ry4" secondAttribute="trailing" constant="-1.4210854715202004e-14" id="0Nb-s5-5fg"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1Ne-O2-G7I"/>
+                            <constraint firstItem="7SX-mc-fq3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2nH-2B-8Zi"/>
                             <constraint firstItem="ZJp-nw-CLt" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="2uj-Oh-atQ"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5az-FP-sEP"/>
+                            <constraint firstItem="7SX-mc-fq3" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.2" id="7Sh-MH-05s"/>
+                            <constraint firstItem="ZJp-nw-CLt" firstAttribute="leading" secondItem="7SX-mc-fq3" secondAttribute="trailing" constant="-1.4210854715202004e-14" id="AHi-T3-20u"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.5" id="ARA-r0-90A"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Bea-Wh-Atl"/>
                             <constraint firstItem="ZJp-nw-CLt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ma4-zK-6mR"/>
                             <constraint firstItem="ZJp-nw-CLt" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.5" id="OGF-10-Bys"/>
+                            <constraint firstItem="7SX-mc-fq3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S56-nA-57E"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ePo-sT-t5d"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="fYp-Da-7jX"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="qpK-VH-Uez"/>
-                            <constraint firstItem="sVB-Vr-Ry4" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.2" id="z2h-Dt-MpU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7SX-mc-fq3" secondAttribute="bottom" id="jBU-xR-C0g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pokedex" id="l8u-Ft-HJB"/>
@@ -350,7 +362,7 @@
                         <outlet property="statsViewHeight" destination="ARA-r0-90A" id="W2S-Xu-ZZT"/>
                         <outlet property="statsViewWidth" destination="fYp-Da-7jX" id="I2U-cl-WLA"/>
                         <outlet property="tableView" destination="sVB-Vr-Ry4" id="H73-8h-2VA"/>
-                        <outlet property="tableViewWidth" destination="z2h-Dt-MpU" id="dWf-F7-X3S"/>
+                        <outlet property="tableViewWidth" destination="7Sh-MH-05s" id="etL-pv-sbL"/>
                         <outlet property="type1" destination="lqo-bh-XbJ" id="jG1-uG-mpk"/>
                         <outlet property="type2" destination="4ZF-mc-YPb" id="Hhb-uM-EeE"/>
                     </connections>
@@ -394,6 +406,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

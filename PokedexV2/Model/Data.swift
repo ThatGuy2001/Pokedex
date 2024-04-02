@@ -18,7 +18,6 @@ struct PokemonListData : Codable {
 
 struct Pokemon : Codable {
     let name: String
-    let url : String
 }
 
 //MARK: - PokemonData
@@ -40,7 +39,6 @@ struct Types : Codable {
 
 struct _Type : Codable {
     let name : String
-    let url : String
 }
 
 struct Stat : Codable {
