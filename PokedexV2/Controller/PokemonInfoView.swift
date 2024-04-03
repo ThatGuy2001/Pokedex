@@ -41,6 +41,13 @@ class PokemonInfoView: UIViewController {
         
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
+        
+        if UIDevice.current.orientation.isLandscape {
+            changeLayout(0.7, 0.6, 0.3, 0.6, 0.4)
+        } else {
+            changeLayout(1, 0.4, 1, 0.4, 0.2)
+        }
+        
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

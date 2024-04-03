@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="roF-7m-LRC" firstAttribute="top" secondItem="BEj-zg-yBn" secondAttribute="top" id="3dh-bL-o67"/>
                                     <constraint firstAttribute="trailing" secondItem="roF-7m-LRC" secondAttribute="trailing" id="duh-qm-Osp"/>
@@ -36,7 +35,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="BEj-zg-yBn" firstAttribute="leading" secondItem="LsS-Ze-bbD" secondAttribute="leading" constant="2" id="ADl-D1-bf7"/>
                             <constraint firstItem="BEj-zg-yBn" firstAttribute="top" secondItem="LsS-Ze-bbD" secondAttribute="top" constant="2" id="UQZ-XB-i7t"/>
@@ -46,6 +45,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="LsS-Ze-bbD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gag-ZG-Ra9"/>
                     <constraint firstAttribute="bottom" secondItem="LsS-Ze-bbD" secondAttribute="bottom" id="gkH-iX-7mv"/>
@@ -54,16 +54,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="background" destination="BEj-zg-yBn" id="rz0-oe-HS1"/>
+                <outlet property="selectedBackground" destination="LsS-Ze-bbD" id="isz-0r-qqr"/>
                 <outlet property="sprite" destination="roF-7m-LRC" id="U2o-QR-2zP"/>
             </connections>
             <point key="canvasLocation" x="-67.175572519083971" y="50"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

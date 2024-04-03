@@ -17,12 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="Lrg-Xc-Egp">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SX-mc-fq3">
                                 <rect key="frame" x="0.0" y="103" width="78.666666666666671" height="715"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="10" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sVB-Vr-Ry4">
                                         <rect key="frame" x="0.0" y="0.0" width="78.666666666666671" height="715"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
                                 <constraints>
@@ -310,7 +314,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="WXZ-6d-39g" secondAttribute="bottom" constant="8" id="8kp-uK-SHP"/>
                                     <constraint firstAttribute="trailing" secondItem="WXZ-6d-39g" secondAttribute="trailing" constant="8" id="EXa-h8-bSw"/>
@@ -326,8 +330,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Lrg-Xc-Egp" secondAttribute="bottom" id="05h-Vj-55I"/>
                             <constraint firstItem="7SX-mc-fq3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2nH-2B-8Zi"/>
                             <constraint firstItem="ZJp-nw-CLt" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="2uj-Oh-atQ"/>
+                            <constraint firstItem="Lrg-Xc-Egp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Iw-hX-E0P"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5az-FP-sEP"/>
                             <constraint firstItem="7SX-mc-fq3" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.2" id="7Sh-MH-05s"/>
                             <constraint firstItem="ZJp-nw-CLt" firstAttribute="leading" secondItem="7SX-mc-fq3" secondAttribute="trailing" constant="-1.4210854715202004e-14" id="AHi-T3-20u"/>
@@ -337,7 +343,9 @@
                             <constraint firstItem="7SX-mc-fq3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S56-nA-57E"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ePo-sT-t5d"/>
                             <constraint firstItem="los-42-RPq" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="fYp-Da-7jX"/>
+                            <constraint firstItem="Lrg-Xc-Egp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="flb-de-p0c"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7SX-mc-fq3" secondAttribute="bottom" id="jBU-xR-C0g"/>
+                            <constraint firstAttribute="trailing" secondItem="Lrg-Xc-Egp" secondAttribute="trailing" id="pm7-mv-naP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pokedex" id="l8u-Ft-HJB">
@@ -616,6 +624,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image" width="1024" height="1024"/>
         <image name="grassland" width="1024" height="383"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="normal" width="58.666667938232422" height="25.666666030883789"/>
@@ -629,8 +638,8 @@
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

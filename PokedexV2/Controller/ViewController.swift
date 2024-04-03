@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     
     var requestManager = RequestManager()
     
+    var selectedCell : PokemonCell?
+    
     // layout constraits
     
     @IBOutlet weak var statsViewHeight: NSLayoutConstraint!
@@ -29,7 +31,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var pokemonViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
-    
     
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
@@ -60,9 +61,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var spDef: UILabel!
     @IBOutlet weak var speed: UILabel!
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         shownPokemons = allPokemons
@@ -76,6 +74,11 @@ class ViewController: UIViewController {
         
         statsView.isHidden = true
         pokemonView.isHidden = true
+        if UIDevice.current.orientation.isLandscape {
+            changeLayout(0.45, 1, 0.45, 1, 0.1)
+        } else {
+            changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
+        }
     }
     
     func requestNextPage() {
@@ -147,7 +150,6 @@ class ViewController: UIViewController {
         }
     }
     
-
     @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
         
         if allPokemonsInDisplay == false {
@@ -181,8 +183,6 @@ class ViewController: UIViewController {
     
     func searchPokemons(_ search : String) {
         somePokemons = []
-        shownPokemons = []
-        allPokemonsInDisplay = false
         if K.types.contains(search.lowercased()){
             requestManager.fetchData(for: .type(search))
         } else {
@@ -278,8 +278,16 @@ extension ViewController : UITableViewDelegate {
         statsView.isHidden = false
         pokemonView.isHidden = false
         
+        if let lastSelectedCell = selectedCell {
+            lastSelectedCell.selectedBackground.backgroundColor = UIColor(named: "clear")
+        }
+        
+        let currentCell = tableView.cellForRow(at:indexPath) as! PokemonCell
+        selectedCell = currentCell
+        
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
+        currentCell.selectedBackground.backgroundColor = UIColor(white: 0, alpha: 1)
         setPokemonView(pokemon: pokemon)
         setStatusView(pokemon: pokemon)
     }
