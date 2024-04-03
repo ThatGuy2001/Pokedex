@@ -72,7 +72,7 @@ struct SpeciesData : Codable {
     let capture_rate : Int
     let generation : Generation
     let growth_rate : GrowthRate
-    let habitat : Habitat
+    let habitat : Habitat?
     let flavor_text_entries : [FlavorTextEntrie]
 }
 

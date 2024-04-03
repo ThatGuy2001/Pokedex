@@ -41,7 +41,6 @@ class PokemonInfoView: UIViewController {
         
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
-        backgorundSprite.image = UIImage(named: "forest")
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -60,12 +59,10 @@ class PokemonInfoView: UIViewController {
         abilitesHeight = abilitesHeight.setMultiplier(multiplier: h2)
         baseInfoHeight = baseInfoHeight.setMultiplier(multiplier: w3)
         view.layoutIfNeeded()
-        guard let pokemon = pokemon else { return }
-        prepareView(for:pokemon)
     }
     
     func prepareView(for pokemon: PokemonModel) {
-        name.text = pokemon.name
+        name.text = pokemon.name.capitalized
         height.text = pokemon.getHeight()
         weight.text = pokemon.getWeight()
         sprite.image = pokemon.sprites.male
@@ -82,8 +79,8 @@ class PokemonInfoView: UIViewController {
         
         guard let speciesInfo = pokemon.species else { return }
         
-        generation.text = "Generation : " + speciesInfo.generation.name.capitalized
-        habitat.text = "Habitat : " + speciesInfo.habitat.name.capitalized
+        generation.text = speciesInfo.generation.name.capitalized + " Pokemon"
+        habitat.text = "Habitat : " + (speciesInfo.habitat?.name.capitalized ?? "Rare")
         captureRate.text = String(format: "Capture rate : %d", speciesInfo.capture_rate )
         growthRate.text = "Growth rate : " + speciesInfo.growth_rate.name
         desc.text = speciesInfo.flavor_text_entries[0].flavor_text.replacingOccurrences(of: "\n", with: " ")
@@ -93,5 +90,7 @@ class PokemonInfoView: UIViewController {
             ability.text = abl.capitalized
             abilitiesView.addArrangedSubview(ability)
         }
+        
+        backgorundSprite.image = UIImage(named:speciesInfo.habitat?.name ?? "rare")
     }
 }
