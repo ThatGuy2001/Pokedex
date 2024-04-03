@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Pokedex-->
+        <!--PokeApi-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PokedexV2" customModuleProvider="target" sceneMemberID="viewController">
@@ -348,7 +348,7 @@
                             <constraint firstAttribute="trailing" secondItem="Lrg-Xc-Egp" secondAttribute="trailing" id="pm7-mv-naP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Pokedex" id="l8u-Ft-HJB">
+                    <navigationItem key="navigationItem" title="PokeApi" id="l8u-Ft-HJB">
                         <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="qyw-L3-rJc">
                             <connections>
                                 <action selector="searchBarButton:" destination="BYZ-38-t0r" id="izT-9a-l0r"/>

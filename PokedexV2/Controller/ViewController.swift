@@ -302,6 +302,7 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
+        cell.selectedBackground.backgroundColor = UIColor(named: "clear")
         let pokemon = shownPokemons[indexPath.row]
         
         if pokemon.updateStatus == .baseInfo {
