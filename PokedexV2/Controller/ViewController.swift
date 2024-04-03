@@ -61,6 +61,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var speed: UILabel!
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         shownPokemons = allPokemons

@@ -11,6 +11,8 @@ class PokemonInfoView: UIViewController {
 
     var pokemon : PokemonModel?
     
+    @IBOutlet weak var backgorundSprite: UIImageView!
+    
     @IBOutlet weak var sprite: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var height: UILabel!
@@ -24,11 +26,7 @@ class PokemonInfoView: UIViewController {
     @IBOutlet weak var growthRate: UILabel!
     @IBOutlet weak var desc: UILabel!
     
-    @IBOutlet weak var abl1: UILabel!
-    @IBOutlet weak var abl2: UILabel!
-    @IBOutlet weak var abl3: UILabel!
-    @IBOutlet weak var abl4: UILabel!
-    
+    @IBOutlet weak var abilitiesView: UIStackView!
     
     //layout Constraits
     
@@ -43,6 +41,7 @@ class PokemonInfoView: UIViewController {
         
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
+        backgorundSprite.image = UIImage(named: "forest")
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -61,7 +60,7 @@ class PokemonInfoView: UIViewController {
         abilitesHeight = abilitesHeight.setMultiplier(multiplier: h2)
         baseInfoHeight = baseInfoHeight.setMultiplier(multiplier: w3)
         view.layoutIfNeeded()
-        guard let pokemon = pokemon else { return  }
+        guard let pokemon = pokemon else { return }
         prepareView(for:pokemon)
     }
     
@@ -89,19 +88,10 @@ class PokemonInfoView: UIViewController {
         growthRate.text = "Growth rate : " + speciesInfo.growth_rate.name
         desc.text = speciesInfo.flavor_text_entries[0].flavor_text.replacingOccurrences(of: "\n", with: " ")
         
-        let abilitis = [abl1, abl2, abl3, abl4]
-        
-        for abs in abilitis {
-            abs!.isHidden = true
+        for abl in pokemon.abilities {
+            let ability = UILabel()
+            ability.text = abl.capitalized
+            abilitiesView.addArrangedSubview(ability)
         }
-        
-        for i in 0..<4 {
-            if pokemon.abilities.count <= i {
-                return
-            }
-            abilitis[i]?.isHidden = false
-            abilitis[i]?.text = pokemon.abilities[i]
-        }
-        
     }
 }
