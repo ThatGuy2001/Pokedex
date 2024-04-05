@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
     
@@ -17,8 +18,6 @@ class ViewController: UIViewController {
     var somePokemons : [PokemonModel] = []
     var shownPokemons : [PokemonModel] = []
     var allPokemonsInDisplay = true
-    
-    var requestManager = RequestManager()
     
     var selectedCell : PokemonCell?
     
@@ -69,18 +68,64 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
         
-        requestManager.delegate = self
-        requestManager.fetchData(for: .pokemonList(K.url.firstPage))
+        
         
         statsView.isHidden = true
         pokemonView.isHidden = true
+        
+        AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
+            guard let response = response.value else { return }
+            self.pokemonListHandler(response)
+        }
+        
     }
     
     func requestNextPage() {
         guard let nextPage = pokemonList?.next else { return }
         pokemonList?.next = nil
-        requestManager.fetchData(for: RequestType.pokemonList(nextPage))
+        AF.request(nextPage).responseDecodable(of: PokemonListData.self) { response in
+            guard let response = response.value else { return }
+            self.pokemonListHandler(response)
+        }
     }
+    
+    func pokemonListHandler( _ pokemonList : PokemonListData) {
+        self.pokemonList = pokemonList
+        for pokemon in pokemonList.results {
+            let name = pokemon.name
+            let newPokemon = PokemonModel(name: name)
+            newPokemon.delegade = self
+            newPokemon.updatePokemon()
+            allPokemons.append(newPokemon)
+        }
+        shownPokemons = allPokemons
+        allPokemonsInDisplay = true
+    }
+    
+    func pokemonByTypeHandler(_ pokemonTypeList : TypeData ){
+        for pokemon in pokemonTypeList.pokemon {
+            let name = pokemon.pokemon.name
+            let newPokemon = PokemonModel(name: name)
+            newPokemon.delegade = self
+            somePokemons.append(newPokemon)
+        }
+        for i in 0..<10 {
+            somePokemons[i].updatePokemon()
+        }
+        shownPokemons = somePokemons
+        allPokemonsInDisplay = false
+    }
+    
+    func pokemonHandler(_ pokemon : PokemonData) {
+            let newPokemon = PokemonModel(name: pokemon.name)
+            newPokemon.delegade = self
+            newPokemon.updatePokemon()
+            somePokemons.append(newPokemon)
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
+    }
+    
+    
     
     func setPokemonView(pokemon: PokemonModel){
         id.text = String(format: "#%03d", pokemon.id)
@@ -175,9 +220,15 @@ class ViewController: UIViewController {
     func searchPokemons(_ search : String) {
         somePokemons = []
         if K.types.contains(search.lowercased()){
-            requestManager.fetchData(for: .type(search))
+            AF.request(K.url.type + search).responseDecodable(of: TypeData.self) { response in
+                guard let response = response.value else {return}
+                self.pokemonByTypeHandler(response)
+            }
         } else {
-            requestManager.fetchData(for: .pokemon(search))
+            AF.request(K.url.pokemon + search).responseDecodable(of: PokemonData.self) { response in
+                guard let response = response.value else {return}
+                self.pokemonHandler(response)
+            }
         }
     }
     
