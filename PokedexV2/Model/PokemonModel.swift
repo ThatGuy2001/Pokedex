@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol PokemonModelDelegate {
     func didEndUpdateSpecies()
@@ -32,7 +33,6 @@ enum SpeciesUpdateStatus {
 class PokemonModel {
     
     var delegade : PokemonModelDelegate?
-    var requestManger : RequestManager
     
     var updateStatus : UpdateStatus
     var speciesStatus : SpeciesUpdateStatus
@@ -61,32 +61,48 @@ class PokemonModel {
         weight = 0
         height = 0
         abilities = []
-        requestManger = RequestManager()
-        requestManger.delegate = self
     }
     
     func updatePokemon() {
         if updateStatus == .baseInfo {
             updateStatus = .updateCalled
-            requestManger.fetchData(for: .pokemon(name))
+            AF.request(K.url.pokemon + name ).responseDecodable(of: PokemonData.self) { response in
+                guard let response = response.value else { return }
+                self.baseInfoHandler(response)
+            }
         }
     }
     
     func updateSprites() {
         let sId = String(id) + ".png"
-        requestSprite(url: K.url.defaultSprite + sId, type: .male)
-        requestSprite(url: K.url.shinySprite + sId, type: .maleShiny)
-    }
-    
-    func requestSprite(url : String, type : SpriteType) {
-        requestManger.fetchData(for: .sprite(url, type))
+        let shinyUrl = K.url.shinySprite + sId
+        let defaultUrl = K.url.defaultSprite + sId
+        
+        AF.request(shinyUrl).responseData { response in
+            guard let data = response.data else { return }
+            self.spriteHandler(UIImage(data: data)!, shinyUrl)
+        }
+        
+        AF.request(defaultUrl).responseData { response in
+            guard let data = response.data else { return }
+            self.spriteHandler(UIImage(data: data)!, defaultUrl)
+        }
     }
     
     func getSpeciesInfo(){
         if speciesStatus == .notCaled {
-            requestManger.fetchData(for: .species(name))
             speciesStatus =  .called
+            AF.request(K.url.species + name).responseDecodable(of: SpeciesData.self) { response in
+                guard let response = response.value else { return }
+                self.speciesInfoHandler(response)
+            }
         }
+    }
+    
+    func speciesInfoHandler(_ species : SpeciesData){
+        self.species = species
+        speciesStatus = .concluded
+        delegade?.didEndUpdateSpecies()
     }
     
     func getHp() -> Float { // max hp 216
@@ -125,44 +141,33 @@ class PokemonModel {
         }
          return UIColor(named: type1)
     }
-}
-
-//MARK: - RequestManagerDelegate
-
-extension PokemonModel : RequestManagerDelegate {
-    func didUpdate(data: Any) {
-        if let pokemon = data as? PokemonData {
-            id = pokemon.id
-            height = pokemon.height
-            weight = pokemon.weight
-            stats = pokemon.stats.map { $0.base_stat }
-            abilities = pokemon.abilities.map{$0.ability.name}
-            
-            type1 = pokemon.types[0].type.name
-            if pokemon.types.count > 1 {
-                type2 = pokemon.types[1].type.name
-            }
-            
-            updateSprites()
-        } else if let sprite = data as? SpriteModel {
-            switch sprite.type {
-            case .male:
-                sprites.male = sprite.sprite
-                updateStatus = .updateEnded
-                delegade?.didEndUpdate()
-            case .maleShiny:
-                sprites.maleShiny = sprite.sprite
-            }
-        } else if let species = data as? SpeciesData {
-            self.species = species
-            speciesStatus = .concluded
-            delegade?.didEndUpdateSpecies()
+    
+    func spriteHandler(_ sprite : UIImage, _ url : String) {
+        if url.contains("shiny"){
+            sprites.maleShiny = sprite
+        } else {
+            sprites.male = sprite
+            updateStatus = .updateEnded
+            delegade?.didEndUpdate()
         }
     }
     
-    func didFailWithError(error: Error) {
-        print(error)
+    func baseInfoHandler(_ pokemon : PokemonData){
+        id = pokemon.id
+        height = pokemon.height
+        weight = pokemon.weight
+        stats = pokemon.stats.map { $0.base_stat }
+        abilities = pokemon.abilities.map{$0.ability.name}
+        
+        type1 = pokemon.types[0].type.name
+        if pokemon.types.count > 1 {
+            type2 = pokemon.types[1].type.name
+        }
+        
+        updateSprites()
     }
 }
+
+
 
 

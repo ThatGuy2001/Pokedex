@@ -68,8 +68,6 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
         
-        
-        
         statsView.isHidden = true
         pokemonView.isHidden = true
         
@@ -124,8 +122,6 @@ class ViewController: UIViewController {
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
     }
-    
-    
     
     func setPokemonView(pokemon: PokemonModel){
         id.text = String(format: "#%03d", pokemon.id)
@@ -260,54 +256,6 @@ class ViewController: UIViewController {
         } else {
             changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
         }
-    }
-    
-}
-
-//MARK: - RequestManagerDelegate
-
-extension ViewController : RequestManagerDelegate {
-    func didUpdate(data: Any) {
-        if let pokemonList = data as? PokemonListData{
-            self.pokemonList = pokemonList
-            for pokemon in pokemonList.results {
-                let name = pokemon.name
-                let newPokemon = PokemonModel(name: name)
-                newPokemon.delegade = self
-                newPokemon.updatePokemon()
-                allPokemons.append(newPokemon)
-            }
-            
-            shownPokemons = allPokemons
-            allPokemonsInDisplay = true
-        } else if let type = data as? TypeData {
-            for pokemon in type.pokemon {
-                let name = pokemon.pokemon.name
-                let newPokemon = PokemonModel(name: name)
-                newPokemon.delegade = self
-                somePokemons.append(newPokemon)
-            }
-            for i in 0..<10 {
-                somePokemons[i].updatePokemon()
-            }
-            shownPokemons = somePokemons
-            allPokemonsInDisplay = false
-        } else if let pokemon = data as? PokemonData {
-            let newPokemon = PokemonModel(name: pokemon.name)
-            newPokemon.delegade = self
-            newPokemon.updatePokemon()
-            somePokemons.append(newPokemon)
-            shownPokemons = somePokemons
-            allPokemonsInDisplay = false
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    
-    func didFailWithError(error: Error) {
-        print(error)
     }
     
 }
