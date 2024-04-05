@@ -89,14 +89,15 @@ class PokemonModel {
         }
     }
     
-    func getSpeciesInfo(){
+    func getSpeciesInfo( completionHandler  : @escaping () -> Void){
         if speciesStatus == .notCaled {
             speciesStatus =  .called
             AF.request(K.url.species + name).responseDecodable(of: SpeciesData.self) { response in
                 guard let response = response.value else { return }
                 self.speciesInfoHandler(response)
+                completionHandler()
             }
-        }
+        } 
     }
     
     func speciesInfoHandler(_ species : SpeciesData){

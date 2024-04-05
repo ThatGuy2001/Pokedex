@@ -42,8 +42,6 @@ class PokemonInfoView: UIViewController {
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
         
-        
-        
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

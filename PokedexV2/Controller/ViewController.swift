@@ -245,7 +245,9 @@ class ViewController: UIViewController {
     @IBAction func moreInfoPressed(_ sender: UIButton) {
         guard let pokemon = pokemonInDisplay else { return }
         if pokemon.speciesStatus == .notCaled {
-            pokemon.getSpeciesInfo()
+            pokemon.getSpeciesInfo {
+                print("Completion Handler called ")
+            }
         } else if pokemon.speciesStatus == .concluded {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
