@@ -74,11 +74,6 @@ class ViewController: UIViewController {
         
         statsView.isHidden = true
         pokemonView.isHidden = true
-        if UIDevice.current.orientation.isLandscape {
-            changeLayout(0.45, 1, 0.45, 1, 0.1)
-        } else {
-            changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
-        }
     }
     
     func requestNextPage() {
@@ -123,11 +118,7 @@ class ViewController: UIViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
             super.willTransition(to: newCollection, with: coordinator)
-                if UIDevice.current.orientation.isLandscape {
-                    changeLayout(0.45, 1, 0.45, 1, 0.1)
-                } else {
-                    changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
-                }
+                choseLayout()
     }
     
     func changeLayout(_ w1: CGFloat, _ h1: CGFloat, _ w2: CGFloat, _ h2: CGFloat, _ w3: CGFloat ) {
@@ -205,6 +196,18 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
                    }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        choseLayout()
+    }
+    
+    func choseLayout(){
+        if UIDevice.current.orientation.isLandscape {
+            changeLayout(0.45, 1, 0.45, 1, 0.1)
+        } else {
+            changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
         }
     }
     

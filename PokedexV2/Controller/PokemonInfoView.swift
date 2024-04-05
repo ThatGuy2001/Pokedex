@@ -42,21 +42,13 @@ class PokemonInfoView: UIViewController {
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
         
-        if UIDevice.current.orientation.isLandscape {
-            changeLayout(0.7, 0.6, 0.3, 0.6, 0.4)
-        } else {
-            changeLayout(1, 0.4, 1, 0.4, 0.2)
-        }
+        
         
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
             super.willTransition(to: newCollection, with: coordinator)
-                if UIDevice.current.orientation.isLandscape {
-                    changeLayout(0.7, 0.6, 0.3, 0.6, 0.4)
-                } else {
-                    changeLayout(1, 0.4, 1, 0.4, 0.2)
-                }
+                choseLayout()
     }
     
     func changeLayout(_ w1: CGFloat, _ h1: CGFloat, _ w2: CGFloat, _ h2: CGFloat, _ w3: CGFloat ) {
@@ -99,5 +91,17 @@ class PokemonInfoView: UIViewController {
         }
         
         backgorundSprite.image = UIImage(named:speciesInfo.habitat?.name ?? "rare")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        choseLayout()
+    }
+    
+    func choseLayout(){
+        if UIDevice.current.orientation.isLandscape {
+            changeLayout(0.7, 0.6, 0.3, 0.6, 0.4)
+        } else {
+            changeLayout(1, 0.4, 1, 0.4, 0.2)
+        }
     }
 }
