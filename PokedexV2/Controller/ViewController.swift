@@ -6,6 +6,13 @@
 //
 
 import UIKit
+
+enum SpriteType {
+    case male
+    case maleShiny
+}
+
+import UIKit
 import Alamofire
 
 class ViewController: UIViewController {
