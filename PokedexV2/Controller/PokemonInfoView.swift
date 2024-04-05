@@ -39,9 +39,20 @@ class PokemonInfoView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
         
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer)  {
+        if gesture.direction == .right {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {

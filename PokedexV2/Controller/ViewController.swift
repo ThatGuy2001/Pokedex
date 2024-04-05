@@ -67,6 +67,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         shownPokemons = allPokemons
         
         tableView.dataSource = self
@@ -88,6 +93,11 @@ class ViewController: UIViewController {
         destinationVC.pokemon = pokemon
     }
     
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer)  {
+        if gesture.direction == .left {
+                goToPokemonInfo()
+           }
+    }
     
     @IBAction func spriteTapped(_ sender: UITapGestureRecognizer) {
         guard let pokemonInDisplay else { return  }
@@ -131,6 +141,10 @@ class ViewController: UIViewController {
     
     
     @IBAction func moreInfoPressed(_ sender: UIButton) {
+        goToPokemonInfo()
+    }
+    
+    func goToPokemonInfo() {
         guard let pokemon = pokemonInDisplay else { return }
         if pokemon.speciesStatus == .notCaled {
             pokemon.getSpeciesInfo {
