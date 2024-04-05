@@ -160,7 +160,3 @@ class PokemonModel {
         speciesStatus = .concluded
     }
 }
-
-
-
-

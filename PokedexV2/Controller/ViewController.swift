@@ -7,13 +7,15 @@
 
 import UIKit
 
+
+
+import UIKit
+import Alamofire
+
 enum SpriteType {
     case male
     case maleShiny
 }
-
-import UIKit
-import Alamofire
 
 class ViewController: UIViewController {
     
@@ -99,11 +101,7 @@ class ViewController: UIViewController {
         for pokemon in pokemonList.results {
             let name = pokemon.name
             let newPokemon = PokemonModel(name: name)
-            newPokemon.updatePokemon{
-                newPokemon.updateSprites {
-                    self.updateTableView()
-                }
-            }
+            updatePokemon(newPokemon)
             allPokemons.append(newPokemon)
         }
         shownPokemons = allPokemons
@@ -130,11 +128,7 @@ class ViewController: UIViewController {
     
     func pokemonHandler(_ pokemon : PokemonData) {
             let newPokemon = PokemonModel(name: pokemon.name)
-            newPokemon.updatePokemon{
-                newPokemon.updateSprites {
-                    self.updateTableView()
-                }
-            }
+            updatePokemon(newPokemon)
             somePokemons.append(newPokemon)
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
@@ -282,7 +276,14 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
+        
+    func updatePokemon(_ pokemon : PokemonModel) {
+        pokemon.updatePokemon{
+            pokemon.updateSprites {
+                self.updateTableView()
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -294,11 +295,7 @@ extension ViewController : UITableViewDelegate {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
                 if pokemon.updateStatus == .baseInfo {
-                    pokemon.updatePokemon{
-                        pokemon.updateSprites {
-                            self.updateTableView()
-                        }
-                    }
+                    updatePokemon(pokemon)
                     cell.isHidden = true
                 }
             }
