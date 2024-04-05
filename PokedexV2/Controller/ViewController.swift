@@ -99,23 +99,30 @@ class ViewController: UIViewController {
         for pokemon in pokemonList.results {
             let name = pokemon.name
             let newPokemon = PokemonModel(name: name)
-            newPokemon.delegade = self
-            newPokemon.updatePokemon()
+            newPokemon.updatePokemon{
+                newPokemon.updateSprites {
+                    self.updateTableView()
+                }
+            }
             allPokemons.append(newPokemon)
         }
         shownPokemons = allPokemons
         allPokemonsInDisplay = true
+        updateTableView()
     }
     
     func pokemonByTypeHandler(_ pokemonTypeList : TypeData ){
         for pokemon in pokemonTypeList.pokemon {
             let name = pokemon.pokemon.name
             let newPokemon = PokemonModel(name: name)
-            newPokemon.delegade = self
             somePokemons.append(newPokemon)
         }
         for i in 0..<10 {
-            somePokemons[i].updatePokemon()
+            somePokemons[i].updatePokemon{
+                self.somePokemons[i].updateSprites {
+                    self.updateTableView()
+                }
+            }
         }
         shownPokemons = somePokemons
         allPokemonsInDisplay = false
@@ -123,8 +130,11 @@ class ViewController: UIViewController {
     
     func pokemonHandler(_ pokemon : PokemonData) {
             let newPokemon = PokemonModel(name: pokemon.name)
-            newPokemon.delegade = self
-            newPokemon.updatePokemon()
+            newPokemon.updatePokemon{
+                newPokemon.updateSprites {
+                    self.updateTableView()
+                }
+            }
             somePokemons.append(newPokemon)
             shownPokemons = somePokemons
             allPokemonsInDisplay = false
@@ -194,9 +204,7 @@ class ViewController: UIViewController {
         if allPokemonsInDisplay == false {
             allPokemonsInDisplay = true
             shownPokemons = allPokemons
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            updateTableView()
         }
         
         let alertBox = UIAlertController (title: "Search", message: "Search Pokemon by type or name", preferredStyle: .alert)
@@ -246,7 +254,9 @@ class ViewController: UIViewController {
         guard let pokemon = pokemonInDisplay else { return }
         if pokemon.speciesStatus == .notCaled {
             pokemon.getSpeciesInfo {
-                print("Completion Handler called ")
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
+                       }
             }
         } else if pokemon.speciesStatus == .concluded {
             DispatchQueue.main.async {
@@ -267,6 +277,12 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -278,7 +294,11 @@ extension ViewController : UITableViewDelegate {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
                 if pokemon.updateStatus == .baseInfo {
-                    pokemon.updatePokemon()
+                    pokemon.updatePokemon{
+                        pokemon.updateSprites {
+                            self.updateTableView()
+                        }
+                    }
                     cell.isHidden = true
                 }
             }
@@ -317,7 +337,11 @@ extension ViewController : UITableViewDataSource {
         let pokemon = shownPokemons[indexPath.row]
         
         if pokemon.updateStatus == .baseInfo {
-            pokemon.updatePokemon()
+            pokemon.updatePokemon {
+                pokemon.updateSprites {
+                    self.updateTableView()
+                }
+            }
             cell.isHidden = true
             return cell
         }
@@ -333,26 +357,6 @@ extension ViewController : UITableViewDataSource {
         }
         
         return cell
-    }
-}
-
-//MARK: - PokemonModelDelegate
-
-extension ViewController : PokemonModelDelegate {
-    func didEndUpdateSpecies() {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
-               }
-    }
-    
-    func didEndUpdate() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func didNotUpdate() {
-        print("Erro")
     }
 }
 

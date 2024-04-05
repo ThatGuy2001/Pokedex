@@ -8,12 +8,6 @@
 import UIKit
 import Alamofire
 
-protocol PokemonModelDelegate {
-    func didEndUpdateSpecies()
-    func didEndUpdate()
-    func didNotUpdate()
-}
-
 struct Sprites {
     var male : UIImage?
     var maleShiny : UIImage?
@@ -31,8 +25,6 @@ enum SpeciesUpdateStatus {
     case concluded
 }
 class PokemonModel {
-    
-    var delegade : PokemonModelDelegate?
     
     var updateStatus : UpdateStatus
     var speciesStatus : SpeciesUpdateStatus
@@ -63,48 +55,6 @@ class PokemonModel {
         abilities = []
     }
     
-    func updatePokemon() {
-        if updateStatus == .baseInfo {
-            updateStatus = .updateCalled
-            AF.request(K.url.pokemon + name ).responseDecodable(of: PokemonData.self) { response in
-                guard let response = response.value else { return }
-                self.baseInfoHandler(response)
-            }
-        }
-    }
-    
-    func updateSprites() {
-        let sId = String(id) + ".png"
-        let shinyUrl = K.url.shinySprite + sId
-        let defaultUrl = K.url.defaultSprite + sId
-        
-        AF.request(shinyUrl).responseData { response in
-            guard let data = response.data else { return }
-            self.spriteHandler(UIImage(data: data)!, shinyUrl)
-        }
-        
-        AF.request(defaultUrl).responseData { response in
-            guard let data = response.data else { return }
-            self.spriteHandler(UIImage(data: data)!, defaultUrl)
-        }
-    }
-    
-    func getSpeciesInfo( completionHandler  : @escaping () -> Void){
-        if speciesStatus == .notCaled {
-            speciesStatus =  .called
-            AF.request(K.url.species + name).responseDecodable(of: SpeciesData.self) { response in
-                guard let response = response.value else { return }
-                self.speciesInfoHandler(response)
-                completionHandler()
-            }
-        } 
-    }
-    
-    func speciesInfoHandler(_ species : SpeciesData){
-        self.species = species
-        speciesStatus = .concluded
-        delegade?.didEndUpdateSpecies()
-    }
     
     func getHp() -> Float { // max hp 216
         return Float(stats[0]) / 216
@@ -143,17 +93,17 @@ class PokemonModel {
          return UIColor(named: type1)
     }
     
-    func spriteHandler(_ sprite : UIImage, _ url : String) {
-        if url.contains("shiny"){
-            sprites.maleShiny = sprite
-        } else {
-            sprites.male = sprite
-            updateStatus = .updateEnded
-            delegade?.didEndUpdate()
+    func updatePokemon(completionHandler : @escaping () -> Void) {
+        if updateStatus == .baseInfo {
+            updateStatus = .updateCalled
+            AF.request(K.url.pokemon + name ).responseDecodable(of: PokemonData.self) { response in
+                guard let response = response.value else { return }
+                self.baseInfoHandler(response, completionHandler: completionHandler )
+            }
         }
     }
     
-    func baseInfoHandler(_ pokemon : PokemonData){
+    func baseInfoHandler(_ pokemon : PokemonData, completionHandler : @escaping () -> Void){
         id = pokemon.id
         height = pokemon.height
         weight = pokemon.weight
@@ -165,7 +115,49 @@ class PokemonModel {
             type2 = pokemon.types[1].type.name
         }
         
-        updateSprites()
+        completionHandler()
+    }
+    
+    func updateSprites(completionHandler : @escaping () -> Void) {
+        let sId = String(id) + ".png"
+        let shinyUrl = K.url.shinySprite + sId
+        let defaultUrl = K.url.defaultSprite + sId
+        
+        AF.request(shinyUrl).responseData { response in
+            guard let data = response.data else { return }
+            self.spriteHandler(UIImage(data: data), shinyUrl, completionHandler: completionHandler )
+        }
+        
+        AF.request(defaultUrl).responseData { response in
+            guard let data = response.data else { return }
+            self.spriteHandler(UIImage(data: data)!, defaultUrl, completionHandler: completionHandler )
+        }
+    }
+    
+    func spriteHandler(_ sprite : UIImage?, _ url : String , completionHandler : @escaping () -> Void ) {
+        if url.contains("shiny"){
+            sprites.maleShiny = sprite
+        } else {
+            sprites.male = sprite
+            updateStatus = .updateEnded
+            completionHandler()
+        }
+    }
+    
+    func getSpeciesInfo( completionHandler  : @escaping () -> Void){
+        if speciesStatus == .notCaled {
+            speciesStatus =  .called
+            AF.request(K.url.species + name).responseDecodable(of: SpeciesData.self) { response in
+                guard let response = response.value else { return }
+                self.speciesInfoHandler(response)
+                completionHandler()
+            }
+        }
+    }
+    
+    func speciesInfoHandler(_ species : SpeciesData){
+        self.species = species
+        speciesStatus = .concluded
     }
 }
 
