@@ -130,7 +130,7 @@ class PokemonModel {
         
         AF.request(defaultUrl).responseData { response in
             guard let data = response.data else { return }
-            self.spriteHandler(UIImage(data: data)!, defaultUrl, completionHandler: completionHandler )
+            self.spriteHandler(UIImage(data: data), defaultUrl, completionHandler: completionHandler )
         }
     }
     

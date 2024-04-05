@@ -24,6 +24,7 @@
 		1CA303892BBFFB010005183D /* PokemonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA303882BBFFB010005183D /* PokemonInfoView.swift */; };
 		1CA3038C2BC000C30005183D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1CA3038B2BC000C30005183D /* Alamofire */; };
 		1CA3038E2BC000C30005183D /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1CA3038D2BC000C30005183D /* AlamofireDynamic */; };
+		1CA303902BC0533F0005183D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3038F2BC0533F0005183D /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		1C47671C2BA0858D007B9395 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1C47671E2BA086B3007B9395 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		1CA303882BBFFB010005183D /* PokemonInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoView.swift; sourceTree = "<group>"; };
+		1CA3038F2BC0533F0005183D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				1C47671C2BA0858D007B9395 /* Data.swift */,
 				1C47671E2BA086B3007B9395 /* PokemonModel.swift */,
+				1CA3038F2BC0533F0005183D /* Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CA303902BC0533F0005183D /* Extension.swift in Sources */,
 				1C47671D2BA0858D007B9395 /* Data.swift in Sources */,
 				1C4767192BA07D06007B9395 /* Constants.swift in Sources */,
 				1C4766E22B9FA367007B9395 /* ViewController.swift in Sources */,

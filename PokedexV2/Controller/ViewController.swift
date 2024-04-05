@@ -20,26 +20,22 @@ enum SpriteType {
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var pokemonInDisplay : PokemonModel?
     
+    var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
     var allPokemons : [PokemonModel] = []
     var somePokemons : [PokemonModel] = []
     var shownPokemons : [PokemonModel] = []
     var allPokemonsInDisplay = true
-    
     var selectedCell : PokemonCell?
     
     // layout constraits
     
     @IBOutlet weak var statsViewHeight: NSLayoutConstraint!
     @IBOutlet weak var statsViewWidth: NSLayoutConstraint!
-    
     @IBOutlet weak var pokemonViewWidth: NSLayoutConstraint!
     @IBOutlet weak var pokemonViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var tableViewWidth: NSLayoutConstraint!
-    
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
     // Pokemon Info View Outlets
@@ -84,55 +80,72 @@ class ViewController: UIViewController {
             guard let response = response.value else { return }
             self.pokemonListHandler(response)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! PokemonInfoView
+        guard let pokemon = pokemonInDisplay else { return }
+        destinationVC.pokemon = pokemon
+    }
+    
+    
+    @IBAction func spriteTapped(_ sender: UITapGestureRecognizer) {
+        guard let pokemonInDisplay else { return  }
+        if spriteType == .male {
+            sprite.image = pokemonInDisplay.sprites.maleShiny
+            spriteType = .maleShiny
+        } else {
+            sprite.image = pokemonInDisplay.sprites.male
+            spriteType = .male
+        }
+    }
+    
+    @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
         
+        if allPokemonsInDisplay == false {
+            allPokemonsInDisplay = true
+            shownPokemons = allPokemons
+            updateTableView()
+        }
+        
+        let alertBox = UIAlertController (title: "Search", message: "Search Pokemon by type or name", preferredStyle: .alert)
+        
+        alertBox.addTextField { field in
+            field.placeholder = "Search..."
+            field.returnKeyType = .continue
+        }
+        
+        alertBox.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertBox.addAction(UIAlertAction(title: "Search", style: .default, handler:{_ in
+            guard let fields = alertBox.textFields else { return }
+            let searchField = fields[0]
+            
+            guard let search = searchField.text, !search.isEmpty else { return }
+            
+            print(search)
+            self.searchPokemons(search)
+        }))
+        
+        present(alertBox, animated: true)
     }
     
-    func requestNextPage() {
-        guard let nextPage = pokemonList?.next else { return }
-        pokemonList?.next = nil
-        AF.request(nextPage).responseDecodable(of: PokemonListData.self) { response in
-            guard let response = response.value else { return }
-            self.pokemonListHandler(response)
-        }
-    }
     
-    func pokemonListHandler( _ pokemonList : PokemonListData) {
-        self.pokemonList = pokemonList
-        for pokemon in pokemonList.results {
-            let name = pokemon.name
-            let newPokemon = PokemonModel(name: name)
-            updatePokemon(newPokemon)
-            allPokemons.append(newPokemon)
-        }
-        shownPokemons = allPokemons
-        allPokemonsInDisplay = true
-        updateTableView()
-    }
-    
-    func pokemonByTypeHandler(_ pokemonTypeList : TypeData ){
-        for pokemon in pokemonTypeList.pokemon {
-            let name = pokemon.pokemon.name
-            let newPokemon = PokemonModel(name: name)
-            somePokemons.append(newPokemon)
-        }
-        for i in 0..<10 {
-            somePokemons[i].updatePokemon{
-                self.somePokemons[i].updateSprites {
-                    self.updateTableView()
-                }
+    @IBAction func moreInfoPressed(_ sender: UIButton) {
+        guard let pokemon = pokemonInDisplay else { return }
+        if pokemon.speciesStatus == .notCaled {
+            pokemon.getSpeciesInfo {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
+                       }
             }
+        } else if pokemon.speciesStatus == .concluded {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
+                   }
         }
-        shownPokemons = somePokemons
-        allPokemonsInDisplay = false
     }
     
-    func pokemonHandler(_ pokemon : PokemonData) {
-            let newPokemon = PokemonModel(name: pokemon.name)
-            updatePokemon(newPokemon)
-            somePokemons.append(newPokemon)
-            shownPokemons = somePokemons
-            allPokemonsInDisplay = false
-    }
+    //MARK: - Layout
     
     func setPokemonView(pokemon: PokemonModel){
         id.text = String(format: "#%03d", pokemon.id)
@@ -181,46 +194,44 @@ class ViewController: UIViewController {
         tableViewWidth = tableViewWidth.setMultiplier(multiplier: w3)
         view.layoutIfNeeded()
     }
+
     
-    @IBAction func spriteTapped(_ sender: UITapGestureRecognizer) {
-        guard let pokemonInDisplay else { return  }
-        if spriteType == .male {
-            sprite.image = pokemonInDisplay.sprites.maleShiny
-            spriteType = .maleShiny
+    override func viewWillAppear(_ animated: Bool) {
+        choseLayout()
+    }
+    
+    func choseLayout(){
+        if UIDevice.current.orientation.isLandscape {
+            changeLayout(0.45, 1, 0.45, 1, 0.1)
         } else {
-            sprite.image = pokemonInDisplay.sprites.male
-            spriteType = .male
+            changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
         }
     }
     
-    @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
-        
-        if allPokemonsInDisplay == false {
-            allPokemonsInDisplay = true
-            shownPokemons = allPokemons
-            updateTableView()
+    //MARK: - Requests
+    
+    func requestNextPage() {
+        guard let nextPage = pokemonList?.next else { return }
+        pokemonList?.next = nil
+        AF.request(nextPage).responseDecodable(of: PokemonListData.self) { response in
+            guard let response = response.value else { return }
+            self.pokemonListHandler(response)
         }
-        
-        let alertBox = UIAlertController (title: "Search", message: "Search Pokemon by type or name", preferredStyle: .alert)
-        
-        alertBox.addTextField { field in
-            field.placeholder = "Search..."
-            field.returnKeyType = .continue
-        }
-        
-        alertBox.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertBox.addAction(UIAlertAction(title: "Search", style: .default, handler:{_ in
-            guard let fields = alertBox.textFields else { return }
-            let searchField = fields[0]
-            
-            guard let search = searchField.text, !search.isEmpty else { return }
-            
-            print(search)
-            self.searchPokemons(search)
-        }))
-        
-        present(alertBox, animated: true)
     }
+    
+    func pokemonListHandler( _ pokemonList : PokemonListData) {
+        self.pokemonList = pokemonList
+        for pokemon in pokemonList.results {
+            let name = pokemon.name
+            let newPokemon = PokemonModel(name: name)
+            updatePokemon(newPokemon)
+            allPokemons.append(newPokemon)
+        }
+        shownPokemons = allPokemons
+        allPokemonsInDisplay = true
+        updateTableView()
+    }
+    
     
     func searchPokemons(_ search : String) {
         somePokemons = []
@@ -237,37 +248,33 @@ class ViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! PokemonInfoView
-        guard let pokemon = pokemonInDisplay else { return }
-        destinationVC.pokemon = pokemon
-    }
-    
-    
-    @IBAction func moreInfoPressed(_ sender: UIButton) {
-        guard let pokemon = pokemonInDisplay else { return }
-        if pokemon.speciesStatus == .notCaled {
-            pokemon.getSpeciesInfo {
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
-                       }
-            }
-        } else if pokemon.speciesStatus == .concluded {
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: K.identifiers.PokemonInfoSegue, sender: self)
-                   }
+    func pokemonByTypeHandler(_ pokemonTypeList : TypeData ){
+        for pokemon in pokemonTypeList.pokemon {
+            let name = pokemon.pokemon.name
+            let newPokemon = PokemonModel(name: name)
+            somePokemons.append(newPokemon)
         }
+        for i in 0..<10 {
+            let pokemon = somePokemons[i]
+            updatePokemon(pokemon)
+        }
+        shownPokemons = somePokemons
+        allPokemonsInDisplay = false
+    }
+
+    func pokemonHandler(_ pokemon : PokemonData) {
+            let newPokemon = PokemonModel(name: pokemon.name)
+            updatePokemon(newPokemon)
+            somePokemons.append(newPokemon)
+            shownPokemons = somePokemons
+            allPokemonsInDisplay = false
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        choseLayout()
-    }
-    
-    func choseLayout(){
-        if UIDevice.current.orientation.isLandscape {
-            changeLayout(0.45, 1, 0.45, 1, 0.1)
-        } else {
-            changeLayout(0.8, 0.5, 0.8, 0.5, 0.2)
+    func updatePokemon(_ pokemon : PokemonModel) {
+        pokemon.updatePokemon{
+            pokemon.updateSprites {
+                self.updateTableView()
+            }
         }
     }
     
@@ -276,14 +283,9 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-        
-    func updatePokemon(_ pokemon : PokemonModel) {
-        pokemon.updatePokemon{
-            pokemon.updateSprites {
-                self.updateTableView()
-            }
-        }
-    }
+    
+
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -291,7 +293,7 @@ class ViewController: UIViewController {
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
-        for i in index..<index+5 {
+        for i in index..<index+10 {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
                 if pokemon.updateStatus == .baseInfo {
@@ -349,7 +351,7 @@ extension ViewController : UITableViewDataSource {
             cell.background.layer.cornerRadius = 1
         }
         
-        if allPokemons.count-10 == indexPath.row && allPokemonsInDisplay{
+        if allPokemons.count-20 < indexPath.row && allPokemonsInDisplay{
             requestNextPage()
         }
         
@@ -357,27 +359,4 @@ extension ViewController : UITableViewDataSource {
     }
 }
 
-extension NSLayoutConstraint {
-    
-    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
-        
-        let newConstraint = NSLayoutConstraint(
-            item: firstItem,
-            attribute: firstAttribute,
-            relatedBy: relation,
-            toItem: secondItem,
-            attribute: secondAttribute,
-            multiplier: multiplier,
-            constant: constant)
-        
-        newConstraint.priority = priority
-        newConstraint.shouldBeArchived = self.shouldBeArchived
-        newConstraint.identifier = self.identifier
-        newConstraint.isActive = true
-        
-        NSLayoutConstraint.deactivate([self])
-        NSLayoutConstraint.activate([newConstraint])
-        return newConstraint
-    }
-    
-}
+
