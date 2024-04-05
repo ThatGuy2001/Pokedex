@@ -10,15 +10,14 @@ import Foundation
 //MARK: - PokemonListData
 
 struct PokemonListData : Codable {
-    var count: Int = 0
-    var next: String? = nil
-    var previous: String? = nil
-    var results : [Pokemon] = []
+    var count: Int
+    var next: String?
+    var previous: String?
+    var results : [Pokemon] 
 }
 
 struct Pokemon : Codable {
     let name: String
-    let url : String
 }
 
 //MARK: - PokemonData
@@ -27,7 +26,19 @@ struct PokemonData : Codable {
     let id : Int
     let name : String
     let types : [Types]
-    let sprites : Sprites
+    let abilities : [Ability]
+    // stats
+    let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
+    let weight : Int
+    let height : Int
+}
+
+struct Ability : Codable {
+    let ability : _ability
+}
+
+struct _ability : Codable {
+    let name : String
 }
 
 struct Types : Codable {
@@ -37,27 +48,13 @@ struct Types : Codable {
 
 struct _Type : Codable {
     let name : String
-    let url : String
-}
-
-struct Sprites : Codable {
-    let front_default : String?
-    let front_shiny : String?
-}
-
-//MARK: - PokemonsStatsData
-
-struct PokemonStatsData : Codable {
-    let stats : [Stat] // hp, atc, def, sAtc, sDef, speed
-    let weight : Int
-    let height : Int
 }
 
 struct Stat : Codable {
     let base_stat : Int
 }
 
-//MARK: - Type
+//MARK: - TypeData
 
 struct TypeData : Codable {
     let id : Int
@@ -67,4 +64,30 @@ struct TypeData : Codable {
 
 struct TPokemon : Codable {
     let pokemon : Pokemon
+}
+
+//MARK: - SpeciesData
+
+struct SpeciesData : Codable {
+    let capture_rate : Int
+    let generation : Generation
+    let growth_rate : GrowthRate
+    let habitat : Habitat?
+    let flavor_text_entries : [FlavorTextEntrie]
+}
+
+struct Generation : Codable {
+    let name : String
+}
+
+struct GrowthRate : Codable {
+    let name : String
+}
+
+struct Habitat : Codable {
+    let name : String
+}
+
+struct FlavorTextEntrie : Codable  {
+    let flavor_text : String
 }

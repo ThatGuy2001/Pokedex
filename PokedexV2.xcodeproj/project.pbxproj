@@ -23,7 +23,7 @@
 		1C47671D2BA0858D007B9395 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C47671C2BA0858D007B9395 /* Data.swift */; };
 		1C47671F2BA086B3007B9395 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C47671E2BA086B3007B9395 /* PokemonModel.swift */; };
 		1C4767212BA0AFE6007B9395 /* SpriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4767202BA0AFE6007B9395 /* SpriteModel.swift */; };
-		1CD07A752BA455120071062D /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD07A742BA455120071062D /* PokemonViewController.swift */; };
+		1CA303892BBFFB010005183D /* PokemonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA303882BBFFB010005183D /* PokemonInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		1C47671C2BA0858D007B9395 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1C47671E2BA086B3007B9395 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		1C4767202BA0AFE6007B9395 /* SpriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteModel.swift; sourceTree = "<group>"; };
-		1CD07A742BA455120071062D /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
+		1CA303882BBFFB010005183D /* PokemonInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				1C4766E12B9FA367007B9395 /* ViewController.swift */,
-				1CD07A742BA455120071062D /* PokemonViewController.swift */,
+				1CA303882BBFFB010005183D /* PokemonInfoView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -313,7 +313,7 @@
 				1C4767212BA0AFE6007B9395 /* SpriteModel.swift in Sources */,
 				1C4767162B9FA413007B9395 /* PokemonCell.swift in Sources */,
 				1C47671B2BA07D91007B9395 /* RequestManager.swift in Sources */,
-				1CD07A752BA455120071062D /* PokemonViewController.swift in Sources */,
+				1CA303892BBFFB010005183D /* PokemonInfoView.swift in Sources */,
 				1C4766DE2B9FA367007B9395 /* AppDelegate.swift in Sources */,
 				1C4766E02B9FA367007B9395 /* SceneDelegate.swift in Sources */,
 				1C47671F2BA086B3007B9395 /* PokemonModel.swift in Sources */,

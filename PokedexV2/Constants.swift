@@ -8,12 +8,17 @@
 import Foundation
 
 struct K {
-    static let PokemonCell = "PokemonCell"
-    static let MoveCell = "MoveCell"
-    static let PokemonViewSegue = "ToPokemonView"
-    static let PokemonMovesSeque = "GoToMoves"
-    static let firstPage = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
-    static let pokemonUrl = "https://pokeapi.co/api/v2/pokemon/"
+    struct url {
+        static let firstPage = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+        static let pokemon = "https://pokeapi.co/api/v2/pokemon/"
+        static let type = "https://pokeapi.co/api/v2/type/"
+        static let defaultSprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        static let shinySprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"
+        static let species = "https://pokeapi.co/api/v2/pokemon-species/"
+    }
+    struct identifiers {
+        static let PokemonCell = "PokemonCell"
+        static let PokemonInfoSegue = "ToPokemonInfo"
+    }
     static let types = ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "physical", "fire", "water", "grass", "electric", "psychic", "ice", "dragon","dark", "fairy"]
-    // testing git
 }

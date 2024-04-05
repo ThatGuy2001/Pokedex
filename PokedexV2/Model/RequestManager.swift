@@ -13,8 +13,8 @@ enum RequestType {
     case pokemonList (String)
     case type (String)
     case pokemon (String)
-    case stats (String)
     case sprite (String, SpriteType)
+    case species (String)
 }
 
 //MARK: - RequestManagerDelegate
@@ -29,7 +29,6 @@ protocol RequestManagerDelegate {
 struct RequestManager {
     
     var delegate : RequestManagerDelegate?
-    let typeUrl = "https://pokeapi.co/api/v2/type/"
     
     func fetchData(for request : RequestType) {
         let urlString = getRequestURL(for : request)
@@ -52,37 +51,37 @@ struct RequestManager {
         switch request {
         case .pokemonList(let url):
             return url
-        case .pokemon(let url):
-            return url
-        case .sprite(let url,_):
-            return url
-        case .stats(let url):
+        case .pokemon(let name):
+            return K.url.pokemon + name
+        case .sprite(let url ,_):
             return url
         case .type(let type):
-            print(typeUrl + type )
-            return typeUrl + type
+            return K.url.type + type
+        case .species(let name):
+            return K.url.species + name
         }
     }
-    
-    func parseJSON(data : Data, request : RequestType) -> Any? {
-        let decoder = JSONDecoder()
-        do {
-            switch request {
-            case .pokemonList:
-                return try decoder.decode(PokemonListData.self, from: data)
-            case .pokemon:
-                return try decoder.decode(PokemonData.self, from: data)
-            case .sprite(_, let spriteType):
-                guard let image = UIImage(data: data) else { return nil }
-                return SpriteModel(sprite: image, type: spriteType)
-            case .stats:
-                return try decoder.decode(PokemonStatsData.self , from: data)
-            case .type(_):
-                return try decoder.decode(TypeData.self , from: data)
+        
+        func parseJSON(data : Data, request : RequestType) -> Any? {
+            let decoder = JSONDecoder()
+            do {
+                switch request {
+                case .pokemonList:
+                    return try decoder.decode(PokemonListData.self, from: data)
+                case .pokemon:
+                    return try decoder.decode(PokemonData.self, from: data)
+                case .sprite(_, let spriteType):
+                    guard let image = UIImage(data: data) else { return nil }
+                    return SpriteModel(sprite: image, type: spriteType)
+                case .type:
+                    return try decoder.decode(TypeData.self , from: data)
+                case .species(_):
+                    return try decoder.decode(SpeciesData.self, from: data)
+                }
+            } catch {
+                delegate?.didFailWithError(error: error)
+                return nil
             }
-        } catch {
-            delegate?.didFailWithError(error: error)
-            return nil
         }
-    }
+    
 }
