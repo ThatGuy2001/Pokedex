@@ -43,6 +43,7 @@ class PokemonInfoView: UIViewController {
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
         
+        navigationController?.navigationBar.tintColor = .white
         
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)

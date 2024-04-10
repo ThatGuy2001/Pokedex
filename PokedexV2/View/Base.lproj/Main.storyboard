@@ -580,7 +580,7 @@
                             <constraint firstItem="0b7-Nb-Wll" firstAttribute="leading" secondItem="paa-pk-JqR" secondAttribute="leading" id="o4n-mf-Csh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dod-Xr-4GW"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="dod-Xr-4GW"/>
                     <connections>
                         <outlet property="abilitesHeight" destination="1Ur-D6-Pnt" id="ZfX-gI-mdm"/>
                         <outlet property="abilitiesView" destination="kU3-uM-f9B" id="Hzh-wO-IQc"/>
@@ -625,6 +625,7 @@
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="tintColor"/>
     <resources>
         <image name="Image" width="1024" height="1024"/>
         <image name="grassland" width="1024" height="383"/>
