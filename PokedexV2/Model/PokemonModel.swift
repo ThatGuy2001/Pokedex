@@ -28,6 +28,7 @@ class PokemonModel {
     
     var updateStatus : UpdateStatus
     var speciesStatus : SpeciesUpdateStatus
+    var isFavorite : Bool
     
     var name : String
     var id : Int
@@ -37,13 +38,13 @@ class PokemonModel {
     var height : Int
     var abilities : [String]
     
-    
     var type1 : String?
     var type2 : String?
     
     var species : SpeciesData?
     
     init(name: String) {
+        isFavorite = false
         updateStatus = .baseInfo
         speciesStatus = .notCaled
         self.name = name
@@ -55,6 +56,10 @@ class PokemonModel {
         abilities = []
     }
     
+    func changeFavoriteStatus() {
+        isFavorite = !isFavorite
+        // send webWook
+    }
     
     func getHp() -> Float { // max hp 216
         return Float(stats[0]) / 216

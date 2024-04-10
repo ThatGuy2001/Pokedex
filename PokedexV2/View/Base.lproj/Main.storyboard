@@ -41,7 +41,7 @@
                                 <rect key="frame" x="78.666666666666657" y="103.00000000000003" width="314.33333333333337" height="357.66666666666674"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imi-4t-TW5">
-                                        <rect key="frame" x="8" y="7.9999999999999982" width="41.333333333333336" height="20.333333333333329"/>
+                                        <rect key="frame" x="265" y="7.9999999999999982" width="41.333333333333314" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -79,18 +79,28 @@
                                             <constraint firstAttribute="height" constant="45" id="nVp-y1-chh"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzO-Qq-IIn">
+                                        <rect key="frame" x="-4" y="2" width="52" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                        <connections>
+                                            <action selector="favButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQJ-V3-qro"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="imi-4t-TW5" secondAttribute="trailing" constant="20" symbolic="YES" id="5or-mM-GzE"/>
+                                    <constraint firstItem="zzO-Qq-IIn" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="2" id="Acq-vh-ZWV"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="Lm2-2Y-OLV" secondAttribute="bottom" constant="8.6666666666666572" id="BXg-06-caj"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="width" secondItem="ZJp-nw-CLt" secondAttribute="width" multiplier="0.636267" id="F71-xe-vdZ"/>
                                     <constraint firstItem="Ol5-tX-pTt" firstAttribute="top" secondItem="kR0-K3-37W" secondAttribute="bottom" constant="5" id="NUR-gb-1Ni"/>
                                     <constraint firstItem="Ol5-tX-pTt" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="QXO-rv-gkm"/>
-                                    <constraint firstItem="imi-4t-TW5" firstAttribute="leading" secondItem="ZJp-nw-CLt" secondAttribute="leading" constant="8" id="Se0-Wd-2yP"/>
+                                    <constraint firstItem="imi-4t-TW5" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="8" id="TUN-Xj-NG6"/>
                                     <constraint firstItem="Lm2-2Y-OLV" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="aKh-5D-9Jg"/>
+                                    <constraint firstItem="zzO-Qq-IIn" firstAttribute="leading" secondItem="ZJp-nw-CLt" secondAttribute="leading" constant="-4" id="bHi-pq-AyP"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="centerY" secondItem="ZJp-nw-CLt" secondAttribute="centerY" id="bfT-Op-PXa"/>
-                                    <constraint firstItem="imi-4t-TW5" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="8" id="iXg-l6-S8Q"/>
+                                    <constraint firstAttribute="trailing" secondItem="imi-4t-TW5" secondAttribute="trailing" constant="8" id="iM0-0t-0rw"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="w9Q-TE-3Lj"/>
                                 </constraints>
                                 <connections>
@@ -362,6 +372,7 @@
                         <outlet property="atkBar" destination="Itc-s0-BCb" id="W3c-5K-yyJ"/>
                         <outlet property="def" destination="2ZM-cY-iSd" id="Z2Z-Rc-fLi"/>
                         <outlet property="defBar" destination="dTS-bM-vZa" id="TLy-dH-m2b"/>
+                        <outlet property="favButton" destination="zzO-Qq-IIn" id="R6n-ss-JN1"/>
                         <outlet property="hp" destination="zZz-tM-WR3" id="nfE-8b-6dy"/>
                         <outlet property="hpBar" destination="p1M-lZ-My9" id="9yp-dQ-BET"/>
                         <outlet property="id" destination="imi-4t-TW5" id="0P4-fh-Dsi"/>
@@ -394,7 +405,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="972" y="-2"/>
+            <point key="canvasLocation" x="971.7557251908396" y="-2.1126760563380285"/>
         </scene>
         <!--Pokemon Info View-->
         <scene sceneID="hrx-fp-CRF">
@@ -632,6 +643,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="normal" width="58.666667938232422" height="25.666666030883789"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="fighting">
             <color red="0.6940000057220459" green="0.23899999260902405" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

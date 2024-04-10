@@ -4,11 +4,6 @@
 //
 //  Created by Diogo Filipe Abreu Rodrigues on 11/03/2024.
 //
-
-import UIKit
-
-
-
 import UIKit
 import Alamofire
 
@@ -46,6 +41,7 @@ class ViewController: UIViewController {
     var spriteType = SpriteType.male
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
+    @IBOutlet weak var favButton: UIButton!
     
     @IBOutlet weak var pokemonView: UIView!
     @IBOutlet weak var statsView: UIView!
@@ -109,6 +105,18 @@ class ViewController: UIViewController {
             sprite.image = pokemonInDisplay.sprites.male
             spriteType = .male
         }
+    }
+    
+    
+    @IBAction func favButtonPressed(_ sender: UIButton) {
+        
+        if !(pokemonInDisplay?.isFavorite ?? false) {
+            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+        
+        pokemonInDisplay?.changeFavoriteStatus()
     }
     
     @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
@@ -181,6 +189,13 @@ class ViewController: UIViewController {
         } else {
             type2.isHidden = true
         }
+        
+        if pokemon.isFavorite {
+            favButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            favButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+        
     }
     
     func setStatusView(pokemon: PokemonModel){
@@ -367,7 +382,7 @@ extension ViewController : UITableViewDataSource {
         if pokemon.updateStatus == .updateEnded {
             cell.sprite.image = pokemon.sprites.male
             cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 1
+            cell.background.layer.cornerRadius = 4
         }
         
         if allPokemons.count-20 < indexPath.row && allPokemonsInDisplay{
