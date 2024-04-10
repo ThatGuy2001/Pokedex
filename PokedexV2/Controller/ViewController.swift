@@ -229,7 +229,6 @@ class ViewController: UIViewController {
         view.layoutIfNeeded()
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         choseLayout()
         guard let pokemonInDisplay else {return}
@@ -264,9 +263,7 @@ class ViewController: UIViewController {
             allPokemons.append(newPokemon)
         }
         shownPokemons = allPokemons
-        allPokemonsInDisplay = true
         updateTableView()
-        
     }
     
     
@@ -343,8 +340,6 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        statsView.isHidden = false
-        pokemonView.isHidden = false
         
         if let lastSelectedCell = selectedCell {
             lastSelectedCell.selectedBackground.backgroundColor = UIColor(named: "clear")
@@ -355,9 +350,8 @@ extension ViewController : UITableViewDelegate {
         
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
-        currentCell.selectedBackground.backgroundColor = UIColor(white: 0, alpha: 1)
-        setPokemonView(pokemon: pokemon)
-        setStatusView(pokemon: pokemon)
+        //currentCell.selectedBackground.backgroundColor = .white
+        showPokemon(pokemon)
     }
 }
 

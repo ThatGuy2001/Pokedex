@@ -41,7 +41,7 @@ class PokemonModel {
     var type1 : String?
     var type2 : String?
     
-    var species : SpeciesData?
+    var speciesInfo : SpeciesData?
     
     init(name: String) {
         isFavorite = false
@@ -58,6 +58,11 @@ class PokemonModel {
     
     func changeFavoriteStatus() {
         isFavorite = !isFavorite
+        
+        let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
+        
+        AF.request("https://webhook.site/1d7957e5-e527-444a-a826-76331c14beac", parameters: parameters, headers: ["content-type": "text/plain"])
+        
         // send webWook
     }
     
@@ -108,7 +113,7 @@ class PokemonModel {
         }
     }
     
-    func baseInfoHandler(_ pokemon : PokemonData, completionHandler : @escaping () -> Void){
+    func baseInfoHandler(_ pokemon : PokemonData, completionHandler : @escaping () -> Void) {
         id = pokemon.id
         height = pokemon.height
         weight = pokemon.weight
@@ -141,9 +146,9 @@ class PokemonModel {
     
     func spriteHandler(_ sprite : UIImage?, _ url : String , completionHandler : @escaping () -> Void ) {
         if url.contains("shiny"){
-            sprites.maleShiny = sprite
+            sprites.maleShiny = sprite ?? UIImage(named: "pokeball")
         } else {
-            sprites.male = sprite
+            sprites.male = sprite ?? UIImage(named: "pokeball")
             updateStatus = .updateEnded
             completionHandler()
         }
@@ -161,7 +166,7 @@ class PokemonModel {
     }
     
     func speciesInfoHandler(_ species : SpeciesData){
-        self.species = species
+        self.speciesInfo = species
         speciesStatus = .concluded
     }
 }

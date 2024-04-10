@@ -103,7 +103,7 @@ class PokemonInfoView: UIViewController {
             favButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
         
-        guard let speciesInfo = pokemon.species else { return }
+        guard let speciesInfo = pokemon.speciesInfo else { return }
         
         generation.text = speciesInfo.generation.name.capitalized + " Pokemon"
         habitat.text = "Habitat : " + (speciesInfo.habitat?.name.capitalized ?? "Rare")
