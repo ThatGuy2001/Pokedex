@@ -125,6 +125,7 @@ class ViewController: UIViewController {
             searchButton.setSymbolImage(UIImage(systemName: "magnifyingglass")!, contentTransition: .automatic)
             allPokemonsInDisplay = true
             shownPokemons = allPokemons
+            initiated = false
             updateTableView()
             return
         }
@@ -295,6 +296,7 @@ class ViewController: UIViewController {
             updatePokemon(pokemon)
         }
         shownPokemons = somePokemons
+        initiated = false
         allPokemonsInDisplay = false
     }
 
