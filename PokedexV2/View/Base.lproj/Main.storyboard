@@ -90,7 +90,6 @@
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="imi-4t-TW5" secondAttribute="trailing" constant="20" symbolic="YES" id="5or-mM-GzE"/>
                                     <constraint firstItem="zzO-Qq-IIn" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="2" id="Acq-vh-ZWV"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="Lm2-2Y-OLV" secondAttribute="bottom" constant="8.6666666666666572" id="BXg-06-caj"/>
                                     <constraint firstItem="kR0-K3-37W" firstAttribute="width" secondItem="ZJp-nw-CLt" secondAttribute="width" multiplier="0.636267" id="F71-xe-vdZ"/>
@@ -119,17 +118,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="yl2-zz-nzw">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HP         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2Q-6O-1t1">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p1M-lZ-My9">
-                                                                <rect key="frame" x="87" y="6" width="123.33333333333331" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" systemColor="systemRedColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="FGQ-LD-xQG"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="FGQ-LD-xQG"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZz-tM-WR3">
@@ -153,17 +146,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="DPI-h0-fs5">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attack   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l90-D3-RMm">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Itc-s0-BCb">
-                                                                <rect key="frame" x="87" y="6" width="123.33333333333331" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="ofh-DM-7K1"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="ofh-DM-7K1"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVu-bK-Xr8">
@@ -188,17 +175,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="5eM-Rs-gvQ">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmM-zh-PIo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-bM-vZa">
-                                                                <rect key="frame" x="88.333333333333314" y="6.3333333333332575" width="122" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.33333333333325754" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="fd8-9b-ZSl"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="fd8-9b-ZSl"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-cY-iSd">
@@ -222,17 +203,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="c8w-zT-Jr5">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sp. Atk  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtV-lf-2f0">
-                                                                <rect key="frame" x="0.0" y="0.0" width="63" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1LC-K2-Wah">
-                                                                <rect key="frame" x="88" y="6.3333333333333712" width="122.33333333333331" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.33333333333337123" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" systemColor="systemCyanColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="ghn-Rk-oGj"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="ghn-Rk-oGj"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-uL-l3v">
@@ -256,17 +231,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="v0B-D3-Uml">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sp. Def " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-96-3lV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OLt-Fl-ext">
-                                                                <rect key="frame" x="85.666666666666657" y="6" width="124.66666666666666" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="IdA-Hs-zhX"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="IdA-Hs-zhX"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLC-Oi-fkR">
@@ -290,17 +259,11 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="8Fq-Da-5Id">
                                                         <rect key="frame" x="20" y="14.999999999999998" width="266.33333333333331" height="20.333333333333329"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-xT-Hcd">
-                                                                <rect key="frame" x="0.0" y="0.0" width="62" height="20.333333333333332"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BOb-Aw-7b8">
-                                                                <rect key="frame" x="87" y="6" width="123.33333333333331" height="8"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="210.33333333333334" height="20"/>
                                                                 <color key="tintColor" red="0.90196079019999997" green="0.38823530080000002" blue="0.53333336109999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="8" id="ssR-eQ-SHQ"/>
+                                                                    <constraint firstAttribute="height" constant="20" id="ssR-eQ-SHQ"/>
                                                                 </constraints>
                                                             </progressView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVy-Zh-4lL">
@@ -320,6 +283,42 @@
                                             </view>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HP         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2Q-6O-1t1">
+                                        <rect key="frame" x="156.33333333333337" y="168.33333333333326" width="0.0" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attack   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l90-D3-RMm">
+                                        <rect key="frame" x="32" y="75.333333333333314" width="62" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defense" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmM-zh-PIo">
+                                        <rect key="frame" x="32" y="125.99999999999993" width="63.333333333333343" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sp. Atk  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtV-lf-2f0">
+                                        <rect key="frame" x="32" y="176.33333333333331" width="63" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sp. Def " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-96-3lV">
+                                        <rect key="frame" x="31.999999999999996" y="226.66666666666669" width="60.666666666666657" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed   " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVk-xT-Hcd">
+                                        <rect key="frame" x="32" y="276.99999999999994" width="62" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXZ-6d-39g">
                                         <rect key="frame" x="259.33333333333331" y="314.99999999999994" width="47" height="34.333333333333314"/>
                                         <state key="normal" title="Button"/>
@@ -331,13 +330,25 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
+                                    <constraint firstItem="BVk-xT-Hcd" firstAttribute="leading" secondItem="BOb-Aw-7b8" secondAttribute="leading" constant="8" id="27R-Mr-kNU"/>
+                                    <constraint firstItem="l90-D3-RMm" firstAttribute="top" secondItem="Itc-s0-BCb" secondAttribute="top" id="4vC-Sg-jXw"/>
                                     <constraint firstAttribute="bottom" secondItem="WXZ-6d-39g" secondAttribute="bottom" constant="8" id="8kp-uK-SHP"/>
+                                    <constraint firstItem="fmM-zh-PIo" firstAttribute="top" secondItem="dTS-bM-vZa" secondAttribute="top" id="BNs-eL-3dh"/>
                                     <constraint firstAttribute="trailing" secondItem="WXZ-6d-39g" secondAttribute="trailing" constant="8" id="EXa-h8-bSw"/>
+                                    <constraint firstItem="S2Q-6O-1t1" firstAttribute="leading" secondItem="p1M-lZ-My9" secondAttribute="leading" constant="8" id="JHc-fh-ZWr"/>
                                     <constraint firstAttribute="bottom" secondItem="gi1-wo-cdc" secondAttribute="bottom" constant="45" id="LxA-LI-g6g"/>
+                                    <constraint firstItem="BOb-Aw-7b8" firstAttribute="top" secondItem="BVk-xT-Hcd" secondAttribute="top" id="QhT-sN-ZuL"/>
                                     <constraint firstAttribute="trailing" secondItem="gi1-wo-cdc" secondAttribute="trailing" constant="4" id="TDn-xA-V1b"/>
+                                    <constraint firstItem="O7L-96-3lV" firstAttribute="leading" secondItem="OLt-Fl-ext" secondAttribute="leading" constant="8" id="V8J-zO-rRY"/>
+                                    <constraint firstItem="l90-D3-RMm" firstAttribute="leading" secondItem="Itc-s0-BCb" secondAttribute="leading" constant="8" id="VHR-p5-SYR"/>
+                                    <constraint firstItem="RtV-lf-2f0" firstAttribute="leading" secondItem="1LC-K2-Wah" secondAttribute="leading" constant="8" id="W4e-VQ-VwU"/>
+                                    <constraint firstItem="OLt-Fl-ext" firstAttribute="top" secondItem="O7L-96-3lV" secondAttribute="top" id="WBS-11-QpW"/>
                                     <constraint firstItem="WXZ-6d-39g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="los-42-RPq" secondAttribute="leading" constant="20" symbolic="YES" id="WK0-By-PNb"/>
                                     <constraint firstItem="gi1-wo-cdc" firstAttribute="leading" secondItem="los-42-RPq" secondAttribute="leading" constant="4" id="WUJ-sq-0sl"/>
+                                    <constraint firstItem="fmM-zh-PIo" firstAttribute="leading" secondItem="dTS-bM-vZa" secondAttribute="leading" constant="8" id="XCb-u0-Ez3"/>
                                     <constraint firstItem="gi1-wo-cdc" firstAttribute="top" secondItem="los-42-RPq" secondAttribute="top" constant="10" id="ZLO-yt-Bca"/>
+                                    <constraint firstItem="1LC-K2-Wah" firstAttribute="top" secondItem="RtV-lf-2f0" secondAttribute="top" id="qTF-5k-4sB"/>
+                                    <constraint firstItem="S2Q-6O-1t1" firstAttribute="top" secondItem="p1M-lZ-My9" secondAttribute="top" id="rBK-V2-IVj"/>
                                 </constraints>
                             </view>
                         </subviews>
