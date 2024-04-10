@@ -473,14 +473,24 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1w2-Ot-fGM">
+                                                    <rect key="frame" x="268" y="0.0" width="52" height="34.333333333333336"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="favButtonPressed:" destination="ezF-9v-ylR" eventType="touchUpInside" id="do0-Uv-3ZX"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Rp3-We-fhu" firstAttribute="top" secondItem="GaZ-ZP-DA1" secondAttribute="top" constant="12" id="8m7-e2-O4K"/>
+                                                <constraint firstAttribute="trailing" secondItem="1w2-Ot-fGM" secondAttribute="trailing" constant="-10" id="9X0-cM-jE4"/>
                                                 <constraint firstItem="Rp3-We-fhu" firstAttribute="leading" secondItem="Zso-SF-RfF" secondAttribute="trailing" constant="8.0000000000000142" id="Ei2-Uf-g5h"/>
                                                 <constraint firstItem="Zso-SF-RfF" firstAttribute="top" secondItem="GaZ-ZP-DA1" secondAttribute="top" constant="10" id="QGY-UM-Oah"/>
                                                 <constraint firstItem="Zso-SF-RfF" firstAttribute="leading" secondItem="GaZ-ZP-DA1" secondAttribute="leading" constant="10" id="WYu-Sj-Esp"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zso-SF-RfF" secondAttribute="bottom" constant="10" id="Wxq-c6-I2N"/>
                                                 <constraint firstAttribute="bottom" secondItem="Rp3-We-fhu" secondAttribute="bottom" constant="10" id="jcm-wv-VGd"/>
+                                                <constraint firstItem="1w2-Ot-fGM" firstAttribute="top" secondItem="GaZ-ZP-DA1" secondAttribute="top" id="ogS-FK-73u"/>
                                             </constraints>
                                         </view>
                                         <constraints>
@@ -600,6 +610,7 @@
                         <outlet property="baseInfoHeight" destination="aQJ-wQ-R6J" id="XKm-wr-cQk"/>
                         <outlet property="captureRate" destination="DGq-rO-WSl" id="0aH-W0-C6S"/>
                         <outlet property="desc" destination="2CZ-rd-tlY" id="d15-pi-Ykg"/>
+                        <outlet property="favButton" destination="1w2-Ot-fGM" id="Rcv-DQ-0VU"/>
                         <outlet property="generation" destination="Ttc-2T-jc1" id="QRF-ag-WXU"/>
                         <outlet property="growthRate" destination="wgm-0g-YqF" id="YFO-gw-Cgr"/>
                         <outlet property="habitat" destination="Fd6-8P-smB" id="GJ6-jQ-V8F"/>

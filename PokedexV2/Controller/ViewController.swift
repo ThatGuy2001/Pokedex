@@ -109,13 +109,11 @@ class ViewController: UIViewController {
     
     
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        
         if !(pokemonInDisplay?.isFavorite ?? false) {
             sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             sender.setImage(UIImage(systemName: "star"), for: .normal)
         }
-        
         pokemonInDisplay?.changeFavoriteStatus()
     }
     
@@ -198,7 +196,7 @@ class ViewController: UIViewController {
         
     }
     
-    func setStatusView(pokemon: PokemonModel){
+    func setStatusView(pokemon: PokemonModel) {
         
         let statsLabels = [hp,atk,def,spAtk,spDef,speed]
         
@@ -232,6 +230,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         choseLayout()
+        guard let pokemonInDisplay else {return}
+        setPokemonView(pokemon: pokemonInDisplay)
     }
     
     func choseLayout(){

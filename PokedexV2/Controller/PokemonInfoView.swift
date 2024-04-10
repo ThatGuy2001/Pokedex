@@ -19,6 +19,7 @@ class PokemonInfoView: UIViewController {
     @IBOutlet weak var weight: UILabel!
     @IBOutlet weak var type1: UIImageView!
     @IBOutlet weak var type2: UIImageView!
+    @IBOutlet weak var favButton: UIButton!
     
     @IBOutlet weak var generation: UILabel!
     @IBOutlet weak var habitat: UILabel!
@@ -48,6 +49,16 @@ class PokemonInfoView: UIViewController {
         guard let pokemon = pokemon else { return  }
         prepareView(for:pokemon)
         
+    }
+    
+    @IBAction func favButtonPressed(_ sender: UIButton) {
+        guard let pokemon else { return  }
+        if !pokemon.isFavorite {
+            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "star"), for: .normal)
+        }
+        pokemon.changeFavoriteStatus()
     }
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer)  {
@@ -84,6 +95,12 @@ class PokemonInfoView: UIViewController {
             self.type2.image = UIImage(named: type2)
         } else {
             type2.isHidden = true
+        }
+        
+        if pokemon.isFavorite {
+            favButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            favButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
         
         guard let speciesInfo = pokemon.species else { return }
