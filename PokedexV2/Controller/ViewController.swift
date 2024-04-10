@@ -15,8 +15,8 @@ enum SpriteType {
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-
     
+    var initiated = false
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
     var allPokemons : [PokemonModel] = []
@@ -75,13 +75,16 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
         
-        statsView.isHidden = true
-        pokemonView.isHidden = true
-        
         AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
             guard let response = response.value else { return }
             self.pokemonListHandler(response)
         }
+    }
+    
+    func showPokemon(_ pokemon: PokemonModel) {
+        pokemonInDisplay = pokemon
+        setStatusView(pokemon: pokemon)
+        setPokemonView(pokemon: pokemon)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -106,7 +109,6 @@ class ViewController: UIViewController {
             spriteType = .male
         }
     }
-    
     
     @IBAction func favButtonPressed(_ sender: UIButton) {
         if !(pokemonInDisplay?.isFavorite ?? false) {
@@ -193,7 +195,6 @@ class ViewController: UIViewController {
         } else {
             favButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
-        
     }
     
     func setStatusView(pokemon: PokemonModel) {
@@ -264,6 +265,7 @@ class ViewController: UIViewController {
         shownPokemons = allPokemons
         allPokemonsInDisplay = true
         updateTableView()
+        
     }
     
     
@@ -380,6 +382,12 @@ extension ViewController : UITableViewDataSource {
         }
         
         if pokemon.updateStatus == .updateEnded {
+            
+            if indexPath.row == 0  && !initiated{
+                initiated = true
+                showPokemon(pokemon)
+            }
+        
             cell.sprite.image = pokemon.sprites.male
             cell.background.backgroundColor = pokemon.getColor()
             cell.background.layer.cornerRadius = 4
