@@ -20,6 +20,7 @@ enum SpriteType {
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+
     
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
@@ -113,9 +114,11 @@ class ViewController: UIViewController {
     @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
         
         if allPokemonsInDisplay == false {
+            searchButton.setSymbolImage(UIImage(systemName: "magnifyingglass")!, contentTransition: .automatic)
             allPokemonsInDisplay = true
             shownPokemons = allPokemons
             updateTableView()
+            return
         }
         
         let alertBox = UIAlertController (title: "Search", message: "Search Pokemon by type or name", preferredStyle: .alert)
@@ -133,10 +136,12 @@ class ViewController: UIViewController {
             guard let search = searchField.text, !search.isEmpty else { return }
             
             print(search)
-            self.searchPokemons(search)
+            self.searchPokemons(search.lowercased())
         }))
         
         present(alertBox, animated: true)
+        
+        searchButton.setSymbolImage(UIImage(systemName: "arrow.counterclockwise")!, contentTransition: .automatic)
     }
     
     
