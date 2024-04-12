@@ -59,11 +59,12 @@ class PokemonModel {
     func changeFavoriteStatus() {
         favorite = !favorite
         
-//        let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
-//        
-//        AF.request("https://webhook.site/1d7957e5-e527-444a-a826-76331c14beac", parameters: parameters, headers: ["content-type": "text/plain"])
-        
-        // send webWook
+        if isFavorite(){
+            let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
+            AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
+                print(response.description)
+            }
+        }
     }
     
     func getHp() -> Float { // max hp 216

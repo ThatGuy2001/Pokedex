@@ -37,7 +37,7 @@ final class PokedexV2UITests: XCTestCase {
         let app = XCUIApplication()
         app.navigationBars["PokeApi"].buttons["Search"].tap()
         
-        let fKey = app/*@START_MENU_TOKEN@*/.keyboards.keys["f"]/*[[".keyboards.keys[\"f\"]",".keys[\"f\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        let fKey = app.keyboards.keys["f"]
         fKey.tap()
         fKey.tap()
         

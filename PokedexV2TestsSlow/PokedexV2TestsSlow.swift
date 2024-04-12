@@ -42,7 +42,7 @@ final class PokedexV2TestsSlow: XCTestCase {
         wait(for: [promisse], timeout: 5)
     }
     
-    func testPokemonModelNormalColorFisrt()  {
+    func testPokemonModelNormalColorFisrt() {
         let promisse = expectation(description: "Testing pokemon with normal color first")
         let pidgey = PokemonModel(name: "pidgey")
         pidgey.updatePokemon {
@@ -52,7 +52,7 @@ final class PokedexV2TestsSlow: XCTestCase {
         wait(for: [promisse], timeout: 5)
     }
     
-    func testPokemonFavoriteStatus(){
+    func testPokemonFavoriteStatus() {
         let promisse = expectation(description: "Testig favorite")
         let bulbasaur = PokemonModel(name: "bulbasaur")
         bulbasaur.updatePokemon {
@@ -78,26 +78,81 @@ final class PokedexV2TestsSlow: XCTestCase {
         wait(for: [promisse], timeout: 5)
     }
     
-    func testPokemonStats()  {
+    func testPokemonHp()  { // isolar testes
         let promisse = expectation(description: "Testing stats")
         let bulbasaur = PokemonModel(name: "bulbasaur")
         bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getHp(), 45/216 )
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    func testPokemonAtk()  { // isolar testes
+        let promisse = expectation(description: "Testing stats")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getAtk(), 49/110 )
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    func testPokemonDef()  { // isolar testes
+        let promisse = expectation(description: "Testing stats")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getDef(), 49/230 )
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    func testPokemonSpAtk()  { // isolar testes
+        let promisse = expectation(description: "Testing stats")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getSpAtk(), 65/194 )
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    
+    func testPokemonSpDef()  { // isolar testes
+        let promisse = expectation(description: "Testing stats")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getSpDef(), 65/230 )
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    func testPokemonSpeed()  { // isolar testes
+        let promisse = expectation(description: "Testing stats")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getSpeed(), 45/180 )
             promisse.fulfill()
         }
         wait(for: [promisse], timeout: 5)
     }
     
-    func testPokemonMesures() {
+    func testPokemonHeight() {
         let promisse = expectation(description: "Testing mesures")
         let bulbasaur = PokemonModel(name: "bulbasaur")
         bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getHeight(), String(format: "Height: %dft", 7))
+            promisse.fulfill()
+        }
+        wait(for: [promisse], timeout: 5)
+    }
+    
+    func testPokemonWeight() {
+        let promisse = expectation(description: "Testing mesures")
+        let bulbasaur = PokemonModel(name: "bulbasaur")
+        bulbasaur.updatePokemon {
             XCTAssertEqual(bulbasaur.getWeight(), String(format: "Weight: %dlb", 69))
             promisse.fulfill()
         }
