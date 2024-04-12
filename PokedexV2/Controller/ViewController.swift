@@ -320,9 +320,6 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-
-    
 }
 
 // MARK: - UITableViewDelegate
