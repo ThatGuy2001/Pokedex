@@ -53,7 +53,7 @@ class PokemonInfoView: UIViewController {
     
     @IBAction func favButtonPressed(_ sender: UIButton) {
         guard let pokemon else { return  }
-        if !pokemon.isFavorite {
+        if !pokemon.favorite {
             sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             sender.setImage(UIImage(systemName: "star"), for: .normal)
@@ -97,7 +97,7 @@ class PokemonInfoView: UIViewController {
             type2.isHidden = true
         }
         
-        if pokemon.isFavorite {
+        if pokemon.favorite {
             favButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             favButton.setImage(UIImage(systemName: "star"), for: .normal)

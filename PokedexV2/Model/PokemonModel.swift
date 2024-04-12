@@ -28,7 +28,7 @@ class PokemonModel {
     
     var updateStatus : UpdateStatus
     var speciesStatus : SpeciesUpdateStatus
-    var isFavorite : Bool
+    var favorite : Bool
     
     var name : String
     var id : Int
@@ -44,7 +44,7 @@ class PokemonModel {
     var speciesInfo : SpeciesData?
     
     init(name: String) {
-        isFavorite = false
+        favorite = false
         updateStatus = .baseInfo
         speciesStatus = .notCaled
         self.name = name
@@ -57,11 +57,11 @@ class PokemonModel {
     }
     
     func changeFavoriteStatus() {
-        isFavorite = !isFavorite
+        favorite = !favorite
         
-        let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
-        
-        AF.request("https://webhook.site/1d7957e5-e527-444a-a826-76331c14beac", parameters: parameters, headers: ["content-type": "text/plain"])
+//        let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
+//        
+//        AF.request("https://webhook.site/1d7957e5-e527-444a-a826-76331c14beac", parameters: parameters, headers: ["content-type": "text/plain"])
         
         // send webWook
     }
@@ -91,6 +91,10 @@ class PokemonModel {
     
     func getWeight() -> String {
         String(format: "Weight: %dlb", weight)
+    }
+    
+    func isFavorite() -> Bool {
+        return favorite
     }
     
     func getColor() -> UIColor? {

@@ -111,12 +111,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func favButtonPressed(_ sender: UIButton) {
-        if !(pokemonInDisplay?.isFavorite ?? false) {
+        guard let pokemonInDisplay else { return }
+        
+        if !pokemonInDisplay.isFavorite() {
             sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             sender.setImage(UIImage(systemName: "star"), for: .normal)
         }
-        pokemonInDisplay?.changeFavoriteStatus()
+        pokemonInDisplay.changeFavoriteStatus()
     }
     
     @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
@@ -191,7 +193,7 @@ class ViewController: UIViewController {
             type2.isHidden = true
         }
         
-        if pokemon.isFavorite {
+        if pokemon.isFavorite() {
             favButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
             favButton.setImage(UIImage(systemName: "star"), for: .normal)
