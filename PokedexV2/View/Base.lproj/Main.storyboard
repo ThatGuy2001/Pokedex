@@ -59,13 +59,30 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kR0-K3-37W">
-                                        <rect key="frame" x="57" y="78.666666666666657" width="200" height="199.99999999999997"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNX-QS-x9g">
+                                        <rect key="frame" x="37" y="58.666666666666657" width="240" height="239.99999999999997"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kR0-K3-37W">
+                                                <rect key="frame" x="19.999999999999986" y="20" width="200" height="200"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="kR0-K3-37W" secondAttribute="height" multiplier="1:1" id="Z07-aZ-wVi"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="kR0-K3-37W" secondAttribute="height" multiplier="1:1" id="Z07-aZ-wVi"/>
+                                            <constraint firstItem="kR0-K3-37W" firstAttribute="centerX" secondItem="tNX-QS-x9g" secondAttribute="centerX" id="02W-th-uA2"/>
+                                            <constraint firstItem="kR0-K3-37W" firstAttribute="centerY" secondItem="tNX-QS-x9g" secondAttribute="centerY" id="271-j1-mLy"/>
+                                            <constraint firstAttribute="bottom" secondItem="kR0-K3-37W" secondAttribute="bottom" constant="20" symbolic="YES" id="Hma-e0-itk"/>
+                                            <constraint firstItem="kR0-K3-37W" firstAttribute="leading" secondItem="tNX-QS-x9g" secondAttribute="leading" constant="20" symbolic="YES" id="P8z-Rf-crB"/>
+                                            <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="tNX-QS-x9g" secondAttribute="top" constant="20" symbolic="YES" id="bn8-Iq-MFo"/>
+                                            <constraint firstAttribute="trailing" secondItem="kR0-K3-37W" secondAttribute="trailing" constant="20" symbolic="YES" id="jyF-y5-I6g"/>
                                         </constraints>
-                                    </imageView>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="85O-2w-Vcg" appends="YES" id="2Jf-Y5-7fl"/>
+                                        </connections>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ol5-tX-pTt" userLabel="Types">
                                         <rect key="frame" x="52.999999999999986" y="283.66666666666669" width="208.33333333333331" height="45"/>
                                         <subviews>
@@ -86,8 +103,8 @@
                                             <constraint firstAttribute="height" constant="45" id="nVp-y1-chh"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm2-2Y-OLV">
-                                        <rect key="frame" x="20" y="30.666666666666661" width="274.33333333333331" height="39.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm2-2Y-OLV">
+                                        <rect key="frame" x="20" y="30.666666666666657" width="274.33333333333331" height="39.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="39"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -95,23 +112,19 @@
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="tNX-QS-x9g" firstAttribute="centerY" secondItem="ZJp-nw-CLt" secondAttribute="centerY" id="5gO-OQ-UUN"/>
                                     <constraint firstAttribute="trailing" secondItem="Lm2-2Y-OLV" secondAttribute="trailing" constant="20" id="7U6-cf-Ck1"/>
                                     <constraint firstItem="zzO-Qq-IIn" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="2" id="Acq-vh-ZWV"/>
-                                    <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="Lm2-2Y-OLV" secondAttribute="bottom" constant="8.6666666666666572" id="BXg-06-caj"/>
-                                    <constraint firstItem="kR0-K3-37W" firstAttribute="width" secondItem="ZJp-nw-CLt" secondAttribute="width" multiplier="0.636267" id="F71-xe-vdZ"/>
-                                    <constraint firstItem="Ol5-tX-pTt" firstAttribute="top" secondItem="kR0-K3-37W" secondAttribute="bottom" constant="5" id="NUR-gb-1Ni"/>
+                                    <constraint firstItem="tNX-QS-x9g" firstAttribute="width" secondItem="ZJp-nw-CLt" secondAttribute="width" multiplier="0.763521" id="IGF-gC-GLN"/>
                                     <constraint firstItem="Ol5-tX-pTt" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="QXO-rv-gkm"/>
                                     <constraint firstItem="imi-4t-TW5" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="8" id="TUN-Xj-NG6"/>
                                     <constraint firstItem="Lm2-2Y-OLV" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="aKh-5D-9Jg"/>
                                     <constraint firstItem="zzO-Qq-IIn" firstAttribute="leading" secondItem="ZJp-nw-CLt" secondAttribute="leading" constant="-4" id="bHi-pq-AyP"/>
-                                    <constraint firstItem="kR0-K3-37W" firstAttribute="centerY" secondItem="ZJp-nw-CLt" secondAttribute="centerY" id="bfT-Op-PXa"/>
                                     <constraint firstAttribute="trailing" secondItem="imi-4t-TW5" secondAttribute="trailing" constant="8" id="iM0-0t-0rw"/>
                                     <constraint firstItem="Lm2-2Y-OLV" firstAttribute="leading" secondItem="ZJp-nw-CLt" secondAttribute="leading" constant="20" id="pkf-9L-uel"/>
-                                    <constraint firstItem="kR0-K3-37W" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="w9Q-TE-3Lj"/>
+                                    <constraint firstItem="tNX-QS-x9g" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="tYS-6j-BcH"/>
+                                    <constraint firstItem="Ol5-tX-pTt" firstAttribute="top" secondItem="tNX-QS-x9g" secondAttribute="bottom" constant="-14.999999999999943" id="vod-vb-bPV"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="xeF-e2-ZIT" appends="YES" id="2Fj-Mv-N5X"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="los-42-RPq" userLabel="statsView">
                                 <rect key="frame" x="78.666666666666657" y="460.66666666666674" width="314.33333333333337" height="357.33333333333326"/>
@@ -421,9 +434,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="xeF-e2-ZIT">
+                <tapGestureRecognizer id="85O-2w-Vcg">
                     <connections>
-                        <action selector="spriteTapped:" destination="BYZ-38-t0r" id="5eZ-KZ-oDd"/>
+                        <action selector="spriteTapped:" destination="BYZ-38-t0r" id="f2s-oi-HDV"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -592,6 +605,7 @@
                                         <rect key="frame" x="35" y="60.333333333333371" width="348" height="20.333333333333343"/>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fay-q2-VDe" firstAttribute="top" secondItem="DGI-0b-uiJ" secondAttribute="top" constant="30" id="1sa-Qf-WpY"/>
                                     <constraint firstItem="kU3-uM-f9B" firstAttribute="top" secondItem="fay-q2-VDe" secondAttribute="bottom" constant="10" id="HSt-pE-uz2"/>
@@ -683,25 +697,25 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

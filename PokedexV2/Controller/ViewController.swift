@@ -65,6 +65,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        statsView.isHidden = true
+        pokemonView.isHidden = true
+        
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
@@ -82,6 +85,8 @@ class ViewController: UIViewController {
     }
     
     func showPokemon(_ pokemon: PokemonModel) {
+        statsView.isHidden = false
+        pokemonView.isHidden = false
         pokemonInDisplay = pokemon
         setStatusView(pokemon: pokemon)
         setPokemonView(pokemon: pokemon)
@@ -235,6 +240,7 @@ class ViewController: UIViewController {
         choseLayout()
         guard let pokemonInDisplay else {return}
         setPokemonView(pokemon: pokemonInDisplay)
+        navigationController?.navigationBar.tintColor = .tintColor
     }
     
     func choseLayout(){
@@ -327,19 +333,18 @@ class ViewController: UIViewController {
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let index = indexPath.row
-        for i in index..<index+10 {
+        for i in index..<index+20 {
             if i < shownPokemons.count {
                 let pokemon = shownPokemons[i]
                 if pokemon.updateStatus == .baseInfo {
                     updatePokemon(pokemon)
                     cell.isHidden = true
-                }
+                } 
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let lastSelectedCell = selectedCell {
             lastSelectedCell.selectedBackground.backgroundColor = UIColor(named: "clear")
         }
@@ -349,7 +354,6 @@ extension ViewController : UITableViewDelegate {
         
         pokemonInDisplay = shownPokemons[indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
-        //currentCell.selectedBackground.backgroundColor = .white
         showPokemon(pokemon)
     }
 }
@@ -377,12 +381,10 @@ extension ViewController : UITableViewDataSource {
         }
         
         if pokemon.updateStatus == .updateEnded {
-            
             if indexPath.row == 0  && !initiated{
                 initiated = true
                 showPokemon(pokemon)
             }
-        
             cell.sprite.image = pokemon.sprites.male
             cell.background.backgroundColor = pokemon.getColor()
             cell.background.layer.cornerRadius = 4
