@@ -20,11 +20,7 @@ class ViewController: UIViewController {
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
     var searchDictionary : [ String : [PokemonModel]] = [:]
-    var allPokemons : [PokemonModel] = []
-    var somePokemons : [PokemonModel] = []
-    var shownPokemons : [PokemonModel] = []
-    var allPokemonsInDisplay = true
-    var selectedCell : PokemonCell?
+    var shownTag = K.all
     
     // layout constraits
     
@@ -73,12 +69,13 @@ class ViewController: UIViewController {
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
         
-        shownPokemons = allPokemons
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
         
+        searchDictionary[K.all] = []
+        searchDictionary[K.onePokemon] = []
+        searchDictionary[K.onePokemon]?.append(PokemonModel(name: "bulbasaur"))
         AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
             guard let response = response.value else { return }
             self.pokemonListHandler(response)
@@ -128,11 +125,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func searchBarButton(_ sender: UIBarButtonItem) {
-        
-        if allPokemonsInDisplay == false {
+        if shownTag != K.all {
             searchButton.setSymbolImage(UIImage(systemName: "magnifyingglass")!, contentTransition: .automatic)
-            allPokemonsInDisplay = true
-            shownPokemons = allPokemons
+            shownTag = K.all
             initiated = false
             updateTableView()
             return
@@ -269,21 +264,28 @@ class ViewController: UIViewController {
             let name = pokemon.name
             let newPokemon = PokemonModel(name: name)
             updatePokemon(newPokemon)
-            allPokemons.append(newPokemon)
+            searchDictionary[K.all]?.append(newPokemon)
         }
-        shownPokemons = allPokemons
         updateTableView()
     }
     
     
     func searchPokemons(_ search : String) {
-        somePokemons = []
         if K.types.contains(search.lowercased()){
+            shownTag = search.lowercased()
+            if searchDictionary[shownTag] != nil {
+                updateTableView()
+                return
+            }
+            searchDictionary[shownTag] = []
             AF.request(K.url.type + search).responseDecodable(of: TypeData.self) { response in
                 guard let response = response.value else {return}
                 self.pokemonByTypeHandler(response)
             }
         } else {
+            if searchDictionary[K.onePokemon]!.count > 0  {
+                searchDictionary[K.onePokemon]?.remove(at: 0)
+            }
             AF.request(K.url.pokemon + search).responseDecodable(of: PokemonData.self) { response in
                 guard let response = response.value else {return}
                 self.pokemonHandler(response)
@@ -295,23 +297,21 @@ class ViewController: UIViewController {
         for pokemon in pokemonTypeList.pokemon {
             let name = pokemon.pokemon.name
             let newPokemon = PokemonModel(name: name)
-            somePokemons.append(newPokemon)
+            searchDictionary[shownTag]?.append(newPokemon)
         }
         for i in 0..<10 {
-            let pokemon = somePokemons[i]
+            let pokemon = (searchDictionary[shownTag]?[i])!
             updatePokemon(pokemon)
         }
-        shownPokemons = somePokemons
         initiated = false
-        allPokemonsInDisplay = false
     }
 
     func pokemonHandler(_ pokemon : PokemonData) {
-            let newPokemon = PokemonModel(name: pokemon.name)
-            updatePokemon(newPokemon)
-            somePokemons.append(newPokemon)
-            shownPokemons = somePokemons
-            allPokemonsInDisplay = false
+        let newPokemon = PokemonModel(name: pokemon.name)
+        shownTag = K.onePokemon
+        updatePokemon(newPokemon)
+        searchDictionary[K.onePokemon]?.append(newPokemon)
+        pokemonInDisplay = newPokemon
     }
     
     func updatePokemon(_ pokemon : PokemonModel) {
@@ -333,10 +333,11 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let pokemons = searchDictionary[shownTag] else {return}
         let index = indexPath.row
         for i in index..<index+20 {
-            if i < shownPokemons.count {
-                let pokemon = shownPokemons[i]
+            if i < pokemons.count {
+                let pokemon = pokemons[i]
                 if pokemon.updateStatus == .baseInfo {
                     updatePokemon(pokemon)
                     cell.isHidden = true
@@ -346,14 +347,10 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let lastSelectedCell = selectedCell {
-            lastSelectedCell.selectedBackground.backgroundColor = UIColor(named: "clear")
-        }
         
         let currentCell = tableView.cellForRow(at:indexPath) as! PokemonCell
-        selectedCell = currentCell
         
-        pokemonInDisplay = shownPokemons[indexPath.row]
+        pokemonInDisplay = searchDictionary[shownTag]![indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
         showPokemon(pokemon)
     }
@@ -363,13 +360,13 @@ extension ViewController : UITableViewDelegate {
 
 extension ViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shownPokemons.count
+        return searchDictionary[shownTag]!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
         cell.selectedBackground.backgroundColor = UIColor(named: "clear")
-        let pokemon = shownPokemons[indexPath.row]
+        let pokemon = searchDictionary[shownTag]![indexPath.row]
         
         if pokemon.updateStatus == .baseInfo {
             pokemon.updatePokemon {
@@ -391,7 +388,7 @@ extension ViewController : UITableViewDataSource {
             cell.background.layer.cornerRadius = 4
         }
         
-        if allPokemons.count-20 < indexPath.row && allPokemonsInDisplay{
+        if searchDictionary[K.all]!.count-20 < indexPath.row && shownTag == K.all{
             requestNextPage()
         }
         
