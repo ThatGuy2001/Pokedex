@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var initiated = false
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
+    var searchDictionary : [ String : [PokemonModel]] = [:]
     var allPokemons : [PokemonModel] = []
     var somePokemons : [PokemonModel] = []
     var shownPokemons : [PokemonModel] = []
@@ -339,7 +340,7 @@ extension ViewController : UITableViewDelegate {
                 if pokemon.updateStatus == .baseInfo {
                     updatePokemon(pokemon)
                     cell.isHidden = true
-                } 
+                }
             }
         }
     }
