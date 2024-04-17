@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     var pokemonList : PokemonListData?
     var searchDictionary : [ String : [PokemonModel]] = [:]
     var shownTag = K.all
-    
     // layout constraits
     
     @IBOutlet weak var statsViewHeight: NSLayoutConstraint!
@@ -347,8 +346,6 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let currentCell = tableView.cellForRow(at:indexPath) as! PokemonCell
         
         pokemonInDisplay = searchDictionary[shownTag]![indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
