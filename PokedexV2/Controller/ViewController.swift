@@ -311,11 +311,10 @@ class ViewController: UIViewController {
             let newPokemon = PokemonModel(name: name)
             searchDictionary[shownTag]?.append(newPokemon)
         }
-        for i in 0..<20 {
+        for i in 0..<K.pagingNumber {
             let pokemon = (searchDictionary[shownTag]?[i])!
             updatePokemon(pokemon)
         }
-        loader.dismiss(animated: true)
         initiated = false
     }
 
@@ -325,13 +324,12 @@ class ViewController: UIViewController {
         updatePokemon(newPokemon)
         searchDictionary[K.onePokemon]?.append(newPokemon)
         pokemonInDisplay = newPokemon
-        loader.dismiss(animated: true)
     }
     
     func updatePokemon(_ pokemon : PokemonModel) {
         pokemon.updatePokemon{
             if pokemon.id >= 10000 {
-                self.searchDictionary[self.shownTag]!.removeAll { $0.id == pokemon.id}
+                self.searchDictionary[self.shownTag]!.removeAll{ $0.id == pokemon.id}
                 self.updateTableView()
                 return
             }
@@ -354,7 +352,7 @@ extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let pokemons = searchDictionary[shownTag] else {return}
         let index = indexPath.row
-        for i in index..<index+20 {
+        for i in index..<index + K.pagingNumber {
             if i < pokemons.count {
                 let pokemon = pokemons[i]
                 if pokemon.updateStatus == .baseInfo {
@@ -382,7 +380,16 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if searchDictionary[shownTag]!.count <= indexPath.row {
+            updateTableView()
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.LoadingCell, for: indexPath) as! LoadingCell
+            let loadingIndicator = cell.loadingIndicator!
+            loadingIndicator.style = UIActivityIndicatorView.Style.large
+            loadingIndicator.startAnimating()
+            return cell
+        }
         let pokemon = searchDictionary[shownTag]![indexPath.row]
+        
         if pokemon.updateStatus != .updateEnded {
             pokemon.updatePokemon {
                 pokemon.updateSprites {
@@ -390,32 +397,26 @@ extension ViewController : UITableViewDataSource {
                 }
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.LoadingCell, for: indexPath) as! LoadingCell
-            
             let loadingIndicator = cell.loadingIndicator!
             loadingIndicator.style = UIActivityIndicatorView.Style.large
             loadingIndicator.startAnimating()
             return cell
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
-        
-        cell.selectedBackground.backgroundColor =  UIColor(named: "clear")
-        
-        if pokemon.updateStatus == .updateEnded {
-            if indexPath.row == 0  && !initiated {
-                initiated = true
-                showPokemon(pokemon)
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
+            if pokemon.updateStatus == .updateEnded {
+                if indexPath.row == 0  && !initiated {
+                    initiated = true
+                    showPokemon(pokemon)
+                }
+                cell.sprite.image = pokemon.sprites.male
+                cell.background.backgroundColor = pokemon.getColor()
+                cell.background.layer.cornerRadius = 4
             }
-            cell.sprite.image = pokemon.sprites.male
-            cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 4
+            if searchDictionary[K.all]!.count - K.pagingNumber < indexPath.row && shownTag == K.all{
+                requestNextPage()
+            }
+            return cell
         }
-        
-        if searchDictionary[K.all]!.count-20 < indexPath.row && shownTag == K.all{
-            requestNextPage()
-        }
-        
-        return cell
     }
 }
 

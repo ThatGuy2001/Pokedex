@@ -12,7 +12,6 @@ class PokemonCell: UITableViewCell {
 
     @IBOutlet weak var sprite: UIImageView!
     @IBOutlet weak var background: UIView!
-    @IBOutlet weak var selectedBackground: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
