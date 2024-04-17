@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         
         searchDictionary[K.all] = []
         searchDictionary[K.onePokemon] = []
-        searchDictionary[K.onePokemon]?.append(PokemonModel(name: "bulbasaur"))
+        
         AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
             guard let response = response.value else { return }
             self.pokemonListHandler(response)

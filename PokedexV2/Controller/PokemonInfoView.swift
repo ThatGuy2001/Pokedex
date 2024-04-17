@@ -29,6 +29,7 @@ class PokemonInfoView: UIViewController {
     
     @IBOutlet weak var abilitiesView: UIStackView!
     
+    @IBOutlet var backgroundView: UIView!
     //layout Constraits
     
     @IBOutlet weak var speciesInfoWidth: NSLayoutConstraint!
@@ -87,6 +88,8 @@ class PokemonInfoView: UIViewController {
         weight.text = pokemon.getWeight()
         sprite.image = pokemon.sprites.male
         
+        backgroundView.backgroundColor = pokemon.getColor()
+        
         if let type1 = pokemon.type1 {
             self.type1.image = UIImage(named: type1)
         }
@@ -113,6 +116,7 @@ class PokemonInfoView: UIViewController {
         
         for abl in pokemon.abilities {
             let ability = UILabel()
+            ability.font = UIFont(name: "PIXELADE", size: 24)
             ability.text = abl.capitalized
             abilitiesView.addArrangedSubview(ability)
         }

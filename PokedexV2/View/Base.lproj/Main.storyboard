@@ -103,8 +103,8 @@
                                             <constraint firstAttribute="height" constant="45" id="nVp-y1-chh"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm2-2Y-OLV">
-                                        <rect key="frame" x="20" y="30.666666666666657" width="274.33333333333331" height="39.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm2-2Y-OLV">
+                                        <rect key="frame" x="20" y="35.333333333333343" width="274.33333333333331" height="39.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="39"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -114,6 +114,7 @@
                                 <constraints>
                                     <constraint firstItem="tNX-QS-x9g" firstAttribute="centerY" secondItem="ZJp-nw-CLt" secondAttribute="centerY" id="5gO-OQ-UUN"/>
                                     <constraint firstAttribute="trailing" secondItem="Lm2-2Y-OLV" secondAttribute="trailing" constant="20" id="7U6-cf-Ck1"/>
+                                    <constraint firstItem="kR0-K3-37W" firstAttribute="top" secondItem="Lm2-2Y-OLV" secondAttribute="bottom" constant="4" id="7m5-Rk-0nF"/>
                                     <constraint firstItem="zzO-Qq-IIn" firstAttribute="top" secondItem="ZJp-nw-CLt" secondAttribute="top" constant="2" id="Acq-vh-ZWV"/>
                                     <constraint firstItem="tNX-QS-x9g" firstAttribute="width" secondItem="ZJp-nw-CLt" secondAttribute="width" multiplier="0.763521" id="IGF-gC-GLN"/>
                                     <constraint firstItem="Ol5-tX-pTt" firstAttribute="centerX" secondItem="ZJp-nw-CLt" secondAttribute="centerX" id="QXO-rv-gkm"/>
@@ -469,23 +470,23 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rp3-We-fhu">
-                                                    <rect key="frame" x="121.00000000000001" y="12" width="134.33333333333337" height="101"/>
+                                                    <rect key="frame" x="121.00000000000001" y="12" width="142.33333333333337" height="101"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name : Bulbasaur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grS-a8-agG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="134.33333333333334" height="19.333333333333332"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="142.33333333333334" height="19.333333333333332"/>
+                                                            <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="25"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height : 000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0w-Cv-XDT">
-                                                            <rect key="frame" x="0.0" y="27.333333333333343" width="94.666666666666671" height="19.333333333333329"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="27.333333333333343" width="92.333333333333329" height="19.333333333333329"/>
+                                                            <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="25"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight : 000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-b1-xFC">
-                                                            <rect key="frame" x="0.0" y="54.666666666666657" width="97.666666666666671" height="19"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="54.666666666666657" width="98.333333333333329" height="19"/>
+                                                            <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="25"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -547,32 +548,32 @@
                                         <rect key="frame" x="10" y="30" width="373" height="246"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desciption" textAlignment="justified" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CZ-rd-tlY">
-                                                <rect key="frame" x="0.0" y="0.0" width="373" height="42.666666666666664"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="43.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttc-2T-jc1">
-                                                <rect key="frame" x="0.0" y="46.666666666666686" width="373" height="42.333333333333343"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="47.333333333333314" width="373" height="43.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habitat: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd6-8P-smB">
-                                                <rect key="frame" x="0.0" y="93" width="64.333333333333329" height="42.666666666666657"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="95" width="61" height="43.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capture Rate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGq-rO-WSl">
-                                                <rect key="frame" x="0.0" y="139.66666666666669" width="109" height="42.333333333333343"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="142.33333333333331" width="109" height="43.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Growth Rate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgm-0g-YqF">
-                                                <rect key="frame" x="0.0" y="186" width="103.33333333333333" height="60"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="190" width="105.33333333333333" height="56"/>
+                                                <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -596,8 +597,8 @@
                                 <rect key="frame" x="0.0" y="532" width="393" height="286"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abilities: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fay-q2-VDe">
-                                        <rect key="frame" x="10" y="30" width="373" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="10" y="30" width="373" height="24.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Pixelade" family="Pixelade" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -605,7 +606,6 @@
                                         <rect key="frame" x="35" y="60.333333333333371" width="348" height="20.333333333333343"/>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fay-q2-VDe" firstAttribute="top" secondItem="DGI-0b-uiJ" secondAttribute="top" constant="30" id="1sa-Qf-WpY"/>
                                     <constraint firstItem="kU3-uM-f9B" firstAttribute="top" secondItem="fay-q2-VDe" secondAttribute="bottom" constant="10" id="HSt-pE-uz2"/>
@@ -643,6 +643,7 @@
                         <outlet property="abilitiesView" destination="kU3-uM-f9B" id="Hzh-wO-IQc"/>
                         <outlet property="abilitiesWidth" destination="0x2-RU-MRy" id="zd5-FL-Gz2"/>
                         <outlet property="backgorundSprite" destination="nkQ-Kg-fth" id="pEA-SY-KzH"/>
+                        <outlet property="backgroundView" destination="e2d-wU-to4" id="Hwt-9w-n0U"/>
                         <outlet property="baseInfoHeight" destination="aQJ-wQ-R6J" id="XKm-wr-cQk"/>
                         <outlet property="captureRate" destination="DGq-rO-WSl" id="0aH-W0-C6S"/>
                         <outlet property="desc" destination="2CZ-rd-tlY" id="d15-pi-Ykg"/>

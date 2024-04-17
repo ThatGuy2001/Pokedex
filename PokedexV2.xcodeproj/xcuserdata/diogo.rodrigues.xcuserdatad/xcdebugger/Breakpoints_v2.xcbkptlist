@@ -20,5 +20,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B29AC442-1020-4CCB-8C24-7D8E766644ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokedexV2/Controller/PokemonInfoView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "prepareView(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B29AC442-1020-4CCB-8C24-7D8E766644ED - b435665352188523"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokedexV2.PokemonInfoView.prepareView(for: PokedexV2.PokemonModel) -&gt; ()"
+                  moduleName = "PokedexV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diogo.rodrigues/Documents/GitHub/Pokedex/PokedexV2/Controller/PokemonInfoView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "1156">
+               </Location>
+               <Location
+                  uuid = "B29AC442-1020-4CCB-8C24-7D8E766644ED - b435665352188523"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PokedexV2.PokemonInfoView.prepareView(for: PokedexV2.PokemonModel) -&gt; ()"
+                  moduleName = "PokedexV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/diogo.rodrigues/Documents/GitHub/Pokedex/PokedexV2/Controller/PokemonInfoView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "1252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
