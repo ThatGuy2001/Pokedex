@@ -187,6 +187,13 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func aboutTheAutorPressed(_ sender: UIBarButtonItem) {
+        
+        let viewController = AboutMeView()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     //MARK: - Layout
     
     func setPokemonView(pokemon: PokemonModel){

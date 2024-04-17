@@ -13,6 +13,7 @@ class PokemonInfoView: UIViewController {
     
     @IBOutlet weak var backgorundSprite: UIImageView!
     
+    @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var sprite: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var height: UILabel!
@@ -44,6 +45,9 @@ class PokemonInfoView: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
+        
+        blurView.layer.cornerRadius = 20
+        blurView.clipsToBounds = true
         
         navigationController?.navigationBar.tintColor = .white
         
