@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var loader = UIAlertController(title: nil, message: "Catching pokemom", preferredStyle: .alert)
+    
+    
     var initiated = false
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
@@ -75,6 +78,14 @@ class ViewController: UIViewController {
         searchDictionary[K.all] = []
         searchDictionary[K.onePokemon] = []
         
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.large
+        loadingIndicator.startAnimating()
+        loader.view.addSubview(loadingIndicator)
+        
+        
+        self.present(loader, animated: true)
         AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
             guard let response = response.value else { return }
             self.pokemonListHandler(response)
@@ -258,6 +269,7 @@ class ViewController: UIViewController {
     }
     
     func pokemonListHandler( _ pokemonList : PokemonListData) {
+        loader.dismiss(animated: true)
         self.pokemonList = pokemonList
         for pokemon in pokemonList.results {
             let name = pokemon.name
@@ -277,6 +289,7 @@ class ViewController: UIViewController {
                 return
             }
             searchDictionary[shownTag] = []
+            self.present(self.loader, animated: true)
             AF.request(K.url.type + search).responseDecodable(of: TypeData.self) { response in
                 guard let response = response.value else {return}
                 self.pokemonByTypeHandler(response)
@@ -298,10 +311,11 @@ class ViewController: UIViewController {
             let newPokemon = PokemonModel(name: name)
             searchDictionary[shownTag]?.append(newPokemon)
         }
-        for i in 0..<10 {
+        for i in 0..<20 {
             let pokemon = (searchDictionary[shownTag]?[i])!
             updatePokemon(pokemon)
         }
+        loader.dismiss(animated: true)
         initiated = false
     }
 

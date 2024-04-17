@@ -64,6 +64,11 @@ class PokemonModel {
             AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
                 print(response.description)
             }
+            return
+        }
+        let parameters = [ "name" : name, "id" : String(id), "operation" : "remove-favorite"]
+        AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
+            print(response.description)
         }
     }
     
