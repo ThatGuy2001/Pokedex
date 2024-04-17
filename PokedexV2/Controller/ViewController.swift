@@ -74,6 +74,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
+        tableView.register(UINib(nibName: K.identifiers.LoadingCell, bundle: nil), forCellReuseIdentifier: K.identifiers.LoadingCell)
         
         searchDictionary[K.all] = []
         searchDictionary[K.onePokemon] = []
@@ -249,7 +250,7 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .tintColor
     }
     
-    func choseLayout(){
+    func choseLayout() {
         if UIDevice.current.orientation.isLandscape {
             changeLayout(0.45, 1, 0.45, 1, 0.1)
         } else {
@@ -279,7 +280,6 @@ class ViewController: UIViewController {
         }
         updateTableView()
     }
-    
     
     func searchPokemons(_ search : String) {
         if K.types.contains(search.lowercased()){
@@ -325,13 +325,13 @@ class ViewController: UIViewController {
         updatePokemon(newPokemon)
         searchDictionary[K.onePokemon]?.append(newPokemon)
         pokemonInDisplay = newPokemon
+        loader.dismiss(animated: true)
     }
     
     func updatePokemon(_ pokemon : PokemonModel) {
         pokemon.updatePokemon{
             pokemon.updateSprites {
-                self.updateTableView()
-            }
+                self.updateTableView()            }
         }
     }
     
@@ -375,22 +375,30 @@ extension ViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
-        cell.selectedBackground.backgroundColor = UIColor(named: "clear")
+        
+        
         let pokemon = searchDictionary[shownTag]![indexPath.row]
         
-        if pokemon.updateStatus == .baseInfo {
+        if pokemon.updateStatus != .updateEnded {
             pokemon.updatePokemon {
                 pokemon.updateSprites {
                     self.updateTableView()
                 }
             }
-            cell.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.LoadingCell, for: indexPath) as! LoadingCell
+            
+            let loadingIndicator = cell.loadingIndicator!
+            loadingIndicator.style = UIActivityIndicatorView.Style.large
+            loadingIndicator.startAnimating()
             return cell
         }
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
+        
+        cell.selectedBackground.backgroundColor =  UIColor(named: "clear")
+        
         if pokemon.updateStatus == .updateEnded {
-            if indexPath.row == 0  && !initiated{
+            if indexPath.row == 0  && !initiated {
                 initiated = true
                 showPokemon(pokemon)
             }

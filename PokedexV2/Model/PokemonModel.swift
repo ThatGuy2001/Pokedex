@@ -50,7 +50,7 @@ class PokemonModel {
         self.name = name
         id = 0
         sprites = Sprites()
-        stats = []
+        stats = [0,0,0,0,0,0]
         weight = 0
         height = 0
         abilities = []
