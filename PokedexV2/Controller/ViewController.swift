@@ -315,6 +315,7 @@ class ViewController: UIViewController {
             let pokemon = (searchDictionary[shownTag]?[i])!
             updatePokemon(pokemon)
         }
+        loader.dismiss(animated: true)
         initiated = false
     }
 
