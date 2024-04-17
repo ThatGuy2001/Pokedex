@@ -59,15 +59,15 @@ class PokemonModel {
     func changeFavoriteStatus() {
         favorite = !favorite
         
+        var parameters = [ "name" : name, "id" : String(id), "operation" : " "]
+        
         if isFavorite(){
-            let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
-            AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
-                print(response.description)
-            }
-            return
+            parameters["operation"] = "add-favorite"
+        } else {
+            parameters["operation"] = "remove-favorite"
         }
-        let parameters = [ "name" : name, "id" : String(id), "operation" : "remove-favorite"]
-        AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
+        
+        AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).response { response in
             print(response.description)
         }
     }
