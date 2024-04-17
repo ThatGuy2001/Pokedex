@@ -330,8 +330,14 @@ class ViewController: UIViewController {
     
     func updatePokemon(_ pokemon : PokemonModel) {
         pokemon.updatePokemon{
+            if pokemon.id >= 10000 {
+                self.searchDictionary[self.shownTag]!.removeAll { $0.id == pokemon.id}
+                self.updateTableView()
+                return
+            }
             pokemon.updateSprites {
-                self.updateTableView()            }
+                self.updateTableView()
+            }
         }
     }
     
@@ -376,9 +382,7 @@ extension ViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let pokemon = searchDictionary[shownTag]![indexPath.row]
-        
         if pokemon.updateStatus != .updateEnded {
             pokemon.updatePokemon {
                 pokemon.updateSprites {
