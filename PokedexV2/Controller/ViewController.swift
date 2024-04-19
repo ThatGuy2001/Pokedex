@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var loader = UIAlertController(title: nil, message: "Catching pokemom", preferredStyle: .alert)
+    var loader = UIAlertController(title: nil, message: "Catching pokemon", preferredStyle: .alert)
     
     
     var initiated = false

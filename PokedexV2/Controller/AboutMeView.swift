@@ -14,7 +14,6 @@ class AboutMeView: UIViewController {
         
         addBacgorundImage()
         addTextBox()
-        
     }
     
     func addBacgorundImage() {
@@ -57,33 +56,24 @@ All the app was designed using a storyboard or xib files, with the exeption of t
         textBox.contentView.addSubview(textLabel)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.bottomAnchor.constraint(equalTo: textBox.contentView.bottomAnchor, constant: -50).isActive = true
-        textLabel.leadingAnchor.constraint(equalTo: textBox.contentView.leadingAnchor, constant: 50).isActive = true
         textLabel.trailingAnchor.constraint(equalTo: textBox.contentView.trailingAnchor,constant: -50).isActive = true
         textLabel.topAnchor.constraint(equalTo: textBox.contentView.topAnchor, constant: 210).isActive = true
+        textLabel.leadingAnchor.constraint(equalTo: textBox.contentView.leadingAnchor, constant: 50).isActive = true
         
     // add profileImage
         
         let contentview = textBox.contentView
         
-        let image = UIImageView(image: UIImage(named: "aboutMe"))
+        let image = UIImageView(image: UIImage(named: "AboutMe"))
         contentview.addSubview(image)
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
+        
         image.topAnchor.constraint(equalTo: contentview.topAnchor, constant: 10 ).isActive = true
+        image.centerXAnchor.constraint(equalTo: contentview.centerXAnchor , constant: 0).isActive = true
+        
         image.widthAnchor.constraint(equalToConstant: 200).isActive = true
         image.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        image.centerXAnchor.constraint(equalTo: contentview.centerXAnchor , constant: 0).isActive = true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
