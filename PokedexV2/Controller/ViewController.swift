@@ -16,12 +16,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var loader = UIAlertController(title: nil, message: "Catching pokemon", preferredStyle: .alert)
+    
+    
     var initiated = false
     var pokemonInDisplay : PokemonModel?
     var pokemonList : PokemonListData?
     var searchDictionary : [ String : [PokemonModel]] = [:]
     var shownTag = K.all
-    
     // layout constraits
     
     @IBOutlet weak var statsViewHeight: NSLayoutConstraint!
@@ -72,10 +74,19 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: K.identifiers.PokemonCell, bundle: nil), forCellReuseIdentifier: K.identifiers.PokemonCell)
+        tableView.register(UINib(nibName: K.identifiers.LoadingCell, bundle: nil), forCellReuseIdentifier: K.identifiers.LoadingCell)
         
         searchDictionary[K.all] = []
         searchDictionary[K.onePokemon] = []
         
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.large
+        loadingIndicator.startAnimating()
+        loader.view.addSubview(loadingIndicator)
+        
+        
+        self.present(loader, animated: true)
         AF.request(K.url.firstPage).responseDecodable(of: PokemonListData.self) { response in
             guard let response = response.value else { return }
             self.pokemonListHandler(response)
@@ -176,6 +187,13 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func aboutTheAutorPressed(_ sender: UIBarButtonItem) {
+        
+        let viewController = AboutMeView()
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     //MARK: - Layout
     
     func setPokemonView(pokemon: PokemonModel){
@@ -239,7 +257,7 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .tintColor
     }
     
-    func choseLayout(){
+    func choseLayout() {
         if UIDevice.current.orientation.isLandscape {
             changeLayout(0.45, 1, 0.45, 1, 0.1)
         } else {
@@ -259,6 +277,7 @@ class ViewController: UIViewController {
     }
     
     func pokemonListHandler( _ pokemonList : PokemonListData) {
+        loader.dismiss(animated: true)
         self.pokemonList = pokemonList
         for pokemon in pokemonList.results {
             let name = pokemon.name
@@ -269,7 +288,6 @@ class ViewController: UIViewController {
         updateTableView()
     }
     
-    
     func searchPokemons(_ search : String) {
         if K.types.contains(search.lowercased()){
             shownTag = search.lowercased()
@@ -278,6 +296,7 @@ class ViewController: UIViewController {
                 return
             }
             searchDictionary[shownTag] = []
+            self.present(self.loader, animated: true)
             AF.request(K.url.type + search).responseDecodable(of: TypeData.self) { response in
                 guard let response = response.value else {return}
                 self.pokemonByTypeHandler(response)
@@ -299,10 +318,11 @@ class ViewController: UIViewController {
             let newPokemon = PokemonModel(name: name)
             searchDictionary[shownTag]?.append(newPokemon)
         }
-        for i in 0..<10 {
+        for i in 0..<K.pagingNumber {
             let pokemon = (searchDictionary[shownTag]?[i])!
             updatePokemon(pokemon)
         }
+        loader.dismiss(animated: true)
         initiated = false
     }
 
@@ -316,6 +336,11 @@ class ViewController: UIViewController {
     
     func updatePokemon(_ pokemon : PokemonModel) {
         pokemon.updatePokemon{
+            if pokemon.id >= 10000 {
+                self.searchDictionary[self.shownTag]!.removeAll{ $0.id == pokemon.id}
+                self.updateTableView()
+                return
+            }
             pokemon.updateSprites {
                 self.updateTableView()
             }
@@ -335,7 +360,7 @@ extension ViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let pokemons = searchDictionary[shownTag] else {return}
         let index = indexPath.row
-        for i in index..<index+20 {
+        for i in index..<index + K.pagingNumber {
             if i < pokemons.count {
                 let pokemon = pokemons[i]
                 if pokemon.updateStatus == .baseInfo {
@@ -347,8 +372,6 @@ extension ViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let currentCell = tableView.cellForRow(at:indexPath) as! PokemonCell
         
         pokemonInDisplay = searchDictionary[shownTag]![indexPath.row]
         guard let pokemon = pokemonInDisplay else { return }
@@ -364,35 +387,44 @@ extension ViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
-        cell.selectedBackground.backgroundColor = UIColor(named: "clear")
+        
+        if searchDictionary[shownTag]!.count <= indexPath.row {
+            updateTableView()
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.LoadingCell, for: indexPath) as! LoadingCell
+            let loadingIndicator = cell.loadingIndicator!
+            loadingIndicator.style = UIActivityIndicatorView.Style.large
+            loadingIndicator.startAnimating()
+            return cell
+        }
         let pokemon = searchDictionary[shownTag]![indexPath.row]
         
-        if pokemon.updateStatus == .baseInfo {
+        if pokemon.updateStatus != .updateEnded {
             pokemon.updatePokemon {
                 pokemon.updateSprites {
                     self.updateTableView()
                 }
             }
-            cell.isHidden = true
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.LoadingCell, for: indexPath) as! LoadingCell
+            let loadingIndicator = cell.loadingIndicator!
+            loadingIndicator.style = UIActivityIndicatorView.Style.large
+            loadingIndicator.startAnimating()
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.identifiers.PokemonCell, for: indexPath) as! PokemonCell
+            if pokemon.updateStatus == .updateEnded {
+                if indexPath.row == 0  && !initiated {
+                    initiated = true
+                    showPokemon(pokemon)
+                }
+                cell.sprite.image = pokemon.sprites.male
+                cell.background.backgroundColor = pokemon.getColor()
+                cell.background.layer.cornerRadius = 4
+            }
+            if searchDictionary[K.all]!.count - K.pagingNumber < indexPath.row && shownTag == K.all{
+                requestNextPage()
+            }
             return cell
         }
-        
-        if pokemon.updateStatus == .updateEnded {
-            if indexPath.row == 0  && !initiated{
-                initiated = true
-                showPokemon(pokemon)
-            }
-            cell.sprite.image = pokemon.sprites.male
-            cell.background.backgroundColor = pokemon.getColor()
-            cell.background.layer.cornerRadius = 4
-        }
-        
-        if searchDictionary[K.all]!.count-20 < indexPath.row && shownTag == K.all{
-            requestNextPage()
-        }
-        
-        return cell
     }
 }
 

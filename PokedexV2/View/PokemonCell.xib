@@ -57,7 +57,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="background" destination="BEj-zg-yBn" id="rz0-oe-HS1"/>
-                <outlet property="selectedBackground" destination="LsS-Ze-bbD" id="isz-0r-qqr"/>
                 <outlet property="sprite" destination="roF-7m-LRC" id="U2o-QR-2zP"/>
             </connections>
             <point key="canvasLocation" x="-67.175572519083971" y="50"/>

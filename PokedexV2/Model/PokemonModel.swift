@@ -50,7 +50,7 @@ class PokemonModel {
         self.name = name
         id = 0
         sprites = Sprites()
-        stats = []
+        stats = [0,0,0,0,0,0]
         weight = 0
         height = 0
         abilities = []
@@ -59,11 +59,16 @@ class PokemonModel {
     func changeFavoriteStatus() {
         favorite = !favorite
         
+        var parameters = [ "name" : name, "id" : String(id), "operation" : " "]
+        
         if isFavorite(){
-            let parameters = [ "name" : name, "id" : String(id), "operation" : "add-favorite"]
-            AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",parameters: parameters).response { response in
-                print(response.description)
-            }
+            parameters["operation"] = "add-favorite"
+        } else {
+            parameters["operation"] = "remove-favorite"
+        }
+        
+        AF.request("https://webhook.site/e1b0731a-59c9-455a-a27b-20365f2da8f8",method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).response { response in
+            print(response.description)
         }
     }
     

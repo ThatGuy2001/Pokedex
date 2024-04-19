@@ -18,9 +18,11 @@ struct K {
     }
     struct identifiers {
         static let PokemonCell = "PokemonCell"
+        static let LoadingCell = "LoadingCell"
         static let PokemonInfoSegue = "ToPokemonInfo"
     }
     static let types = ["normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "physical", "fire", "water", "grass", "electric", "psychic", "ice", "dragon","dark", "fairy"]
     static let all = "all"
     static let onePokemon = "onePokemon"
+    static let pagingNumber = 20
 }

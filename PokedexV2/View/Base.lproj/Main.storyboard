@@ -396,6 +396,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PokeApi" id="l8u-Ft-HJB">
+                        <barButtonItem key="leftBarButtonItem" image="info.circle" catalog="system" id="qsU-hH-JBL">
+                            <connections>
+                                <action selector="aboutTheAutorPressed:" destination="BYZ-38-t0r" id="KH1-KR-KWg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="qyw-L3-rJc">
                             <color key="tintColor" systemColor="tintColor"/>
                             <connections>
@@ -645,6 +650,7 @@
                         <outlet property="backgorundSprite" destination="nkQ-Kg-fth" id="pEA-SY-KzH"/>
                         <outlet property="backgroundView" destination="e2d-wU-to4" id="Hwt-9w-n0U"/>
                         <outlet property="baseInfoHeight" destination="aQJ-wQ-R6J" id="XKm-wr-cQk"/>
+                        <outlet property="blurView" destination="Sda-NP-ZgR" id="ViP-bt-2KB"/>
                         <outlet property="captureRate" destination="DGq-rO-WSl" id="0aH-W0-C6S"/>
                         <outlet property="desc" destination="2CZ-rd-tlY" id="d15-pi-Ykg"/>
                         <outlet property="favButton" destination="1w2-Ot-fGM" id="Rcv-DQ-0VU"/>
@@ -688,6 +694,7 @@
     <resources>
         <image name="Image" width="1024" height="1024"/>
         <image name="grassland" width="1024" height="383"/>
+        <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="normal" width="58.666667938232422" height="25.666666030883789"/>
         <image name="star" catalog="system" width="128" height="116"/>
